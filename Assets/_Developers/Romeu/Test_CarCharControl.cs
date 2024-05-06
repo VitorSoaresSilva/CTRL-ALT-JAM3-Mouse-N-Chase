@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Test_CarCharControl : MonoBehaviour
 {
+    [SerializeField, Header("Waypoints")] 
+    public LaneWaypoint startWaypoint;
+
+    [Header("Vehicle")]
+    public bool autoAccel = true;
     public float maxSpeed = 100;
     public float acceleration = 20;
     public float turnSpeed = 1;
@@ -14,18 +19,28 @@ public class Test_CarCharControl : MonoBehaviour
     private WheelControl[] wheels;
     private float moveSpeed;
 
+    private LaneWaypoint currentWaypoint, nextWaypoint;
+
     // Start is called before the first frame update
     void Start()
     {
         charControl = GetComponent<CharacterController>();
         wheels = GetComponentsInChildren<WheelControl>();
+        currentWaypoint = startWaypoint;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if(Vector3.Distance(transform.position, currentWaypoint.transform.position) < .5)
+        {
+            currentWaypoint = currentWaypoint.Next;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        float vInput = autoAccel ? 1 : Input.GetAxis("Debug Vertical");
         float hInput = -Input.GetAxis("Left") + Input.GetAxis("Right");
-        float vInput = Input.GetAxis("Debug Vertical");
 
         moveSpeed = acceleration * vInput;
 
@@ -42,9 +57,9 @@ public class Test_CarCharControl : MonoBehaviour
 
         charControl.Move(velocity * Time.deltaTime);
 
-        //foreach(WheelControl wheel in wheels)
-        //{
-        //    wheel.Steer(hInput);
-        //}
+        foreach (WheelControl wheel in wheels)
+        {
+            wheel.Accelerate(moveSpeed);
+        }
     }
 }

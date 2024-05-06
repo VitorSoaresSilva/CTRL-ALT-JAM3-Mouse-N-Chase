@@ -45,9 +45,7 @@ public class WheelControl : MonoBehaviour
     }
 
     public void Accelerate(float torque)
-    {
-        if (!motorized) return;
-        
+    {   
         wheelCollider.motorTorque = torque;
     }
 
