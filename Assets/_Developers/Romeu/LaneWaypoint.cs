@@ -5,15 +5,15 @@ using UnityEngine;
 public class LaneWaypoint : MonoBehaviour
 {
     public LaneWaypoint Next;
-    public LaneWaypoint Previous;
+    //public LaneWaypoint Previous;
 
-    [Header("Lanes")]
-    public LaneWaypoint LeftLaneNext;
-    public LaneWaypoint RightLaneNext;
+    //[Header("Lanes")]
+    //public LaneWaypoint LeftLaneNext;
+    //public LaneWaypoint RightLaneNext;
 
-    [Header("Turns")]
-    public LaneWaypoint LeftTurn;
-    public LaneWaypoint RightTurn;
+    //[Header("Turns")]
+    //public LaneWaypoint LeftTurn;
+    //public LaneWaypoint RightTurn;
 
     protected bool selected = false;
 
@@ -24,27 +24,25 @@ public class LaneWaypoint : MonoBehaviour
 
         if (Next != null)
         {
-            Gizmos.color = Color.green;
+            Gizmos.color = selected ? Color.cyan : Color.green;
             Gizmos.DrawLine(transform.position, Next.transform.position);
         }
 
-        if (Previous != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, Previous.transform.position);
-        }
-
-        if (LeftTurn != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, LeftTurn.transform.position);
-        }
-
-        if (RightTurn != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, RightTurn.transform.position);
-        }
+        //if (Previous != null)
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawLine(transform.position, Previous.transform.position);
+        //}
+        //if (LeftTurn != null)
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawLine(transform.position, LeftTurn.transform.position);
+        //}
+        //if (RightTurn != null)
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawLine(transform.position, RightTurn.transform.position);
+        //}
 
         selected = false;
     }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class WheelControl : MonoBehaviour
 {
@@ -35,6 +34,9 @@ public class WheelControl : MonoBehaviour
 
         float steerFactor = -Input.GetAxis("Left") + Input.GetAxis("Right");
         Steer(steerFactor);
+
+        //Steer(-Input.GetAxis("Left") + Input.GetAxis("Right"));
+        //Accelerate(Input.GetAxis("Debug Vertical"));
     }
 
     public void Steer(float steer)
