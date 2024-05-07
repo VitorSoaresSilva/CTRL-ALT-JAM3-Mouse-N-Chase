@@ -7,6 +7,7 @@ public class LaneFollower : MonoBehaviour
     public LanePart StartingLane;
     public float speed = 2f;
     public float rotSpeed = 2f;
+    public float waypointRadius = 0.5f;
 
     private LanePart currentLane;
     private int currentWaypointIndex = 0;
@@ -22,7 +23,7 @@ public class LaneFollower : MonoBehaviour
     void FixedUpdate()
     {
         float distance = Vector3.Distance(targetWaypoint.position, transform.position);
-        if(distance < 0.1f)
+        if(distance < waypointRadius)
         {
             if(currentWaypointIndex < currentLane.waypoints.Length - 1)
             {
@@ -35,9 +36,17 @@ public class LaneFollower : MonoBehaviour
             } else if(loop) currentWaypointIndex = 0;
         }
 
-        Quaternion lookWp = Quaternion.LookRotation(targetWaypoint.position - transform.position);
+        MoveTowardsLane();
 
-        transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, speed * Time.deltaTime);
+
+    }
+
+    void MoveTowardsLane()
+    {
+        Quaternion lookWp = Quaternion.LookRotation(targetWaypoint.position - transform.position);
+        Vector3 targePos = targetWaypoint.position;
+        targePos.y = transform.position.y;
+        transform.position = Vector3.MoveTowards(transform.position, targePos, speed * Time.deltaTime);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookWp, rotSpeed * Time.deltaTime);        
         Physics.SyncTransforms();    
     }
