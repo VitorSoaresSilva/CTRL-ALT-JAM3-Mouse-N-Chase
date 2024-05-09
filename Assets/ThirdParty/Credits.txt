@@ -1,0 +1,72 @@
+INFO: 
+
+CATEGORIA
+AUTOR (PASTA)
+LINK ASSET
+(Se remover algum asset do projeto, remova a linha do autor, caso adicione algum, faça o mesmo padrão abaixo)
+
+-------------------------
+Models:
+Erbeilo3D (Erbeilo3d_StylizeFreeProps)
+https://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015
+
+False Wisp Studios (Cartoon_Farm_Crops)
+https://assetstore.unity.com/packages/3d/vegetation/plants/cartoon-farm-crops-79777#releases
+
+xiaolianhuastudio (Fantasy_Kingdom_Pack_Lite)
+https://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-kindom-building-pack-lite-78378
+
+Ioan Stan (Low_Poly_Mini_Village)
+https://assetstore.unity.com/packages/3d/environments/low-poly-mini-village-free-131677
+
+JustCreate (LowPolyFarmLite)
+https://assetstore.unity.com/packages/3d/environments/industrial/low-poly-farm-pack-lite-188100
+
+BigRookGames (BigRookGames)
+https://assetstore.unity.com/packages/3d/vegetation/trees/stylized-hand-painted-nature-pack-free-177775
+
+Rokay3D (tractor and planter)
+https://assetstore.unity.com/packages/3d/vehicles/land/farm-machinery-low-poly-tractor-and-planter-94533
+
+Supercyan (Supercyan Free Forest Sample)
+https://assetstore.unity.com/packages/3d/vegetation/environment-pack-free-forest-sample-168396
+
+JustCreate (SimpleNaturePack)
+https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
+
+23 Space Robots and Counting... (Free Low Poly Desert Pack)
+https://assetstore.unity.com/packages/3d/environments/free-low-poly-desert-pack-106709
+
+Cartoon Palmtree and Umbrellas (Cartoon PalmTree and Umbrella)
+https://assetstore.unity.com/packages/3d/vegetation/cartoon-palmtree-and-umbrellas-58457
+
+-------------------------
+Effects e SkyBox:
+Jean Moreno (JMO Assets)
+https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-remaster-free-109565
+
+Lana Studio (LaFinca) 
+https://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333
+https://assetstore.unity.com/packages/2d/textures-materials/sky/midgard-skybox-273733
+
+-------------------------
+Sounds:
+Jeremy Frobose (A-Symphony-of-Disarray_GameMusicPack)
+https://assetstore.unity.com/packages/audio/music/orchestral/a-symphony-of-disarray-game-music-pack-217536
+
+Kristian Grundström (Engines)
+https://assetstore.unity.com/packages/audio/sound-fx/engines-123836
+
+Tom Feldmann (OldCartoonMusicFree)
+https://assetstore.unity.com/packages/audio/music/orchestral/old-cartoon-music-pack-free-277325
+
+-------------------------
+Texture:
+Chromisu (Handpainted_Grass_and_Ground_Textures)
+https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-grass-ground-textures-187634#reviews
+
+
+AINDA NÃO ESTÃO NO PROJETO OU É UMA ALTERNATIVA:
+VALIDAR:
+https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854
+SkyBox Alternativo https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257
