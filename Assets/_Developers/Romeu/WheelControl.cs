@@ -32,8 +32,8 @@ public class WheelControl : MonoBehaviour
         wheelModel.transform.position = position;
         wheelModel.transform.rotation = rotation;
 
-        float steerFactor = -Input.GetAxis("Left") + Input.GetAxis("Right");
-        Steer(steerFactor);
+        //float steerFactor = -Input.GetAxis("Left") + Input.GetAxis("Right");
+        //Steer(steerFactor);
 
         //Steer(-Input.GetAxis("Left") + Input.GetAxis("Right"));
         //Accelerate(Input.GetAxis("Debug Vertical"));
