@@ -65,8 +65,15 @@ Texture:
 Chromisu (Handpainted_Grass_and_Ground_Textures)
 https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-grass-ground-textures-187634#reviews
 
+-------------------------
+Tools
+Sebastian Lague (PathCreator)
+https://assetstore.unity.com/packages/tools/utilities/b-zier-path-creator-136082
 
+
+-------------------------
 AINDA NÃO ESTÃO NO PROJETO OU É UMA ALTERNATIVA:
 VALIDAR:
-https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854
+https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854 (Validar como será o terreno)
 SkyBox Alternativo https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257
+
