@@ -1594,16 +1594,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3783402606226820145, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: steeringRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3783402606226820145, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: steeringRangeAtMaxSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3874731809032953195, guid: 412711b50872d3d44b6716fb6cb2e6e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1654,30 +1644,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3893970810681687146, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7041524084854346403, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 7227020644753318008, guid: 412711b50872d3d44b6716fb6cb2e6e9,
         type: 3}
       propertyPath: m_Name
       value: TruckCar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7754430745387883360, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7826062445214354175, guid: 412711b50872d3d44b6716fb6cb2e6e9,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

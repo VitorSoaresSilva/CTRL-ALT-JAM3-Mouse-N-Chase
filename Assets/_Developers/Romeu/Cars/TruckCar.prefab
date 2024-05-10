@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341141563234453373}
-  m_Mesh: {fileID: 1958397125179749051, guid: 37e6b3108a99c7045836aa4b6f07aafa, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &4072590500671376123
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 100
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -212,7 +212,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3291086514164328163}
-  m_Mesh: {fileID: 1958397125179749051, guid: 37e6b3108a99c7045836aa4b6f07aafa, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &4144992792616424129
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 100
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -504,7 +504,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 100
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -593,7 +593,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 100
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -673,7 +673,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6022854721867694388}
-  m_Mesh: {fileID: 1958397125179749051, guid: 37e6b3108a99c7045836aa4b6f07aafa, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2380415348610212598
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -923,7 +923,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7096509551856895028}
-  m_Mesh: {fileID: 1958397125179749051, guid: 37e6b3108a99c7045836aa4b6f07aafa, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2319893424056528734
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1050,9 +1050,21 @@ MonoBehaviour:
   motorTorque: 4000
   brakeTorque: 8000
   maxSpeed: 100
-  steeringRange: 20
-  steeringRangeAtMaxSpeed: 10
+  steeringRange: 10
+  steeringRangeAtMaxSpeed: 5
   centreOfGravityOffset: -1
+  Steer: {fileID: 5597207095133116727, guid: 18d4fb559e9221d4db50975b10b1efbb, type: 3}
+  Accelerate: {fileID: 5563116638868035030, guid: 18d4fb559e9221d4db50975b10b1efbb,
+    type: 3}
+  MoveLeft: {fileID: 7934850015760524696, guid: 18d4fb559e9221d4db50975b10b1efbb,
+    type: 3}
+  MoveRight: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
+    type: 3}
+  DashLeft: {fileID: -3456189811519499976, guid: 18d4fb559e9221d4db50975b10b1efbb,
+    type: 3}
+  DashRight: {fileID: -3147210155704388828, guid: 18d4fb559e9221d4db50975b10b1efbb,
+    type: 3}
+  Powerup: {fileID: 604414987806454581, guid: 18d4fb559e9221d4db50975b10b1efbb, type: 3}
 --- !u!1 &7953361534557474644
 GameObject:
   m_ObjectHideFlags: 0
