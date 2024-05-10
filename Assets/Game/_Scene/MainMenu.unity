@@ -1761,7 +1761,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Seta Direita / Seta Esquerda
+  m_text: 'Seta Direita (RB) / Seta Esquerda (LB)
 
     Iniciar o jogo / Sair do jogo
 
