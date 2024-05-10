@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Test_CarControl : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Test_CarControl : MonoBehaviour
     WheelControl[] wheels;
     Rigidbody rigidBody;
 
+    public InputActionReference Steer;
+    public InputActionReference Accelerate;
+    public InputActionReference MoveLeft;
+    public InputActionReference MoveRight;
+    public InputActionReference DashLeft;
+    public InputActionReference DashRight;
+    public InputActionReference Powerup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +33,22 @@ public class Test_CarControl : MonoBehaviour
 
         // Find all child GameObjects that have the WheelControl script attached
         wheels = GetComponentsInChildren<WheelControl>();
+
+        // Set up the Input Actions
+        Steer.action.Enable();
+        Accelerate.action.Enable();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        float vInput = Input.GetAxis("Debug Vertical");
-        float hInput = -Input.GetAxis("Left") + Input.GetAxis("Right");
+        //float vInput = Input.GetAxis("Debug Vertical");
+        //float hInput = -Input.GetAxis("Left") + Input.GetAxis("Right");
+
+        float hInput = Steer.action.ReadValue<float>();
+        float vInput = Accelerate.action.ReadValue<float>();
 
         // Calculate current speed in relation to the forward direction of the car
         // (this returns a negative number when traveling backwards)
