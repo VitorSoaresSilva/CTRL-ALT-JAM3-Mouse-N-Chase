@@ -70,6 +70,13 @@ Tools
 Sebastian Lague (PathCreator)
 https://assetstore.unity.com/packages/tools/utilities/b-zier-path-creator-136082
 
+-------------------------
+UI
+Clicking hand
+https://openclipart.org/detail/346746/clicking-hand
+
+Wrench Icon
+https://www.flaticon.com/free-icon/wrench_31056
 
 -------------------------
 AINDA NÃO ESTÃO NO PROJETO OU É UMA ALTERNATIVA:
