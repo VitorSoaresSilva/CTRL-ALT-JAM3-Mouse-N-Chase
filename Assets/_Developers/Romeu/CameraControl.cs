@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour
 
     [field: SerializeField, Header("Follow")] public float FollowDistance { get; set; } = 10.0f;
     [field: SerializeField] public float FollowHeight { get; set; } = 5.0f;
-    [field: SerializeField] public float Smoothing { get; set; } = 0.25f;
+    [field: SerializeField, Range(0, 1)] public float Smoothing { get; set; } = 0.25f;
 
     public enum UpdateMode { Update, LateUpdate, FixedUpdate }
     [field: SerializeField] private UpdateMode updateMode { get; set; } = UpdateMode.LateUpdate;

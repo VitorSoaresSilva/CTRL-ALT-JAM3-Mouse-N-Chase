@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -13,12 +14,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private RectTransform jamLogo;
     [SerializeField] private float logoRotationSpeed = 50f;
 
-    [Header("Scene Config")]
+    [Header("Game Scene Config")]
     public string sceneName = "Game";
-    [SerializeField] public InputActionProperty startAction;
-    [SerializeField] public InputActionProperty quitAction;
-    public Button startButton;
-    public Button quitButton;
+
+    [Header("Components")]
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button controlsButton;
+    [SerializeField] private Button quitButton;
 
     [Header("Audio")]
     public AudioClip[] AudioClip;
@@ -27,30 +29,24 @@ public class MainMenu : MonoBehaviour
     [Range(0, 1)] public float Volume = 1f;
     private int currentAudioIndex = 0;
 
+    #region Unity Methods
     private void OnEnable()
     {
-        startAction.action.Enable();
-        startAction.action.performed += OnStartActionTriggered;
-
-        quitAction.action.Enable();
-        quitAction.action.performed += OnQuitActionTriggered;
+            
     }
 
     private void OnDisable()
     {
-        startAction.action.Disable();
-        startAction.action.performed -= OnStartActionTriggered;
 
-        quitAction.action.Disable();
-        quitAction.action.performed -= OnQuitActionTriggered;
     }
 
     private void Start()
     {
         StartCoroutine(FadeInMusic());
         PlayNextAudioClip();
-        startButton.onClick.AddListener(OnStartButton);
-        quitButton.onClick.AddListener(OnQuitButton);
+        startButton.Select();
+        startButton.onClick.AddListener(StartGame);
+        quitButton.onClick.AddListener(QuitGame);
     }
 
     void Update()
@@ -62,8 +58,37 @@ public class MainMenu : MonoBehaviour
             PlayNextAudioClip();
         }
     }
+    #endregion
 
-    //Música
+    public void StartGame()
+    {
+        Debug.Log("OnStartButton was called.");
+        StartCoroutine(FadeOutAndLoadScene());
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("OnQuitButton was called.");
+        Application.Quit();
+    }
+
+    #region Private Methods
+    private IEnumerator FadeOutAndLoadScene()
+    {
+        StartCoroutine(FadeOutMusic());
+        yield return new WaitForSeconds(fadeInDuration);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private void PlayNextAudioClip()
+    {
+        if (AudioClip.Length > 0 && currentAudioIndex < AudioClip.Length)
+        {
+            audioSource.clip = AudioClip[currentAudioIndex];
+            audioSource.Play();
+            currentAudioIndex = (currentAudioIndex + 1) % AudioClip.Length;
+        }
+    }
     private IEnumerator FadeInMusic()
     {
         float startTime = Time.time;
@@ -91,54 +116,6 @@ public class MainMenu : MonoBehaviour
         }
         audioSource.volume = 0;
     }
+    #endregion
 
-    private void PlayNextAudioClip()
-    {
-        if (AudioClip.Length > 0 && currentAudioIndex < AudioClip.Length)
-        {
-            audioSource.clip = AudioClip[currentAudioIndex];
-            audioSource.Play();
-            currentAudioIndex = (currentAudioIndex + 1) % AudioClip.Length;
-        }
-    }
-
-    //StartQuitGame
-    public void LoadScene()
-    {
-        Debug.Log("OnStartButton was called.");
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void QuitGame()
-    {
-        Debug.Log("OnQuitButton was called.");
-        Application.Quit();
-    }
-
-    public void OnStartButton()
-    {
-        StartCoroutine(FadeOutAndLoadScene());
-    }
-
-    public void OnQuitButton()
-    {
-        QuitGame();
-    }
-
-    private IEnumerator FadeOutAndLoadScene()
-    {
-        StartCoroutine(FadeOutMusic());
-        yield return new WaitForSeconds(fadeInDuration);
-        LoadScene();
-    }
-
-    private void OnStartActionTriggered(InputAction.CallbackContext context)
-    {
-        OnStartButton();
-    }
-
-    private void OnQuitActionTriggered(InputAction.CallbackContext context)
-    {
-        OnQuitButton();
-    }
 }
