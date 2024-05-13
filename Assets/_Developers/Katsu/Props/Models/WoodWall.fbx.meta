@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 8808b14a032d7da4d9e109f5aefcb964
+guid: 4a6f3d28951fe2547911016539eddc71
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WoodWallTexture
+    second: {fileID: 2100000, guid: 2233d04fd9883c242add533b8f188a1d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

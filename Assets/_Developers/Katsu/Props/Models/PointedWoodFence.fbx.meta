@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 5bfb309cdbb454a45941c1eba033249d
+guid: 718fbc777a3e9c04ba91f90d57745bfa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PointedWoodTexture
+    second: {fileID: 2100000, guid: 3afa0618adcf6174d9ee8589a8a68dd2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

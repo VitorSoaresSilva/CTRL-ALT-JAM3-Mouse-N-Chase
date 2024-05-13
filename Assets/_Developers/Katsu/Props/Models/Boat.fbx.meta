@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 718fbc777a3e9c04ba91f90d57745bfa
+guid: 5bfb309cdbb454a45941c1eba033249d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoatTexture
+    second: {fileID: 2100000, guid: 6c4733ef56e2b41439f9eba926282338, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
