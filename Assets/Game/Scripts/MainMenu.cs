@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 //By FJB and Romeu
@@ -17,13 +18,8 @@ public class MainMenu : MonoBehaviour
     [Header("Game Scene Config")]
     public string sceneName = "Game";
 
-    [Header("Components")]
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button controlsButton;
-    [SerializeField] private Button quitButton;
-
-    [Header("Audio")]
-    public AudioClip[] AudioClip;
+    [Header("Audio"), FormerlySerializedAs("AudioClip")]
+    public AudioClip[] AudioClips;
     public AudioSource audioSource;
     public float fadeInDuration = 2.0f;
     [Range(0, 1)] public float Volume = 1f;
@@ -44,14 +40,12 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(FadeInMusic());
         PlayNextAudioClip();
-        startButton.Select();
-        startButton.onClick.AddListener(StartGame);
-        quitButton.onClick.AddListener(QuitGame);
     }
 
     void Update()
     {
-        jamLogo.transform.Rotate(0, logoRotationSpeed * Time.deltaTime, 0);
+        if(jamLogo != null)
+            jamLogo.transform.Rotate(0, logoRotationSpeed * Time.deltaTime, 0);
 
         if (audioSource != null && !audioSource.isPlaying)
         {
@@ -63,7 +57,12 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("OnStartButton was called.");
-        StartCoroutine(FadeOutAndLoadScene());
+        StartCoroutine(FadeOutAndLoadScene(sceneName));
+    }
+
+    public void ChangeScene(string scene)
+    {
+        StartCoroutine(FadeOutAndLoadScene(scene));
     }
 
     public void QuitGame()
@@ -73,22 +72,28 @@ public class MainMenu : MonoBehaviour
     }
 
     #region Private Methods
-    private IEnumerator FadeOutAndLoadScene()
+    private IEnumerator FadeOutAndLoadScene(string scene)
     {
         StartCoroutine(FadeOutMusic());
         yield return new WaitForSeconds(fadeInDuration);
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(scene);
     }
 
     private void PlayNextAudioClip()
     {
-        if (AudioClip.Length > 0 && currentAudioIndex < AudioClip.Length)
+        if (AudioClips.Length > 0)
         {
-            audioSource.clip = AudioClip[currentAudioIndex];
+            int rndIndex = Random.Range(0, AudioClips.Length);
+            if(rndIndex == currentAudioIndex)
+            {
+                rndIndex = (rndIndex + 1) % AudioClips.Length;
+            }
+            audioSource.clip = AudioClips[rndIndex];
+            currentAudioIndex = rndIndex;
             audioSource.Play();
-            currentAudioIndex = (currentAudioIndex + 1) % AudioClip.Length;
         }
     }
+
     private IEnumerator FadeInMusic()
     {
         float startTime = Time.time;

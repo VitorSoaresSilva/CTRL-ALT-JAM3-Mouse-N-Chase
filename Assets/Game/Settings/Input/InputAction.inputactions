@@ -29,7 +29,7 @@
                     "id": "91921b92-26ff-485e-969c-bbe9cda1d9c4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "initialStateCheck": false
                 },
                 {
@@ -96,7 +96,7 @@
                     "name": "",
                     "id": "642688e5-822e-4ace-a897-c4d80c02fcfb",
                     "path": "<Keyboard>/rightArrow",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Double Right",
@@ -107,7 +107,7 @@
                     "name": "",
                     "id": "54a63707-e6ad-412c-82aa-d99f041d0e55",
                     "path": "<Gamepad>/rightShoulder",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Double Right",

@@ -2,58 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class UIButton : MonoBehaviour, ISelectHandler
+public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler
 {
-    [SerializeField] private RectTransform GlobalPointer;
-    [SerializeField] private RectTransform DummyPointer;
+    [SerializeField] private UIPointer GlobalPointer;
     [field: SerializeField] public Vector3 PointerPosition { get; private set; }
     [field: SerializeField] public Vector3 PointerRotation { get; private set; }
     [SerializeField] private float transitionDuration = 1f;
 
-    // Start is called before the first frame update
-    void Start()
+    public Button Button { get; private set; }
+
+    void OnEnable()
     {
+        Button = GetComponent<Button>();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if(GlobalPointer == null) GlobalPointer = FindObjectOfType<UIPointer>();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
         if(GlobalPointer != null)
         {
-            GlobalPointer.SetParent(this.transform);
-            StartCoroutine(MovePointer());
-
-            //GlobalPointer.anchoredPosition = PointerPosition;
-            //GlobalPointer.localRotation = Quaternion.Euler(PointerRotation);
-            //GlobalPointer.position = PointerPosition;
-            //GlobalPointer.rotation = Quaternion.Euler(PointerRotation);
+            GlobalPointer.MoveTo(PointerPosition, Quaternion.Euler(PointerRotation));
         }
 
     }
 
-    IEnumerator MovePointer()
+    public void OnSubmit(BaseEventData eventData)
     {
-        float elapsedTime = 0;
-        float progress = 0;
-        while(progress <= 1)
-        {
-            GlobalPointer.anchoredPosition = Vector3.Slerp(GlobalPointer.anchoredPosition, PointerPosition, progress);
-            GlobalPointer.localRotation = Quaternion.Slerp(GlobalPointer.localRotation, Quaternion.Euler(PointerRotation), progress);
-                
-            elapsedTime += Time.deltaTime;
-            progress = elapsedTime / transitionDuration;
-                
-            yield return null;
-        }
-
-        GlobalPointer.anchoredPosition = PointerPosition;
-        GlobalPointer.localRotation = Quaternion.Euler(PointerRotation);
+        Debug.Log($"Submited {name}");
     }
 }
