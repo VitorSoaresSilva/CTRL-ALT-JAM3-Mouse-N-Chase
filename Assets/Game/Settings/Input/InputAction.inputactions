@@ -24,21 +24,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Double Right",
+                    "name": "Dash Right",
                     "type": "Button",
                     "id": "91921b92-26ff-485e-969c-bbe9cda1d9c4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "MultiTap",
+                    "interactions": "Dash",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Double Left",
+                    "name": "Dash Left",
                     "type": "Button",
                     "id": "c7422605-19e0-4fb4-8325-94a264c944b5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Dash",
                     "initialStateCheck": false
                 },
                 {
@@ -99,7 +99,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Double Right",
+                    "action": "Dash Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,7 +110,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Double Right",
+                    "action": "Dash Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -140,10 +140,10 @@
                     "name": "",
                     "id": "aca84a5b-8900-440d-8509-365443a70c67",
                     "path": "<Keyboard>/leftArrow",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Double Left",
+                    "action": "Dash Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -151,10 +151,10 @@
                     "name": "",
                     "id": "4834673f-9689-4c2c-88fa-ee56e8e52ab6",
                     "path": "<Gamepad>/leftShoulder",
-                    "interactions": "MultiTap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Double Left",
+                    "action": "Dash Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -315,6 +315,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NavigateOneDirection",
+                    "type": "PassThrough",
+                    "id": "ab4eecce-44d3-4d5d-a59e-fe9d1d8528b0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "a93ea0f7-7b85-47ce-8e00-6b81602c3125",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftSubmit",
+                    "type": "Button",
+                    "id": "110257b3-a1d3-48bc-9670-fac7c0a4631f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -427,6 +454,127 @@
                     "action": "NavigateUI",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "e980cd67-ef14-4ebb-9c6d-28e96158e105",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "6e20231d-6f77-4deb-8b77-a5055df2df99",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "7b8d2609-5e0b-48d3-bed1-4a6ef33715ba",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Gamepad",
+                    "id": "2f14fe5b-f68a-444f-9708-82e7b7f432dd",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "right",
+                    "id": "c664ccf0-3a68-4c65-be63-942c9e445a9c",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Joystick",
+                    "id": "e4faf132-1e18-4af6-9b22-750a2425cd5e",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "right",
+                    "id": "a117a562-7028-4112-97d9-cdbe6b58756b",
+                    "path": "<Joystick>/stick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "9d9b8148-c475-4683-8c1d-854a5fe415e3",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "right",
+                    "id": "a49947c1-ec1f-4519-84aa-f79e76ddb13b",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavigateOneDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "51a664ff-8f98-4c27-a9d0-c7136be3cd97",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSubmit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdad62ef-cef9-4413-887d-12b47491b82a",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftSubmit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

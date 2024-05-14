@@ -25,6 +25,11 @@ public class MainMenu : MonoBehaviour
     [Range(0, 1)] public float Volume = 1f;
     private int currentAudioIndex = 0;
 
+    [SerializeField, Header("Controls Dialog")]
+    private RectTransform controlsDialog;
+    [SerializeField] private Button openDialogBtn;
+    [SerializeField] private Button closeDialogBtn;
+
     #region Unity Methods
     private void OnEnable()
     {
@@ -69,6 +74,22 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("OnQuitButton was called.");
         Application.Quit();
+    }
+
+    public void ShowControls()
+    {
+        if(controlsDialog != null)
+            controlsDialog.gameObject.SetActive(true);
+        if(closeDialogBtn != null)
+            closeDialogBtn.Select();
+    }
+
+    public void HideControls()
+    {
+        if (controlsDialog != null)
+            controlsDialog.gameObject.SetActive(false);
+        if(openDialogBtn != null)
+            openDialogBtn.Select();
     }
 
     #region Private Methods

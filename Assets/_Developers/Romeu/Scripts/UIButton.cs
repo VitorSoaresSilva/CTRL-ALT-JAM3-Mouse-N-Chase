@@ -31,6 +31,7 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler
 
     public void OnSubmit(BaseEventData eventData)
     {
+
         Debug.Log($"Submited {name}");
     }
 }
