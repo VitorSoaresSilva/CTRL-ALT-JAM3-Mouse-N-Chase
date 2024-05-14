@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 67a70ba56d964c34598ee05abf2e3dfe
+guid: 366bbe7c85bf4b74494480c675dd9b2c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAINTCAR_4
+    second: {fileID: 2100000, guid: 7ced40e39b677db4d92a1c4cf2be131c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
