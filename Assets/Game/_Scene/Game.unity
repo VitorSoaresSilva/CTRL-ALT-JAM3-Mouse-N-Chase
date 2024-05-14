@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 1272553278}
   - component: {fileID: 1272553277}
   - component: {fileID: 1272553276}
+  - component: {fileID: 1272553279}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -575,6 +576,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1272553279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272553275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb257b300d8d9d748bf8d0eeb8190b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distSource: 2
+  baseMesh: {fileID: 0}
+  terrain: {fileID: 15600000, guid: 96a862515a3eb24489ab350546209a38, type: 2}
+  terrainLayers:
+  - {fileID: 8574412962073106934, guid: 8fde0e14ec3e727408747cecb891bcca, type: 2}
+  chunkCount: {x: 5, y: 5}
+  sceneFilters: []
+  bladeType: 2
+  multipleMeshes: 1
+  grassBladeMesh: {fileID: -7426583211642308163, guid: 002bf449675252849a29782b177a97f2,
+    type: 3}
+  grassBladeMeshes:
+  - {fileID: -7426583211642308163, guid: 7ec0ef22cf4445843ace952b1d76d863, type: 3}
+  meshDensityValues:
+  - 1
+  multipleMaterials: 1
+  material: {fileID: 2100000, guid: 67bf7110f1e9aa1479f46da9c636bff6, type: 2}
+  materials:
+  - {fileID: 2100000, guid: 67bf7110f1e9aa1479f46da9c636bff6, type: 2}
+  shadowMode: 0
+  renderLayer:
+    m_LayerIndex: 0
+  pointCount: 1
+  multiplyByArea: 1
+  pointLODFactor: 1
+  randomiseSeed: 1
+  seed: 0
+  overwriteNormalDirection: 0
+  forcedNormal: {x: 0, y: 1, z: 0}
+  useDensity: 1
+  densityCutoff: 0.01
+  useLength: 1
+  lengthMapping: {x: 0.3104456, y: 1}
+  projectType: 0
+  projectMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  boundingBoxOffset:
+    m_Center: {x: 0, y: 0.2, z: 0}
+    m_Extent: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &1308546642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1033,6 +1086,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bfb309cdbb454a45941c1eba033249d, type: 3}
+--- !u!1 &1900899306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900899308}
+  - component: {fileID: 1900899307}
+  - component: {fileID: 1900899309}
+  m_Layer: 0
+  m_Name: Point Grass Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1900899307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900899306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d938393f58ae1e844b929a6d939683ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windScale: 0.25
+  noiseRange: {x: -0.45, y: 1}
+  windDirection: {x: 0.35, y: -0.1, z: 0.75}
+  windScroll: {x: 0.35, y: -0.1, z: 0.75}
+--- !u!4 &1900899308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900899306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 568, y: 0, z: 468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900899309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900899306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a5033f7080c5549a9cc007d2df0a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2008095765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1108,6 +1222,7 @@ SceneRoots:
   - {fileID: 919412925}
   - {fileID: 1446919830}
   - {fileID: 1272553278}
+  - {fileID: 1900899308}
   - {fileID: 1878210481}
   - {fileID: 1417951029}
   - {fileID: 1733170508}
