@@ -97,7 +97,7 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(FadeOutMusic());
         yield return new WaitForSeconds(fadeInDuration);
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadSceneAsync(scene);
     }
 
     private void PlayNextAudioClip()
