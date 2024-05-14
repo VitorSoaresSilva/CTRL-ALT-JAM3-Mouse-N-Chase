@@ -3,7 +3,17 @@ guid: a53da2de086f8e94dbe471b99c88c660
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alpha_GridUpgrade
+    second: {fileID: 2100000, guid: 9ba90ddb42fede64d8ce7923a0601610, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PAINTCAR_0
+    second: {fileID: 2100000, guid: 085a009c02794df44a6cdcddd99cfd63, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
