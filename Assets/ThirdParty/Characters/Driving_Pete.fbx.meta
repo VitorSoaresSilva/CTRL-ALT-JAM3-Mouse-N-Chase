@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e0042f64a717f044911de93fe3ded9b
+guid: 4c4b05542a1337a40b9c5b45514ec8fd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: PAINTCAR_3
-    second: {fileID: 2100000, guid: 02c8b5738a81755458c1ba50b6ddb9a4, type: 2}
+      name: mat_0
+    second: {fileID: 2100000, guid: 56f3ce29b61dfb74283dacffdc219b4e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_1
+    second: {fileID: 2100000, guid: 223a11908a316d5438c7698eeb90ad66, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

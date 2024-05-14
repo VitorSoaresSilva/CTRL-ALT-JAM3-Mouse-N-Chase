@@ -79,6 +79,14 @@ Wrench Icon
 https://www.flaticon.com/free-icon/wrench_31056
 
 -------------------------
+Characters
+Dead Account (Oswald The Lucky Rabbit)
+https://sketchfab.com/3d-models/oswald-the-lucky-rabbit-25cb18cc26e9470d86734b594d8d3506
+
+peedr0o0 (Kingdom Hearts - Captain Pete)
+https://sketchfab.com/3d-models/kingdom-hearts-captain-pete-c10919f81747437f874f7d497b0f6df4
+
+-------------------------
 AINDA NÃO ESTÃO NO PROJETO OU É UMA ALTERNATIVA:
 VALIDAR:
 https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854 (Validar como será o terreno)
