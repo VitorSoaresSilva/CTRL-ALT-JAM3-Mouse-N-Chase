@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -30,6 +26,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button openDialogBtn;
     [SerializeField] private Button closeDialogBtn;
 
+    [SerializeField, Header("Credits Dialog")]
+    private RectTransform creditsDialog;
+    [SerializeField] private Button openCreditsBtn;
+    [SerializeField] private Button closeCreditsBtn;
+    [SerializeField] private ScrollRect creditsScrollRect;
+    [SerializeField] private float creditsScrollSpeed = 0.035f;
+    private bool creditsScrollDirection = false;
+
     #region Unity Methods
     private void OnEnable()
     {
@@ -45,6 +49,9 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(FadeInMusic());
         PlayNextAudioClip();
+
+        if(creditsScrollRect)
+            creditsScrollRect.verticalNormalizedPosition = (creditsScrollDirection) ? 0 : 1;
     }
 
     void Update()
@@ -56,6 +63,23 @@ public class MainMenu : MonoBehaviour
         {
             PlayNextAudioClip();
         }
+
+        // credits auto scroll
+        if(creditsScrollRect != null && creditsScrollRect.gameObject.activeSelf)
+        {
+            creditsScrollRect.verticalNormalizedPosition = Mathf.MoveTowards(
+                creditsScrollRect.verticalNormalizedPosition, 
+                (creditsScrollDirection) ? 0 : 1,
+                Time.deltaTime * creditsScrollSpeed
+            );
+
+            if (creditsScrollRect.verticalNormalizedPosition <= 0.01f)
+                creditsScrollDirection = false;
+            else if(creditsScrollRect.verticalNormalizedPosition >= 0.99f)
+                creditsScrollDirection = true;
+        }
+
+        
     }
     #endregion
 
@@ -91,6 +115,21 @@ public class MainMenu : MonoBehaviour
         if(openDialogBtn != null)
             openDialogBtn.Select();
     }
+
+    public void ToggleDialog(Dialog dialog)
+    {
+        if(dialog.dialog.gameObject.activeSelf)
+        {
+            dialog.dialog.gameObject.SetActive(false);
+            dialog.openBtn.Select();
+        }
+        else
+        {
+            dialog.dialog.gameObject.SetActive(true);
+            dialog.closeBtn.Select();
+        }
+    }
+
 
     #region Private Methods
     private IEnumerator FadeOutAndLoadScene(string scene)
@@ -144,4 +183,12 @@ public class MainMenu : MonoBehaviour
     }
     #endregion
 
+}
+
+[System.Serializable]
+public class Dialog
+{
+    public RectTransform dialog;
+    public Button openBtn;
+    public Button closeBtn;
 }
