@@ -9,6 +9,7 @@ namespace _Developers.Vitor
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
         public float lateralSpeed = 5;
+        public float yOffset = 0;
         float distanceTravelled;
         public Transform car;
         void Start() {
@@ -31,7 +32,7 @@ namespace _Developers.Vitor
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }
         }
