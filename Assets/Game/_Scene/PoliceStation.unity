@@ -5718,6 +5718,10 @@ MonoBehaviour:
   audioSource: {fileID: 1470262099}
   fadeInDuration: 2
   Volume: 1
+  backgroundImage: {fileID: 269845808}
+  backgroundImages:
+  - {fileID: 21300000, guid: e214cd5485f5d5b48b185506b55e50b9, type: 3}
+  - {fileID: 21300000, guid: d174c5536c72d7a48b2a960040ab7079, type: 3}
   controlsDialog: {fileID: 0}
   openDialogBtn: {fileID: 0}
   closeDialogBtn: {fileID: 0}

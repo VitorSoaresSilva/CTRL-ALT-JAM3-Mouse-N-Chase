@@ -21,6 +21,10 @@ public class MainMenu : MonoBehaviour
     [Range(0, 1)] public float Volume = 1f;
     private int currentAudioIndex = 0;
 
+    [Header("Background Image")]
+    [SerializeField] private Image backgroundImage;
+    [SerializeField] private Sprite[] backgroundImages;
+
     [SerializeField, Header("Controls Dialog")]
     private RectTransform controlsDialog;
     [SerializeField] private Button openDialogBtn;
@@ -47,6 +51,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        SetRandomBackgroundImage();
         StartCoroutine(FadeInMusic());
         PlayNextAudioClip();
 
@@ -82,6 +87,15 @@ public class MainMenu : MonoBehaviour
         
     }
     #endregion
+
+    private void SetRandomBackgroundImage()
+    {
+        if (backgroundImages.Length > 0 && backgroundImage != null)
+        {
+            int index = Random.Range(0, backgroundImages.Length);
+            backgroundImage.sprite = backgroundImages[index];
+        }
+    }
 
     public void StartGame()
     {

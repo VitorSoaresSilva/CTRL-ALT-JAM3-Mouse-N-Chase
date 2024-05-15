@@ -104,3 +104,14 @@ VALIDAR:
  (Validar como será o terreno)
 SkyBox Alternativo https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257
 
+
+Modelos Cenário:
+https://open3dmodel.com/pt/3d-models/typewriter-keyboard_597374.html
+https://free3d.com/pt/3d-model/black-wooden-desk-421660.html
+https://free3d.com/pt/3d-model/old-russian-phone-407165.html
+https://free3d.com/pt/3d-model/old-open-book-71010.html
+https://free3d.com/pt/3d-model/chair-255345.html
+https://free3d.com/pt/3d-model/low-polly-lamp-978441.html
+https://free3d.com/pt/3d-model/old-russian-phone-407165.html
+https://br.freepik.com/fotos-vetores-gratis/quadro-detetive
+https://sketchfab.com/3d-models/city-police-station-f6ba27f0426c4eefabce32d17e87fd35#download
