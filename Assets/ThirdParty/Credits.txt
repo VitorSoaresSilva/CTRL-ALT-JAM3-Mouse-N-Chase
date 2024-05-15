@@ -5,8 +5,17 @@ AUTOR (PASTA)
 LINK ASSET
 (Se remover algum asset do projeto, remova a linha do autor, caso adicione algum, faça o mesmo padrão abaixo)
 
+
+Equipe:
+Vitor Soares (Programação)
+Eduardo Romeu (Programação e UI)
+Felipe Jardim (Modelagem Veículos e props; Level Design; Programação)
+
+Conteúdo terceiro:
 -------------------------
 Models:
+Elimar Luciano (Modelagem - Mickey Mouse)
+
 Erbeilo3D (Erbeilo3d_StylizeFreeProps)
 https://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015
 
@@ -70,6 +79,9 @@ Tools
 Sebastian Lague (PathCreator)
 https://assetstore.unity.com/packages/tools/utilities/b-zier-path-creator-136082
 
+Micah Wilder (Point-Grass-Renderer)
+https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854
+
 -------------------------
 UI
 Clicking hand
@@ -89,6 +101,6 @@ https://sketchfab.com/3d-models/kingdom-hearts-captain-pete-c10919f81747437f874f
 -------------------------
 AINDA NÃO ESTÃO NO PROJETO OU É UMA ALTERNATIVA:
 VALIDAR:
-https://assetstore.unity.com/packages/3d/vegetation/point-grass-renderer-207854 (Validar como será o terreno)
+ (Validar como será o terreno)
 SkyBox Alternativo https://assetstore.unity.com/packages/2d/textures-materials/sky/free-stylized-skybox-212257
 
