@@ -9,28 +9,31 @@ using Random = UnityEngine.Random;
 public class PathGenerator : MonoBehaviour
 {
     public int pathLength = 10; // Tamanho do caminho desejado
-    public int pathDistance = 10; // Tamanho do caminho desejado
+    public float pathDistance = 10; // Tamanho do caminho desejado
+    public float minAngle = -30; // Tamanho do caminho desejado
+    public float maxAngle = 30; // Tamanho do caminho desejado
     public GameObject pathPrefab; // Prefab a ser usado para criar o caminho
     public Transform pathParent; // Parent object para os objetos do caminho
 
-    private List<Vector2Int> path = new List<Vector2Int>(); // Lista para armazenar o caminho
+    // private List<Vector2Int> path = new List<Vector2Int>(); // Lista para armazenar o caminho
+    private List<Vector3> pathPoints = new List<Vector3>(); // Lista para armazenar o caminho
     private List<Transform> pathObjects = new List<Transform>();
     
     [SerializeField] private PathCreator _pathCreator;
     public Transform[] waypoints;
     public PathCreator pathCreatorInstance;
     public CarFollowPath carFollowPath;
+    public CarFollowPath enemyCarFollowPath;
     void Start()
     {
-        // pathCreatorInstance = Instantiate (_pathCreator, Vector3.zero, Quaternion.identity);
         GeneratePath();
         DrawPath();
         SetPath();
         carFollowPath.pathCreator = pathCreatorInstance;
         carFollowPath.enabled = true;
-        
+        enemyCarFollowPath.pathCreator = pathCreatorInstance;
+        enemyCarFollowPath.enabled = true;
     }
-
     private void Update()
     {
 
@@ -41,10 +44,9 @@ public class PathGenerator : MonoBehaviour
             SetPath();
         }
     }
-
     private void ClearPath()
     {
-        path.Clear();
+        pathPoints.Clear();
         foreach (var pathObject in pathObjects)
         {
             Destroy(pathObject.gameObject);
@@ -55,51 +57,58 @@ public class PathGenerator : MonoBehaviour
     void GeneratePath()
     {
         ClearPath();
-        path.Add(Vector2Int.zero); // Adiciona o ponto inicial ao caminho
-
-        Vector2Int currentPosition = Vector2Int.zero;
-
-        while (path.Count < pathLength)
+        // path.Add(Vector2Int.zero); // Adiciona o ponto inicial ao caminho
+        pathPoints.Add(Vector3.zero);
+        // Vector3 nextPoint = Vector3.zero;
+        Vector3 currentPosition = Vector3.zero;
+        // bool validPoint = false;
+        while (pathPoints.Count < pathLength)
         {
-            List<Vector2Int> validMoves = new List<Vector2Int>();
+            Vector3 nextPoint = Vector3.zero;
 
-            // Verifica os movimentos possíveis
-            if (!path.Contains(currentPosition + Vector2Int.right))
-                validMoves.Add(currentPosition + Vector2Int.right);
-            if (!path.Contains(currentPosition + Vector2Int.left))
-                validMoves.Add(currentPosition + Vector2Int.left);
-            if (!path.Contains(currentPosition + Vector2Int.up))
-                validMoves.Add(currentPosition + Vector2Int.up);
-            if (!path.Contains(currentPosition + Vector2Int.down))
-                validMoves.Add(currentPosition + Vector2Int.down);
-
-            if (validMoves.Count > 0)
+            // Gera um ponto candidato
+            bool validPoint = false;
+            while (!validPoint)
             {
-                // Escolhe um movimento aleatório dentre os possíveis
-                Vector2Int nextMove = validMoves[Random.Range(0, validMoves.Count)];
-                // Atualiza a posição atual e adiciona ao caminho
-                currentPosition = nextMove;
-                path.Add(nextMove);
-            }
-            else
-            {
-                break;
+                nextPoint = currentPosition + Random.insideUnitSphere * pathDistance;
+                nextPoint.y = 0;
+                // Verifica se o próximo ponto está dentro dos limites de ângulo em relação ao ponto anterior
+                if (pathPoints.Count > 1)
+                {
+                    Vector3 lastDirection = (pathPoints[pathPoints.Count - 1] - pathPoints[pathPoints.Count - 2]).normalized;
+                    Vector3 nextDirection = (nextPoint - currentPosition).normalized;
+                    float angle = Vector3.Angle(lastDirection, nextDirection);
+
+                    if (angle >= minAngle && angle <= maxAngle)
+                    {
+                        validPoint = true;
+                    }
+                }
+                else
+                {
+                    validPoint = true;
+                }
             }
 
+            // Adiciona o ponto ao caminho se for válido
+            pathPoints.Add(nextPoint);
+            currentPosition = nextPoint;
         }
-    }
 
+        // Cria o caminho com curvas suaves usando Bezier
+        // pathCreator.bezierPath = new BezierPath(pathPoints, false, PathSpace.xyz);
+    }
     public void SetPath()
     {
         
-        BezierPath bezierPath = new BezierPath (pathObjects, false, PathSpace.xyz);
+        BezierPath bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
         pathCreatorInstance.bezierPath = bezierPath;
         // pathCreatorInstance.TriggerPathUpdate();
     }
 
     void DrawPath()
     {
-        foreach (Vector2Int point in path)
+        foreach (Vector3 point in pathPoints)
         {
             GameObject pathObject = Instantiate(pathPrefab, new Vector3(point.x, 0,point.y) * pathDistance, Quaternion.identity);
             pathObject.transform.SetParent(pathParent);
