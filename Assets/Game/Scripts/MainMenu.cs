@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using TMPro;
 
 //By FJB and Romeu
 public class MainMenu : MonoBehaviour
@@ -25,18 +26,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Sprite[] backgroundImages;
 
-    [SerializeField, Header("Controls Dialog")]
-    private RectTransform controlsDialog;
-    [SerializeField] private Button openDialogBtn;
-    [SerializeField] private Button closeDialogBtn;
-
-    [SerializeField, Header("Credits Dialog")]
-    private RectTransform creditsDialog;
-    [SerializeField] private Button openCreditsBtn;
-    [SerializeField] private Button closeCreditsBtn;
-    [SerializeField] private ScrollRect creditsScrollRect;
+    [SerializeField, Header("Credits")]
+    private ScrollRect creditsScrollRect;
     [SerializeField] private float creditsScrollSpeed = 0.035f;
     private bool creditsScrollDirection = false;
+
+    [SerializeField, Header("Points")]
+    private TextMeshProUGUI pointsText;
+    [SerializeField] private TextMeshProUGUI completedMissionsText;
+    [SerializeField] private TextMeshProUGUI lostPointsText;
 
     #region Unity Methods
     private void OnEnable()
@@ -57,6 +55,19 @@ public class MainMenu : MonoBehaviour
 
         if(creditsScrollRect)
             creditsScrollRect.verticalNormalizedPosition = (creditsScrollDirection) ? 0 : 1;
+
+        if(CareerPoints.instance != null)
+        {
+            Debug.Log("Showing Career Points");
+            if(pointsText != null)
+                pointsText.text = $"{CareerPoints.instance.Points}";
+
+            if (completedMissionsText != null)
+                completedMissionsText.text = $"{CareerPoints.instance.MissionsCompleted}";
+
+            if (lostPointsText != null)
+                lostPointsText.text = $"{CareerPoints.instance.LostPoints}";
+        }
     }
 
     void Update()
@@ -82,9 +93,7 @@ public class MainMenu : MonoBehaviour
                 creditsScrollDirection = false;
             else if(creditsScrollRect.verticalNormalizedPosition >= 0.99f)
                 creditsScrollDirection = true;
-        }
-
-        
+        }        
     }
     #endregion
 
@@ -114,43 +123,13 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void ShowControls()
-    {
-        if(controlsDialog != null)
-            controlsDialog.gameObject.SetActive(true);
-        if(closeDialogBtn != null)
-            closeDialogBtn.Select();
-    }
-
-    public void HideControls()
-    {
-        if (controlsDialog != null)
-            controlsDialog.gameObject.SetActive(false);
-        if(openDialogBtn != null)
-            openDialogBtn.Select();
-    }
-
-    public void ToggleDialog(Dialog dialog)
-    {
-        if(dialog.dialog.gameObject.activeSelf)
-        {
-            dialog.dialog.gameObject.SetActive(false);
-            dialog.openBtn.Select();
-        }
-        else
-        {
-            dialog.dialog.gameObject.SetActive(true);
-            dialog.closeBtn.Select();
-        }
-    }
-
-
     #region Private Methods
     private IEnumerator FadeOutAndLoadScene(string scene)
     {
         StartCoroutine(FadeOutMusic());
         yield return new WaitForSeconds(fadeInDuration);
-        SceneManager.LoadSceneAsync(scene);
+        //SceneManager.LoadSceneAsync(scene);
+        SceneControl.instance.ChangeScene(scene);
     }
 
     private void PlayNextAudioClip()
@@ -197,12 +176,4 @@ public class MainMenu : MonoBehaviour
     }
     #endregion
 
-}
-
-[System.Serializable]
-public class Dialog
-{
-    public RectTransform dialog;
-    public Button openBtn;
-    public Button closeBtn;
 }

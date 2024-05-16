@@ -3,81 +3,102 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class CareerPoints : MonoBehaviour
+public class CareerPoints : Singleton<CareerPoints>
 {
-    public int points;
-    public int lostPoints;
-    public List<string> unlocked;
-    public TextMeshProUGUI pointsText;
-    //public TextMeshProUGUI lostPointsText;
+    // Points
+    public int Points { get; private set; }
+    public int LostPoints { get; private set; }
+    public int MissionsCompleted { get => FastResponseCompleted + PursuitCompleted + RescueCompleted + BossCompleted; }
 
-    void Start()
+    // Missions
+    public enum MissionType { FastResponse, Pursuit, Rescue, Boss }
+    private int FastResponseCompleted = 0;
+    private int PursuitCompleted = 0;
+    private int RescueCompleted = 0;
+    private int BossCompleted = 0;
+    [SerializeField] int FastResponsePoints = 1500;
+    [SerializeField] int PursuitPoints = 1500;
+    [SerializeField] int RescuePoints = 1500;
+    [SerializeField] int BossPoints = 3000;
+
+    // Powerups
+    public bool ShieldUnlocked { get => Points >= 10000; }
+    public bool SlotUnlocked { get => Points >= 20000; }
+    public bool BumperUnlocked { get => Points >= 30000; }
+
+    public bool debug = false;
+
+    void OnEnable()
     {
-        points = 0;
-        lostPoints = 0;
-        unlocked = new List<string>();
+        Load();
     }
 
-    //qd completar a missão 
-    public void CompleteMission(int earnedPoints)
+    public void AddPoints(int points)
     {
-        points += earnedPoints;
-        CheckUnlocked();
-        UpdatePointsText();
+        this.Points += points;
     }
 
-    //qd o jogador perde pontos
-    public void HitObjects(int lostPoints)
+    public void RemovePoints(int points)
     {
-        points -= lostPoints;
-        this.lostPoints += lostPoints;
-        if (points <= 0)
+        this.Points -= points;
+        LostPoints += points;
+    }
+
+    public void Load()
+    {
+        Points = PlayerPrefs.GetInt("Points", 100);
+        LostPoints = PlayerPrefs.GetInt("LostPoints", 0);
+        FastResponseCompleted = PlayerPrefs.GetInt("FastResponseCompleted", 0);
+        PursuitCompleted = PlayerPrefs.GetInt("PursuitCompleted", 0);
+        RescueCompleted = PlayerPrefs.GetInt("RescueCompleted", 0);
+        BossCompleted = PlayerPrefs.GetInt("BossCompleted", 0);
+
+        Log($"Points: {Points}");
+        Log($"LostPoints: {LostPoints}");
+        Log($"MissionsCompleted: {MissionsCompleted}");
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetInt("Points", Points);
+        PlayerPrefs.SetInt("LostPoints", LostPoints);
+        PlayerPrefs.SetInt("FastResponseCompleted", FastResponseCompleted);
+        PlayerPrefs.SetInt("PursuitCompleted", PursuitCompleted);
+        PlayerPrefs.SetInt("RescueCompleted", RescueCompleted);
+        PlayerPrefs.SetInt("BossCompleted", BossCompleted);
+    }
+
+    public void CompleteMission(MissionType mission)
+    {
+        switch (mission)
         {
-            Debug.Log("Game Over");
+            case MissionType.FastResponse:
+                FastResponseCompleted++;
+                AddPoints(FastResponsePoints);
+                break;
+            case MissionType.Pursuit:
+                PursuitCompleted++;
+                AddPoints(PursuitPoints);
+                break;
+            case MissionType.Rescue:
+                RescueCompleted++;
+                AddPoints(RescuePoints);
+                break;
+            case MissionType.Boss:
+                BossCompleted++;
+                AddPoints(BossPoints);
+                break;
         }
-        UpdatePointsText();
     }
 
-    //Validar o desbloqueio
-    public void CheckUnlocked()
+    public bool CheckGameOver()
     {
-        Dictionary<int, string> pieces = new Dictionary<int, string>()
-        {
-            {10000, "Piece 1"},
-            {20000, "Piece 2"},
-            {30000, "Piece 3"}
-        };
-
-        foreach (KeyValuePair<int, string> piece in pieces)
-        {
-            if (points >= piece.Key && !unlocked.Contains(piece.Value))
-            {
-                unlocked.Add(piece.Value);
-            }
-        }
+        return Points < 0;
     }
 
-    public void UpdatePointsText()
+    void Log(string text)
     {
-        pointsText.text = "Points: " + points;
-        //melhorar
-    }
-
-    //Pontos perdidos aparecerem talvez?
-
-    //Dev n esquecer de remover o debug
-    public void ShowPoints()
-    {
-        Debug.Log("Points: " + points);
-    }
-
-    public void ShowLostPoints()
-    {
-        Debug.Log("Lost Points: " + lostPoints);
-    }
-
-    public void ShowUnlocked()
-    {
-        Debug.Log("Unlocked: " + string.Join(", ", unlocked));
+        if(debug)
+            Debug.Log($"CarrerPoints: {text}");
     }
 }

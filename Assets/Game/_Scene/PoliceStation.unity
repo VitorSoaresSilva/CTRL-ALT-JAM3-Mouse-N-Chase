@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4865,7 +4865,6 @@ GameObject:
   - component: {fileID: 1307778347}
   - component: {fileID: 1307778349}
   - component: {fileID: 1307778348}
-  - component: {fileID: 1307778350}
   - component: {fileID: 1307778351}
   m_Layer: 5
   m_Name: Player Info
@@ -4934,22 +4933,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307778346}
   m_CullTransparentMesh: 1
---- !u!114 &1307778350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307778346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53bdb117a3fa35d41a773329761e10a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  points: 0
-  lostPoints: 0
-  unlocked: []
-  pointsText: {fileID: 713831209}
 --- !u!114 &1307778351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5730,6 +5713,9 @@ MonoBehaviour:
   closeCreditsBtn: {fileID: 0}
   creditsScrollRect: {fileID: 0}
   creditsScrollSpeed: 0.035
+  pointsText: {fileID: 74131986}
+  completedMissionsText: {fileID: 551616425}
+  lostPointsText: {fileID: 11960548}
 --- !u!224 &1470262098
 RectTransform:
   m_ObjectHideFlags: 0
