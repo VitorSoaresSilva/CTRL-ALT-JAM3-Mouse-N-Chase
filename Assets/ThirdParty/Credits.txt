@@ -11,6 +11,10 @@ Vitor Soares (Programação)
 Eduardo Romeu (Programação e UI)
 Felipe Jardim (Modelagem Veículos e props; Level Design; Programação)
 
+Agradecimentos: IA (Copilot).
+
+Softwares Utilizados: Unity, Visual Studio Code, Blender, Photoshop, Substance Painter, GitHub.
+
 Conteúdo terceiro:
 -------------------------
 Models:
