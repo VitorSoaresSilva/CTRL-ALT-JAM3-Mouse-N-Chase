@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7590677900431850354}
   m_Layer: 0
-  m_Name: CrazyCar 1
+  m_Name: CrazyCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
