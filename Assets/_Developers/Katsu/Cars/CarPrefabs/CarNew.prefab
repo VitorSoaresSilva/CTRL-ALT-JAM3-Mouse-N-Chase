@@ -308,7 +308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4152978810813071935}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 517, y: 0.44, z: 472}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -316,7 +316,7 @@ Transform:
   - {fileID: 4769140664378080814}
   - {fileID: 4462459689113839601}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &1258468528146083678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,6 +1052,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1879099953100309802}
+    - targetCorrespondingSourceObject: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4705739462490333525}
   m_SourcePrefab: {fileID: 100100000, guid: 1e839c3af3904cb4d82b960a0b4a5c9f, type: 3}
 --- !u!4 &8154490039822646226 stripped
 Transform:
@@ -1072,7 +1076,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8781199489059050956}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be9355ad6290b146880b9e8794ef42d, type: 3}
   m_Name: 
@@ -1082,6 +1086,48 @@ MonoBehaviour:
   steerable: 1
   SteerAngle: 30
   wheelCollider: {fileID: 0}
+--- !u!114 &4705739462490333525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781199489059050956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538e85c8d13aa7f4a9239f11afd5c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 1258468528146083678}
+  isFrontWheel: 1
+  rotateClockwise: 0
+  baseRotationSpeedMultiplier: 300
+  turnLeftAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cacfaec7-ade4-47d0-8238-e649b8f32912
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 7934850015760524696, guid: 18d4fb559e9221d4db50975b10b1efbb,
+      type: 3}
+  turnRightAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 20cae0ce-6cf3-44b2-83a2-076a6b5689fc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
+      type: 3}
 --- !u!1001 &1173844188126536414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,6 +1199,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 34635808674721857}
+    - targetCorrespondingSourceObject: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7532555559832155840}
   m_SourcePrefab: {fileID: 100100000, guid: 1e839c3af3904cb4d82b960a0b4a5c9f, type: 3}
 --- !u!1 &7142168305779729106 stripped
 GameObject:
@@ -1167,7 +1217,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7142168305779729106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be9355ad6290b146880b9e8794ef42d, type: 3}
   m_Name: 
@@ -1177,6 +1227,46 @@ MonoBehaviour:
   steerable: 0
   SteerAngle: 30
   wheelCollider: {fileID: 0}
+--- !u!114 &7532555559832155840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142168305779729106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538e85c8d13aa7f4a9239f11afd5c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 1258468528146083678}
+  isFrontWheel: 0
+  rotateClockwise: 1
+  baseRotationSpeedMultiplier: 300
+  turnLeftAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Turn Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b04b725b-af1d-4f1b-8d5a-10e86bbdc952
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  turnRightAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Turn Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8b096759-c8c2-494d-98fa-ec68b0229a7b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!4 &7775908057597332684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
@@ -1254,6 +1344,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8853686263218780445}
+    - targetCorrespondingSourceObject: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 946753519522474589}
   m_SourcePrefab: {fileID: 100100000, guid: 1e839c3af3904cb4d82b960a0b4a5c9f, type: 3}
 --- !u!4 &2413790957682591020 stripped
 Transform:
@@ -1274,7 +1368,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2992647466615745330}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be9355ad6290b146880b9e8794ef42d, type: 3}
   m_Name: 
@@ -1284,6 +1378,48 @@ MonoBehaviour:
   steerable: 1
   SteerAngle: 30
   wheelCollider: {fileID: 0}
+--- !u!114 &946753519522474589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992647466615745330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538e85c8d13aa7f4a9239f11afd5c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 1258468528146083678}
+  isFrontWheel: 1
+  rotateClockwise: 1
+  baseRotationSpeedMultiplier: 300
+  turnLeftAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7ddfcf79-ae34-4262-b8bc-dd3a0bbf659d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 7934850015760524696, guid: 18d4fb559e9221d4db50975b10b1efbb,
+      type: 3}
+  turnRightAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Turn Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e96e2b51-a0cb-4a35-b711-664bbcd109fa
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
+      type: 3}
 --- !u!1001 &8259601298248984810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1355,6 +1491,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2606496190146362957}
+    - targetCorrespondingSourceObject: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2663380257625667161}
   m_SourcePrefab: {fileID: 100100000, guid: 1e839c3af3904cb4d82b960a0b4a5c9f, type: 3}
 --- !u!1 &129406698883508454 stripped
 GameObject:
@@ -1369,7 +1509,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129406698883508454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6be9355ad6290b146880b9e8794ef42d, type: 3}
   m_Name: 
@@ -1379,6 +1519,46 @@ MonoBehaviour:
   steerable: 0
   SteerAngle: 30
   wheelCollider: {fileID: 0}
+--- !u!114 &2663380257625667161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129406698883508454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538e85c8d13aa7f4a9239f11afd5c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 1258468528146083678}
+  isFrontWheel: 0
+  rotateClockwise: 0
+  baseRotationSpeedMultiplier: 300
+  turnLeftAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Turn Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 0ee4831b-53a6-4533-806d-f92b94d74e51
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  turnRightAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Turn Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 80597c8a-394b-4522-9145-92cb4f124b8c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!4 &665470209899087608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
