@@ -25,7 +25,9 @@ namespace PathCreation.Examples
 
                 VertexPath path = pathCreator.path;
 
-                spacing = Mathf.Max(minSpacing, spacing);
+                //spacing = Mathf.Max(minSpacing, spacing); // original
+                spacing = Random.Range(minSpacing, spacing); // aleatório by Romeu_, validar
+
                 float dst = 0;
 
                 while (dst < path.length)

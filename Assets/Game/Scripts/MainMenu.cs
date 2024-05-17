@@ -36,6 +36,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI completedMissionsText;
     [SerializeField] private TextMeshProUGUI lostPointsText;
 
+    [System.Serializable]
+    public struct powerupSlot { public Image LockedIcon; public Image UnlockedIcon; }
+    [SerializeField, Header("Upgrades")] private powerupSlot shieldSlot;
+    [SerializeField] private powerupSlot slotSlot;
+    [SerializeField] private powerupSlot bumperSlot;
+
+
     #region Unity Methods
     private void OnEnable()
     {
@@ -67,7 +74,26 @@ public class MainMenu : MonoBehaviour
 
             if (lostPointsText != null)
                 lostPointsText.text = $"{CareerPoints.instance.LostPoints}";
+
+            if(shieldSlot.LockedIcon != null && shieldSlot.UnlockedIcon != null)
+            {
+                shieldSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.ShieldUnlocked);
+                shieldSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.ShieldUnlocked);
+            }
+
+            if (slotSlot.LockedIcon != null && slotSlot.UnlockedIcon != null)
+            {
+                slotSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.SlotUnlocked);
+                slotSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.SlotUnlocked);
+            }
+
+            if (bumperSlot.LockedIcon != null && bumperSlot.UnlockedIcon != null)
+            {
+                bumperSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.BumperUnlocked);
+                bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
+            }
         }
+
     }
 
     void Update()
@@ -127,9 +153,21 @@ public class MainMenu : MonoBehaviour
     private IEnumerator FadeOutAndLoadScene(string scene)
     {
         StartCoroutine(FadeOutMusic());
+        if(Fade.instance != null)
+            Fade.instance.FadeIn();
+            
         yield return new WaitForSeconds(fadeInDuration);
-        //SceneManager.LoadSceneAsync(scene);
-        SceneControl.instance.ChangeScene(scene);
+
+        AsyncOperation load;
+
+        if (SceneControl.instance != null)
+            load = SceneControl.instance.ChangeScene(scene);
+        else load = SceneManager.LoadSceneAsync(scene);
+
+        while(!load.isDone)
+        {
+            yield return null;
+        };
     }
 
     private void PlayNextAudioClip()
