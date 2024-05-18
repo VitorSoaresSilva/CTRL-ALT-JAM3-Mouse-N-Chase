@@ -139,6 +139,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("OnStartButton was called.");
         StartCoroutine(FadeOutAndLoadScene(sceneName));
     }
+
     public void QuitGame()
     {
         Debug.Log("OnQuitButton was called.");
@@ -150,15 +151,14 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(FadeOutAndLoadScene(scene));
     }
 
-    public void ChangeToRandomScene()
+    public void ChangeToRandomScene(UIButton MissionBtn)
     {
         string chosenScene = gameScenes[Random.Range(0, gameScenes.Length)];
-        StartCoroutine(FadeAndLoadBiome());
-        // inserir alguma lógica relativa a missão
+        StartCoroutine(FadeAndLoadBiome(MissionBtn.missionType));
     }
 
     #region Private Methods
-    private IEnumerator FadeAndLoadBiome()
+    private IEnumerator FadeAndLoadBiome(MissionType missionType)
     {
         StartCoroutine(FadeOutMusic());
 
@@ -168,7 +168,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(fadeInDuration);
 
         if (SceneControl.instance != null)
-            SceneControl.instance.LoadBiomeScene();
+            SceneControl.instance.LoadBiomeScene(missionType);
         else
         {   // fallback
             SceneManager.LoadSceneAsync(gameScenes[Random.Range(0, gameScenes.Length)]);

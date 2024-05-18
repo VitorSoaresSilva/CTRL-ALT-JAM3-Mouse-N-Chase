@@ -3031,6 +3031,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: 356, y: -85, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 0, z: -90}
   transitionDuration: 0.2
+  missionType: 0
 --- !u!1 &707818786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,10 +3530,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1470262097}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ChangeToRandomScene
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 813682880}
+          m_ObjectArgumentAssemblyTypeName: UIButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3592,6 +3593,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: -130, y: -330, z: 0}
   <PointerRotation>k__BackingField: {x: 180, y: 0, z: 88.25}
   transitionDuration: 0.2
+  missionType: 3
 --- !u!1 &820911487
 GameObject:
   m_ObjectHideFlags: 0
@@ -4915,10 +4917,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1470262097}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ChangeToRandomScene
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1171023216}
+          m_ObjectArgumentAssemblyTypeName: UIButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4978,6 +4980,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: -140, y: 270, z: 0}
   <PointerRotation>k__BackingField: {x: 180, y: 0, z: 88.25}
   transitionDuration: 0.2
+  missionType: 0
 --- !u!1 &1171862124
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,10 +5937,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1470262097}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ChangeToRandomScene
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1396896430}
+          m_ObjectArgumentAssemblyTypeName: UIButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5959,6 +5962,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: -140, y: 60, z: 0}
   <PointerRotation>k__BackingField: {x: 180, y: 0, z: 88.25}
   transitionDuration: 0.2
+  missionType: 1
 --- !u!1 &1427826813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5989,6 +5993,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 0
+  gameplayScene: Gameplay
+  biomeScenes:
+  - BiomeCorrupted
+  - BiomeDesert
+  - BiomeFlorest
+  - BiomeMix
 --- !u!4 &1427826815
 Transform:
   m_ObjectHideFlags: 0
@@ -6260,6 +6270,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: 356, y: -15, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 0, z: -90}
   transitionDuration: 0.2
+  missionType: 0
 --- !u!1 &1470262093
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,6 +7126,7 @@ MonoBehaviour:
   FirstButtonSelected: {fileID: 1171023216}
   moveOffset: 10
   moveSpeed: 95
+  moveAxis: 0
 --- !u!1 &1635339380
 GameObject:
   m_ObjectHideFlags: 0
@@ -8138,10 +8150,10 @@ MonoBehaviour:
       - m_Target: {fileID: 1470262097}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ChangeToRandomScene
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1926429009}
+          m_ObjectArgumentAssemblyTypeName: UIButton, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8163,6 +8175,7 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: -140, y: -135, z: 0}
   <PointerRotation>k__BackingField: {x: 180, y: 0, z: 88.25}
   transitionDuration: 0.2
+  missionType: 2
 --- !u!1 &2074816226
 GameObject:
   m_ObjectHideFlags: 0
@@ -8319,9 +8332,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 545420004}
   - {fileID: 472502332}
+  - {fileID: 1470262098}
   - {fileID: 324890450}
   - {fileID: 1427826815}
   - {fileID: 1221369340}
   - {fileID: 623736198}
   - {fileID: 1751937680}
-  - {fileID: 1470262098}

@@ -10,6 +10,7 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler
     [field: SerializeField] public Vector3 PointerPosition { get; private set; }
     [field: SerializeField] public Vector3 PointerRotation { get; private set; }
     [SerializeField] private float transitionDuration = 1f;
+    public MissionType missionType;
 
     public Button Button { get; private set; }
 

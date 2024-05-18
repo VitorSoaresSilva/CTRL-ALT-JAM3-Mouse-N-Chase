@@ -11,7 +11,6 @@ public class CareerPoints : Singleton<CareerPoints>
     public int MissionsCompleted { get => FastResponseCompleted + PursuitCompleted + RescueCompleted + BossCompleted; }
 
     // Missions
-    public enum MissionType { FastResponse, Pursuit, Rescue, Boss }
     private int FastResponseCompleted = 0;
     private int PursuitCompleted = 0;
     private int RescueCompleted = 0;
