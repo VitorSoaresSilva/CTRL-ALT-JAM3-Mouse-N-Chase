@@ -82,6 +82,7 @@ https://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-g
 
 FreeStylized (texturas)
 
+Capa do jogo IA Copilot
 -------------------------
 Tools
 Sebastian Lague (PathCreator)
@@ -101,6 +102,7 @@ https://www.flaticon.com/free-icon/wrench_31056
 Remix Icons (Icones diversos)
 https://remixicon.com/
 
+Fonte khurasan https://www.dafont.com/pt/rato.font
 -------------------------
 Characters
 Dead Account (Oswald The Lucky Rabbit)
@@ -130,3 +132,83 @@ https://free3d.com/pt/3d-model/low-polly-lamp-978441.html
 https://free3d.com/pt/3d-model/old-russian-phone-407165.html
 https://br.freepik.com/fotos-vetores-gratis/quadro-detetive
 https://sketchfab.com/3d-models/city-police-station-f6ba27f0426c4eefabce32d17e87fd35#download
+
+
+///// LOCOCAR NO MENU /////
+
+Progração:
+Eduardo Romeu
+Vitor Soares
+Felipe Jardim
+Copilot
+
+Veículos:
+Felipe Jardim
+
+Level Design:
+Felipe Jardim
+
+UI:
+Eduardo Romeu
+Felipe Jardim
+Copilot
+Clicking hand
+Wrench Icon
+Remix Icons
+khurasan
+
+Personagem Principal:
+ELimar Luciano
+
+Personagens Secundário:
+Dead Account
+
+Áudios
+Kristian Grundström
+Felipe Jardim
+
+Música
+Oleg Kyrylkovv
+Jeremy Frobose
+Tom Feldmann
+
+Textura
+Chromisu
+FreeStylized
+
+Efeitos
+Jean Moreno
+Lana Studio
+
+Modelos
+Felipe Jardim
+
+Modelos Assets
+Erbeilo3D
+False Wisp Studios
+xiaolianhuastudio
+Ioan Stan
+JustCreate
+BigRookGames
+Rokay3D
+Supercyan
+23 Space Robots and Counting...
+Cartoon Palmtree and Umbrellas
+
+Devlopers Tools
+Sebastian Lague
+Micah Wilder
+
+Programas
+Unity
+GitHub
+Blender
+Discord
+WhatsApp
+Jetbrains Rider
+Visual Studio Code
+Adobe Substance Painter
+Adobe Photoshop 
+
+
+
