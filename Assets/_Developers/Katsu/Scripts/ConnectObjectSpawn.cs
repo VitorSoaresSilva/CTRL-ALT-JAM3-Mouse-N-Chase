@@ -4,12 +4,12 @@ using UnityEngine;
 namespace PathCreation.Examples
 {
 
-    [ExecuteInEditMode]
+    // [ExecuteInEditMode]
     public class ConnectObjectSpawn : PathSceneTool
     {
         public GameObject prefab;
         public GameObject holder;
-        public float spacing = 3;
+        [Range(0.1f, 10)] public float spacing = 3;
         public float lateralOffset = 1.0f;
         public float heightOffset = 0.0f; 
         public Vector3 rotationOffset = Vector3.zero;
@@ -25,8 +25,8 @@ namespace PathCreation.Examples
 
                 VertexPath path = pathCreator.path;
 
-                //spacing = Mathf.Max(minSpacing, spacing); // original
-                spacing = Random.Range(minSpacing, spacing); // aleatório by Romeu_, validar
+                // spacing = Mathf.Max(minSpacing, spacing); // original
+                // spacing = Random.Range(minSpacing, spacing); // aleatï¿½rio by Romeu_, validar
 
                 float dst = 0;
 

@@ -71,3 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .vsconfig
+.idea/.idea.ctrl-alt-jam-3/.idea/workspace.xml
+.idea/.idea.ctrl-alt-jam-3/.idea/vcs.xml
+.idea/.idea.ctrl-alt-jam-3/.idea/projectSettingsUpdater.xml
+.idea/.idea.ctrl-alt-jam-3/.idea/indexLayout.xml

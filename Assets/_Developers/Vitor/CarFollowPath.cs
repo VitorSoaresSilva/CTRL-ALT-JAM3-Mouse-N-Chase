@@ -1,3 +1,4 @@
+using System;
 using PathCreation;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace _Developers.Vitor
         public float lateralSpeed = 5;
         public float yOffset = 0;
         float distanceTravelled;
+        public float maxDeltaX;
         public Transform car;
         void Start() {
             if (pathCreator != null)
@@ -19,19 +21,19 @@ namespace _Developers.Vitor
                 pathCreator.pathUpdated += OnPathChanged;
             }
         }
-        void Update()
+        void FixedUpdate()
         {
             float horizontalInput = Input.GetAxis("Right") - Input.GetAxis("Left");
             if (horizontalInput != 0)
             {
                 // Mover o carro lateralmente
-                float deltaX = horizontalInput * lateralSpeed * Time.deltaTime;
+                float deltaX = horizontalInput * lateralSpeed * Time.fixedDeltaTime;
                 car.transform.Translate(Vector3.right * deltaX);
             }
             
             if (pathCreator != null)
             {
-                distanceTravelled += speed * Time.deltaTime;
+                distanceTravelled += speed * Time.fixedDeltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }

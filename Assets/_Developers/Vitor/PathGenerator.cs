@@ -3,36 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using _Developers.Vitor;
 using PathCreation;
+using PathCreation.Examples;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PathGenerator : MonoBehaviour
 {
-    public int pathLength = 10; // Tamanho do caminho desejado
-    public float pathDistance = 10; // Tamanho do caminho desejado
-    public float minAngle = -30; // Tamanho do caminho desejado
-    public float maxAngle = 30; // Tamanho do caminho desejado
-    public GameObject pathPrefab; // Prefab a ser usado para criar o caminho
-    public Transform pathParent; // Parent object para os objetos do caminho
-
-    // private List<Vector2Int> path = new List<Vector2Int>(); // Lista para armazenar o caminho
-    private List<Vector3> pathPoints = new List<Vector3>(); // Lista para armazenar o caminho
-    private List<Transform> pathObjects = new List<Transform>();
+    [Tooltip("Quantidade de pontos na rua")] [SerializeField] 
+    private int pathLength = 10;
+    [Tooltip("Distancia entre os pontos")] [SerializeField] 
+    private float pathDistance = 10;
+    [Tooltip("Angulo minimo entre os pontos gerados")] [SerializeField] 
+    private float minAngle = -30;
+    [Tooltip("Angulo máximo entre os pontos gerados")] [SerializeField]
+    private float maxAngle = 30;
     
-    [SerializeField] private PathCreator _pathCreator;
-    public Transform[] waypoints;
+    private Transform pathParent;
+    private List<Vector3> pathPoints = new List<Vector3>();
     public PathCreator pathCreatorInstance;
     public CarFollowPath carFollowPath;
-    public CarFollowPath enemyCarFollowPath;
+    private RoadMeshCreator _roadMeshCreator;
+    
     void Start()
     {
+        _roadMeshCreator = pathCreatorInstance.GetComponent<RoadMeshCreator>();
         GeneratePath();
-        DrawPath();
         SetPath();
         carFollowPath.pathCreator = pathCreatorInstance;
         carFollowPath.enabled = true;
-        enemyCarFollowPath.pathCreator = pathCreatorInstance;
-        enemyCarFollowPath.enabled = true;
     }
     private void Update()
     {
@@ -40,23 +38,12 @@ public class PathGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GeneratePath();
-            DrawPath();
             SetPath();
         }
-    }
-    private void ClearPath()
-    {
-        pathPoints.Clear();
-        foreach (var pathObject in pathObjects)
-        {
-            Destroy(pathObject.gameObject);
-        }
-        pathObjects.Clear();
     }
 
     void GeneratePath()
     {
-        ClearPath();
         // path.Add(Vector2Int.zero); // Adiciona o ponto inicial ao caminho
         pathPoints.Add(Vector3.zero);
         // Vector3 nextPoint = Vector3.zero;
@@ -103,16 +90,6 @@ public class PathGenerator : MonoBehaviour
         
         BezierPath bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
         pathCreatorInstance.bezierPath = bezierPath;
-        // pathCreatorInstance.TriggerPathUpdate();
-    }
-
-    void DrawPath()
-    {
-        foreach (Vector3 point in pathPoints)
-        {
-            GameObject pathObject = Instantiate(pathPrefab, new Vector3(point.x, 0,point.y) * pathDistance, Quaternion.identity);
-            pathObject.transform.SetParent(pathParent);
-            pathObjects.Add(pathObject.transform);
-        }
+        _roadMeshCreator.TriggerUpdate();
     }
 }

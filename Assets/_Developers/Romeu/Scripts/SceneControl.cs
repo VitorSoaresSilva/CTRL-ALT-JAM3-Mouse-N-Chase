@@ -10,7 +10,7 @@ public enum MissionType { FastResponse, Pursuit, Rescue, Boss }
 
 public class SceneControl : Singleton<SceneControl>
 {
-    [SerializeField] private string gameplayScene = "CarPathFollow"; // carrega junto ao bioma
+    [SerializeField] private string gameplayScene = "Gameplay"; // carrega junto ao bioma
     [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
     public MissionType currentMission { get; private set; }
