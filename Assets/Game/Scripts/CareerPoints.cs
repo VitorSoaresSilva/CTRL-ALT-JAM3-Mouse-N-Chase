@@ -5,8 +5,6 @@ using TMPro;
 
 public class CareerPoints : Singleton<CareerPoints>
 {
-    public static CareerPoints Instance { get; private set; }
-
     // Points
     public int Points { get; private set; }
     public int LostPoints { get; private set; }
@@ -29,18 +27,6 @@ public class CareerPoints : Singleton<CareerPoints>
     public bool BumperUnlocked { get => Points >= 30000; }
 
     public bool debug = false;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void OnEnable()
     {

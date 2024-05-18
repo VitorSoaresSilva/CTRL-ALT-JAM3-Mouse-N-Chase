@@ -32,14 +32,14 @@ public class GameOverManager : MonoBehaviour
     void Update()
     {
         // Verifique se a saúde do carro é 0 ou menos, ou se os pontos são 0 ou menos
-        if (car != null && (car.health <= 0 || CareerPoints.Instance.Points <= 0))
+        if (car != null && (car.health <= 0 || CareerPoints.instance.Points <= 0))
         {
             // O jogo acabou, faça algo aqui (por exemplo, exibir uma tela de Game Over)
             gameOverImage.enabled = true; // Mostre a imagem de Game Over
             audioSource.Play(); // Toque a música de Game Over
 
             // Reset os pontos
-            CareerPoints.Instance.SetPoints(0);
+            CareerPoints.instance.SetPoints(0);
 
             // Aguarde alguns segundos e depois volte para o menu
             Invoke("GoToMenu", delayBeforeMenu);

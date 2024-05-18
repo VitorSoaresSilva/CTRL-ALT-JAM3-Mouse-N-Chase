@@ -7,8 +7,10 @@ public class CarDamage : MonoBehaviour
     public float health = 100f; // Saúde inicial do carro
     public string damageTag = "Obstacle"; // Tag dos objetos que causam dano ao carro
 
+
     void OnCollisionEnter(Collision collision)
     {
+
         // Verifique se o carro colidiu com um objeto que causa dano
         if (collision.gameObject.CompareTag(damageTag))
         {
@@ -19,7 +21,7 @@ public class CarDamage : MonoBehaviour
             health -= damage;
 
             // Atualize os pontos perdidos no CareerPoints
-            CareerPoints.Instance.RemovePoints((int)damage);
+            CareerPoints.instance.RemovePoints((int)damage);
 
             // Verifique se o carro ainda tem saúde
             if (health <= 0)

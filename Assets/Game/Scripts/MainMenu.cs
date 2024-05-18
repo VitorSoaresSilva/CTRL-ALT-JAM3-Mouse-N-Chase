@@ -186,7 +186,7 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(fadeInDuration);
 
         if (SceneControl.instance != null)
-            SceneControl.instance.LoadBiomeScene(); 
+            SceneControl.instance.ChangeScene(scene); 
         else SceneManager.LoadSceneAsync(scene);
     }
 

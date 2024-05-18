@@ -613,6 +613,7 @@ MonoBehaviour:
   FirstButtonSelected: {fileID: 718553253}
   moveOffset: 10
   moveSpeed: 95
+  moveAxis: 0
 --- !u!1 &148909045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1194,7 @@ MonoBehaviour:
   FirstButtonSelected: {fileID: 718553253}
   moveOffset: 10
   moveSpeed: 95
+  moveAxis: 0
 --- !u!114 &217036745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3571,14 +3573,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1758975757}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: PoliceStation
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &718553251
@@ -8358,6 +8360,11 @@ MonoBehaviour:
   jamLogo: {fileID: 171003112}
   logoRotationSpeed: 120
   sceneName: PoliceStation
+  gameScenes:
+  - BiomeCorrupted
+  - BiomeDesert
+  - BiomeFlorest
+  - BiomeMix
   AudioClips:
   - {fileID: 8300000, guid: 097dcfaefc4ec4254af24ee434048454, type: 3}
   - {fileID: 8300000, guid: cc8fd0346fd08446d9a0b5cde9e1d2a1, type: 3}
@@ -9405,6 +9412,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 0
+  gameplayScene: CarPathFollow
+  biomeScenes:
+  - BiomeCorrupted
+  - BiomeDesert
+  - BiomeFlorest
+  - BiomeMix
 --- !u!4 &1959068839
 Transform:
   m_ObjectHideFlags: 0

@@ -10,11 +10,13 @@ public class UIPointer : MonoBehaviour
     [SerializeField] UIButton FirstButtonSelected;
     [SerializeField] float moveOffset = 20f;
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private MoveAxis moveAxis = MoveAxis.X;
 
     private RectTransform rt;
     private float currentOffset = 0f;
-    private bool movingRight = true;
+    private bool moving = true;
     private float initialXPosition;
+    public enum MoveAxis { X, Y }
 
     private void OnEnable()
     {
@@ -29,18 +31,21 @@ public class UIPointer : MonoBehaviour
                 btn.Select();
         }
 
-        initialXPosition = rt.localPosition.x;
+        if(moveAxis == MoveAxis.X)
+            initialXPosition = rt.localPosition.x;
+        else if(moveAxis == MoveAxis.Y)
+            initialXPosition = rt.localPosition.y;
     }
 
     void Update()
     {
         // Movendo o RectTransform
-        if (movingRight)
+        if (moving)
         {
             currentOffset += moveSpeed * Time.deltaTime;
             if (currentOffset >= moveOffset)
             {
-                movingRight = false;
+                moving = false;
             }
         }
         else
@@ -48,7 +53,7 @@ public class UIPointer : MonoBehaviour
             currentOffset -= moveSpeed * Time.deltaTime;
             if (currentOffset <= -moveOffset)
             {
-                movingRight = true;
+                moving = true;
             }
         }
 
@@ -57,7 +62,11 @@ public class UIPointer : MonoBehaviour
 
         // Aplicando a nova posição ao RectTransform
         Vector3 newPosition = rt.localPosition;
-        newPosition.x = newXPosition;
+        if(moveAxis == MoveAxis.X)
+            newPosition.x = newXPosition;
+        else if(moveAxis == MoveAxis.Y)
+            newPosition.y = newXPosition;
+
         rt.localPosition = newPosition;
     }
 
