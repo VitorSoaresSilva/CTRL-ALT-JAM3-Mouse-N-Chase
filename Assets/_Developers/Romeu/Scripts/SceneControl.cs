@@ -13,7 +13,7 @@ public class SceneControl : Singleton<SceneControl>
     [SerializeField] private string gameplayScene = "Gameplay"; // carrega junto ao bioma
     [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
-    public MissionType currentMission { get; private set; }
+    [field:SerializeField] public MissionType currentMission { get; private set; }
     public GameplayManager gameplayManager { get; private set; }
 
     public void ChangeScene(string sceneName)

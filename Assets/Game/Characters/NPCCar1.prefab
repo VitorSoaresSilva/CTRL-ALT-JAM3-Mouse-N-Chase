@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1380929733662744203}
   - component: {fileID: 1258468528146083678}
   - component: {fileID: 4632126025990604678}
+  - component: {fileID: -6232721783095306507}
   m_Layer: 0
   m_Name: NPCCar1
   m_TagString: Untagged
@@ -129,7 +130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4152978810813071935}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288960c90449421c99ea589cab494f95, type: 3}
   m_Name: 
@@ -139,6 +140,7 @@ MonoBehaviour:
   speed: 8
   lateralSpeed: 5
   yOffset: 0.1
+  maxDeltaX: 0
   car: {fileID: 7175667350867641469}
 --- !u!114 &4632126025990604678
 MonoBehaviour:
@@ -170,6 +172,25 @@ MonoBehaviour:
   DashRight: {fileID: -3147210155704388828, guid: 18d4fb559e9221d4db50975b10b1efbb,
     type: 3}
   Powerup: {fileID: 604414987806454581, guid: 18d4fb559e9221d4db50975b10b1efbb, type: 3}
+--- !u!114 &-6232721783095306507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4152978810813071935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9022a443d25547dcb3f97ac72d6e8cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathCreator: {fileID: 0}
+  endOfPathInstruction: 0
+  speed: 5
+  lateralSpeed: 5
+  yOffset: 0
+  car: {fileID: 7175667350867641469}
+  lateralLimit: 7
 --- !u!1 &5700594235850370108
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +382,7 @@ HingeJoint:
   m_UseSpring: 1
   m_Spring:
     spring: 100
-    damper: 5
+    damper: 40
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -660,7 +681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4462459689113839601
 Transform:
   m_ObjectHideFlags: 0
@@ -734,7 +755,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8565547884583409863}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &4293057710820718983
 MonoBehaviour:
   m_ObjectHideFlags: 0

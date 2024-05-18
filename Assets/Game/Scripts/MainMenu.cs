@@ -153,7 +153,6 @@ public class MainMenu : MonoBehaviour
 
     public void ChangeToRandomScene(UIButton MissionBtn)
     {
-        string chosenScene = gameScenes[Random.Range(0, gameScenes.Length)];
         StartCoroutine(FadeAndLoadBiome(MissionBtn.missionType));
     }
 
