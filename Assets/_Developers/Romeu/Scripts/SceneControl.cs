@@ -14,6 +14,14 @@ public class SceneControl : Singleton<SceneControl>
     [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
     [field:SerializeField] public MissionType currentMission { get; private set; }
+
+    // audios com vozes dos personagens
+    [SerializeField] private AudioClip[] FastResponseClips;
+    [SerializeField] private AudioClip[] PursuitClips;
+    [SerializeField] private AudioClip[] RescueClips;
+    [SerializeField] private AudioClip[] BossClips;
+    [SerializeField] private AudioClip[] PlayerResponseClips;
+
     public GameplayManager gameplayManager { get; private set; }
 
     public void ChangeScene(string sceneName)

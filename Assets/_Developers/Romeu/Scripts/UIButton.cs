@@ -11,7 +11,6 @@ public class UIButton : MonoBehaviour, ISelectHandler, ISubmitHandler
     [SerializeField] private UIPointer GlobalPointer;
     [field: SerializeField] public Vector3 PointerPosition { get; private set; }
     [field: SerializeField] public Vector3 PointerRotation { get; private set; }
-    [SerializeField] private float transitionDuration = 1f;
     [SerializeField] private bool randomMission = false;
     [SerializeField] private MissionType _missionType;
     public MissionType missionType
