@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.SearchService;
 
 //By FJB and Romeu
 public class MainMenu : MonoBehaviour
@@ -138,6 +139,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("OnStartButton was called.");
         StartCoroutine(FadeOutAndLoadScene(sceneName));
     }
+    public void QuitGame()
+    {
+        Debug.Log("OnQuitButton was called.");
+        Application.Quit();
+    }
 
     public void ChangeScene(string scene)
     {
@@ -147,35 +153,41 @@ public class MainMenu : MonoBehaviour
     public void ChangeToRandomScene()
     {
         string chosenScene = gameScenes[Random.Range(0, gameScenes.Length)];
-        ChangeScene(chosenScene);
+        StartCoroutine(FadeAndLoadBiome());
         // inserir alguma lógica relativa a missão
     }
 
-    public void QuitGame()
+    #region Private Methods
+    private IEnumerator FadeAndLoadBiome()
     {
-        Debug.Log("OnQuitButton was called.");
-        Application.Quit();
+        StartCoroutine(FadeOutMusic());
+
+        if (Fade.instance != null)
+            Fade.instance.FadeIn();
+
+        yield return new WaitForSeconds(fadeInDuration);
+
+        if (SceneControl.instance != null)
+            SceneControl.instance.LoadBiomeScene();
+        else
+        {   // fallback
+            SceneManager.LoadSceneAsync(gameScenes[Random.Range(0, gameScenes.Length)]);
+            SceneManager.LoadSceneAsync(sceneName);
+        }
     }
 
-    #region Private Methods
     private IEnumerator FadeOutAndLoadScene(string scene)
     {
         StartCoroutine(FadeOutMusic());
+
         if(Fade.instance != null)
             Fade.instance.FadeIn();
             
         yield return new WaitForSeconds(fadeInDuration);
 
-        AsyncOperation load;
-
         if (SceneControl.instance != null)
-            load = SceneControl.instance.ChangeScene(scene);
-        else load = SceneManager.LoadSceneAsync(scene);
-
-        while(!load.isDone)
-        {
-            yield return null;
-        };
+            SceneControl.instance.LoadBiomeScene(); 
+        else SceneManager.LoadSceneAsync(scene);
     }
 
     private void PlayNextAudioClip()
