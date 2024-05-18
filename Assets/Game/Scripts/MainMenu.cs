@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
     [Header("Game Scene Config")]
     public string sceneName = "Game";
+    public string[] gameScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
     [Header("Audio"), FormerlySerializedAs("AudioClip")]
     public AudioClip[] AudioClips;
@@ -141,6 +142,13 @@ public class MainMenu : MonoBehaviour
     public void ChangeScene(string scene)
     {
         StartCoroutine(FadeOutAndLoadScene(scene));
+    }
+
+    public void ChangeToRandomScene()
+    {
+        string chosenScene = gameScenes[Random.Range(0, gameScenes.Length)];
+        ChangeScene(chosenScene);
+        // inserir alguma lógica relativa a missão
     }
 
     public void QuitGame()

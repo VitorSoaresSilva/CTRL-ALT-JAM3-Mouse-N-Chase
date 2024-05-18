@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64881848d8992334a9ca646be94e0fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyOnLoad: 0
+  DestroyOnLoad: 1
   fadeAnimator: {fileID: 148909051}
   fadeCanvas: {fileID: 148909049}
   <animationSpeed>k__BackingField: 0.75
@@ -8377,6 +8377,15 @@ MonoBehaviour:
   pointsText: {fileID: 0}
   completedMissionsText: {fileID: 0}
   lostPointsText: {fileID: 0}
+  shieldSlot:
+    LockedIcon: {fileID: 0}
+    UnlockedIcon: {fileID: 0}
+  slotSlot:
+    LockedIcon: {fileID: 0}
+    UnlockedIcon: {fileID: 0}
+  bumperSlot:
+    LockedIcon: {fileID: 0}
+    UnlockedIcon: {fileID: 0}
 --- !u!82 &1758975758
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10382,8 +10391,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 973225194}
   - {fileID: 1959068839}
-  - {fileID: 623736198}
-  - {fileID: 1867646096}
-  - {fileID: 1758975756}
   - {fileID: 148909050}
   - {fileID: 1834091}
+  - {fileID: 1867646096}
+  - {fileID: 623736198}
+  - {fileID: 1758975756}
