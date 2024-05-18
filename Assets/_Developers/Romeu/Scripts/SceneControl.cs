@@ -14,6 +14,7 @@ public class SceneControl : Singleton<SceneControl>
     [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
     public MissionType currentMission { get; private set; }
+    public GameplayManager gameplayManager { get; private set; }
 
     public void ChangeScene(string sceneName)
     {
@@ -51,7 +52,15 @@ public class SceneControl : Singleton<SceneControl>
             }
             yield return null;
         }
+
+        if(gameplayManager != null)
+        {
+            gameplayManager.StartGameplay();
+        }
     }
 
-
+    public void AddGameplayManager(GameplayManager manager)
+    {
+        gameplayManager = manager;
+    }
 }

@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
     public enum UpdateMode { Update, LateUpdate, FixedUpdate }
     [field: SerializeField] private UpdateMode updateMode { get; set; } = UpdateMode.LateUpdate;
 
-    private Camera Camera;
+    public Camera Camera { get; private set; }
 
     void Awake()
     {
