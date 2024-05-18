@@ -42,12 +42,18 @@ public class GameOverManager : MonoBehaviour
             CareerPoints.instance.SetPoints(0);
 
             // Aguarde alguns segundos e vai para a cena de game over
-            Invoke("GoToMenu", delayBeforeMenu);
+            GoToGameOverScreen();
         }
     }
 
-    void GoToMenu()
+    void GoToGameOverScreen()
     {
         SceneControl.instance.ChangeScene("GameOver");
+
+        Invoke(nameof(GoToMenu), delayBeforeMenu);
+        void GoToMenu()
+        {
+            SceneControl.instance.ChangeScene("MainMenu");
+        }
     }
 }

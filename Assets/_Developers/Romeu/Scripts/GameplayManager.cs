@@ -15,7 +15,8 @@ public class GameplayManager : MonoBehaviour
 
     void OnEnable()
     {
-        SceneControl.instance.AddGameplayManager(this);
+        if(SceneControl.instance != null)
+            SceneControl.instance.AddGameplayManager(this);
     }
 
     public void StartGameplay() // wip

@@ -273,6 +273,8 @@ MonoBehaviour:
   <PointerPosition>k__BackingField: {x: 350, y: -200, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 0, z: 180}
   transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!1 &633077351
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,8 +653,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carTag: Player
   gameOverImage: {fileID: 0}
-  gameOverMusic: {fileID: 0}
-  audioMixer: {fileID: 0}
+  gameOverMusic: {fileID: 8300000, guid: fa1bfb98283d59a47975e477e9387fd2, type: 3}
+  audioMixer: {fileID: 771500548904080322, guid: 20a71d601a9388344bb47e9410f2c010,
+    type: 2}
   delayBeforeMenu: 10
 --- !u!114 &1486242396
 MonoBehaviour:
