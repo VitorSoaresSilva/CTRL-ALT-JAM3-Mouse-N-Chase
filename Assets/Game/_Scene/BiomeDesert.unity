@@ -1519,7 +1519,7 @@ MonoBehaviour:
   terrain: {fileID: 15600000, guid: 6327cd239f7c3124f9c74b028d447824, type: 2}
   terrainLayers:
   - {fileID: 8574412962073106934, guid: 9d4c363caf962fc4db3f057f27debd78, type: 2}
-  chunkCount: {x: 3, y: 3}
+  chunkCount: {x: 4, y: 4}
   sceneFilters: []
   bladeType: 2
   multipleMeshes: 1
@@ -1536,7 +1536,7 @@ MonoBehaviour:
   shadowMode: 0
   renderLayer:
     m_LayerIndex: 0
-  pointCount: 0.3
+  pointCount: 0.1
   multiplyByArea: 1
   pointLODFactor: 1
   randomiseSeed: 1
