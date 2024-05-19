@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 1380929733662744203}
   - component: {fileID: 1258468528146083678}
   - component: {fileID: 4632126025990604678}
+  - component: {fileID: 1896079848400874259}
   m_Layer: 0
   m_Name: PlayerCarPath
   m_TagString: Player
@@ -502,6 +503,22 @@ MonoBehaviour:
   DashRight: {fileID: -3147210155704388828, guid: 18d4fb559e9221d4db50975b10b1efbb,
     type: 3}
   Powerup: {fileID: 604414987806454581, guid: 18d4fb559e9221d4db50975b10b1efbb, type: 3}
+--- !u!114 &1896079848400874259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4152978810813071935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95b23b48d0201224fb5c8f229a9ae641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <carDamage>k__BackingField: {fileID: 2740046953578790167}
+  ShieldObject: {fileID: 0}
+  SlotObject: {fileID: 0}
+  BumperObject: {fileID: 0}
 --- !u!1 &5527529134646955672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,6 +1373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3911760657846870369}
   - component: {fileID: 7405643179354457423}
+  - component: {fileID: 2740046953578790167}
   m_Layer: 0
   m_Name: COLLISION0
   m_TagString: Untagged
@@ -1400,6 +1418,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1044490386882040481, guid: a53da2de086f8e94dbe471b99c88c660, type: 3}
+--- !u!114 &2740046953578790167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250805721480813361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580822451d67f0a4b93726bc89494481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 0}
+  health: 100
+  damageTag: Obstacle
 --- !u!1 &8565547884583409863
 GameObject:
   m_ObjectHideFlags: 0

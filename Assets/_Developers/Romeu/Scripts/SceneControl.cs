@@ -16,11 +16,11 @@ public class SceneControl : Singleton<SceneControl>
     [field:SerializeField] public MissionType currentMission { get; private set; }
 
     // audios com vozes dos personagens
-    [SerializeField] private AudioClip[] FastResponseClips;
-    [SerializeField] private AudioClip[] PursuitClips;
-    [SerializeField] private AudioClip[] RescueClips;
-    [SerializeField] private AudioClip[] BossClips;
-    [SerializeField] private AudioClip[] PlayerResponseClips;
+    [field: SerializeField] public AudioClip[] FastResponseClips { get; private set; }
+    [field: SerializeField] public AudioClip[] PursuitClips { get; private set; }
+    [field: SerializeField] public AudioClip[] RescueClips { get; private set; }
+    [field: SerializeField] public AudioClip[] BossClips { get; private set; }
+    [field: SerializeField] public AudioClip[] PlayerResponseClips { get; private set; }
 
     public GameplayManager gameplayManager { get; private set; }
 

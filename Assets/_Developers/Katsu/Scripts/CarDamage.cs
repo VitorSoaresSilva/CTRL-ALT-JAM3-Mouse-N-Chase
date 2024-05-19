@@ -1,10 +1,11 @@
 using _Developers.Vitor;
 using UnityEngine;
+using UnityEngine.SearchService;
 
 public class CarDamage : MonoBehaviour
 {
     public CarFollowPath car; // Referência ao script CarFollowPath do carro
-    public float health = 100f; // Saúde inicial do carro
+    [Range(0, 100)] public float health = 100f; // Saúde inicial do carro
     public string damageTag = "Obstacle"; // Tag dos objetos que causam dano ao carro
 
 

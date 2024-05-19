@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarUpgrades : MonoBehaviour
+public class PlayerCar : MonoBehaviour
 {
-    [SerializeField] private GameObject ShieldObject;
+    [field: SerializeField] public CarDamage carDamage { get; private set; }
+
+
+    [SerializeField, Header("Upgrades")] private GameObject ShieldObject;
     [SerializeField] private GameObject SlotObject;
     [SerializeField] private GameObject BumperObject;
 
+
+
     void Start()
     {
+        // Upgrades
         if(CareerPoints.instance != null)
         {
             if(ShieldObject != null)
@@ -19,12 +25,12 @@ public class CarUpgrades : MonoBehaviour
 
             if (SlotObject != null)
             {
-                if (CareerPoints.instance.ShieldUnlocked) SlotObject.SetActive(true);
+                if (CareerPoints.instance.SlotUnlocked) SlotObject.SetActive(true);
             }
 
             if (BumperObject != null)
             {
-                if (CareerPoints.instance.ShieldUnlocked) BumperObject.SetActive(true);
+                if (CareerPoints.instance.BumperUnlocked) BumperObject.SetActive(true);
             }
         }
     }
