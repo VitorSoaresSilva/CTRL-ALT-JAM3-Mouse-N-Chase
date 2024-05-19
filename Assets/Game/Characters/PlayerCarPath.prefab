@@ -464,14 +464,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   endOfPathInstruction: 2
-  speed: 15
+  speed: 20
   lateralSpeed: 5
   yOffset: 0.1
   distanceTravelled: 0
   maxDeltaX: 0
   endOffset: 10
   car: {fileID: 7175667350867641469}
-  lateralLimit: 7
+  lateralLimit: 6
   isAtTheEnd: 0
 --- !u!114 &4632126025990604678
 MonoBehaviour:
@@ -516,6 +516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <carDamage>k__BackingField: {fileID: 2740046953578790167}
+  <Siren>k__BackingField: {fileID: 1908816019517810544}
+  <Engine>k__BackingField: {fileID: 3719884746842431248}
   ShieldObject: {fileID: 0}
   SlotObject: {fileID: 0}
   BumperObject: {fileID: 0}
