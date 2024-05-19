@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6663468165168339}
   m_Layer: 0
   m_Name: COLLISION2
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 4769140664378080814}
   m_Layer: 0
   m_Name: CarHolder
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: -6232721783095306507}
   m_Layer: 0
   m_Name: NPCCar1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,9 +143,82 @@ MonoBehaviour:
   distanceTravelled: 0
   maxDeltaX: 0
   endOffset: 10
+  startOffset: 5
   car: {fileID: 7175667350867641469}
   lateralLimit: 7
   isAtTheEnd: 0
+  steer:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Steer
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7bbc3cee-f256-4ca0-aaf8-3bf5619df41a
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  right:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 801b6a92-0b2c-49d4-bacd-2e8061456e6c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  left:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9895a7e6-83f3-44b0-9b18-9b5481535a0f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  dashRight:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Dash Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e2aa920f-1b22-4de6-9a92-460fd9fe76e6
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  dashLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Dash Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 62e6c5c7-933f-47a6-9a98-118f94ff02ad
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  powerup:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Powerup
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 6f5685ca-03db-456b-b420-9fe19f82abb0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &4632126025990604678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +276,7 @@ MonoBehaviour:
   maxDistance: 50
   damageSpeedBoost: 5
   boostDuration: 6
+  negativeOffsetAfterBoost: -1
 --- !u!1 &5700594235850370108
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +290,7 @@ GameObject:
   - component: {fileID: 8839001503892272297}
   m_Layer: 0
   m_Name: CHASSIS_2_Parts
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,7 +374,7 @@ GameObject:
   - component: {fileID: 6291790031975681071}
   m_Layer: 0
   m_Name: LaneFollow
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,7 +504,7 @@ GameObject:
   - component: {fileID: 3719884746842431248}
   m_Layer: 0
   m_Name: MovingPart
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -603,7 +677,7 @@ GameObject:
   - component: {fileID: 1929161188888513383}
   m_Layer: 0
   m_Name: CHASSIS_2_Paint
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -926,6 +1000,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: STEERING_WHEELS
       objectReference: {fileID: 0}
+    - target: {fileID: 8824894310865949715, guid: 586fe6d8befc5fb4aaade83a800552f9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -949,6 +1028,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Driving-Oswald
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772995798087584334, guid: c08a5ffd77644ba43b8719dc8d512b49,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 4546259702341505268, guid: c08a5ffd77644ba43b8719dc8d512b49,
         type: 3}
@@ -1023,6 +1107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WheelsRR
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
@@ -1147,6 +1236,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WheelsFR
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
@@ -1274,6 +1368,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WheelsFL
       objectReference: {fileID: 0}
+    - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1399,6 +1498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WheelsRL
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
