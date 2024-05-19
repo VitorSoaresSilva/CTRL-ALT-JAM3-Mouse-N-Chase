@@ -71,6 +71,7 @@ namespace _Developers.Vitor
         
         void OnPathChanged() {
             distanceTravelled = 0;
+            Debug.Log("Path Changed");
         }
 
         private void UpdateVelocity()

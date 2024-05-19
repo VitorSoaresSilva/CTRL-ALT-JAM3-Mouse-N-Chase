@@ -10,8 +10,6 @@ using Random = UnityEngine.Random;
 
 public class PathGenerator : Singleton<PathGenerator>
 {
-    public static PathGenerator instance { get; private set; }
-
     [Tooltip("Quantidade de pontos na rua")] [SerializeField] 
     private int pathLength = 10;
     [Tooltip("Distancia entre os pontos")] [SerializeField] 
@@ -21,39 +19,39 @@ public class PathGenerator : Singleton<PathGenerator>
     [Tooltip("Angulo máximo entre os pontos gerados")] [SerializeField]
     private float maxAngle = 30;
 
-    public event Action OnPathUpdated;
-
     private Transform pathParent;
     private List<Vector3> pathPoints = new List<Vector3>();
     public PathCreator pathCreatorInstance;
     public CarFollowPath carFollowPath;
     private RoadMeshCreator _roadMeshCreator;
-    //private ConnectObjectSpawn[] connectObjectSpawns;
-    //private MultipleObjectSpawner[] multipleObjectSpawners;
     public Vector3 centerPosition;
     public GameObject tunnelPrefab;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this; 
-        }
-    }
+    private ConnectObjectSpawn[] connectObjectSpawns;
+    private MultipleObjectSpawner[] multipleObjectSpawners;
 
     void Start()
     {
-        //connectObjectSpawns = FindObjectsOfType<ConnectObjectSpawn>();
-        //multipleObjectSpawners = FindObjectsOfType<MultipleObjectSpawner>();
+        connectObjectSpawns = FindObjectsByType<ConnectObjectSpawn>(FindObjectsSortMode.None);
+        multipleObjectSpawners = FindObjectsByType<MultipleObjectSpawner>(FindObjectsSortMode.None);
+
         _roadMeshCreator = pathCreatorInstance.GetComponent<RoadMeshCreator>();
         GeneratePath();
         SetPath();
         carFollowPath.SetPathCreator(pathCreatorInstance);
         carFollowPath.enabled = true;
+
+        foreach(ConnectObjectSpawn con in connectObjectSpawns)
+        {
+            con.SetPathGenerator(this);
+        }
+
+        foreach (MultipleObjectSpawner mult in multipleObjectSpawners)
+        {
+            mult.SetPathGenerator(this);
+        }
     }
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GeneratePath();
@@ -120,6 +118,7 @@ public class PathGenerator : Singleton<PathGenerator>
         CenterPath();
         pathCreatorInstance.gameObject.transform.position = centerPosition;
         _roadMeshCreator.TriggerUpdate();
+        pathCreatorInstance.TriggerPathUpdate();
         carFollowPath.ResetPosition();
 
         // Instancia tunel no final do caminho

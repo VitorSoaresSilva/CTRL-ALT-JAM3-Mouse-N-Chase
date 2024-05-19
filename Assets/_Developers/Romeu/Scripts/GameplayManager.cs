@@ -41,19 +41,19 @@ public class GameplayManager : MonoBehaviour
         {
             if (shieldSlot != null)
             {
-                Debug.Log(CareerPoints.instance.ShieldUnlocked);
+                //Debug.Log(CareerPoints.instance.ShieldUnlocked);
                 shieldSlot.gameObject.SetActive(CareerPoints.instance.ShieldUnlocked);
             }
 
             if (slotSlot != null)
             {
-                Debug.Log(CareerPoints.instance.SlotUnlocked);
+                //Debug.Log(CareerPoints.instance.SlotUnlocked);
                 slotSlot.gameObject.SetActive(CareerPoints.instance.SlotUnlocked);
             }
 
             if (bumperSlot != null)
             {
-                Debug.Log(CareerPoints.instance.BumperUnlocked);
+                //Debug.Log(CareerPoints.instance.BumperUnlocked);
                 bumperSlot.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
             }
         }
@@ -66,7 +66,7 @@ public class GameplayManager : MonoBehaviour
 
     public void StartGameplay() // wip
     {
-        Debug.Log("Starting gameplay");
+        //Debug.Log("Starting gameplay");
         playerCar.gameObject.SetActive(true);
 
         if(SceneControl.instance != null)
@@ -91,20 +91,23 @@ public class GameplayManager : MonoBehaviour
             if(clips.Length > 0)
             {
                 RadioAudio.clip = clips[Random.Range(0, clips.Length)];
-                RadioAudio.Play();
                 StartSceneTime = RadioAudio.clip.length;
             }
         }
 
         float followDist = cameraControl.FollowDistance;
         cameraControl.FollowDistance = -followDist;
-        if (RadioAudio != null)
-            RadioAudio.Play();
+        playerCar.Follow.speed = 10;
 
         // Play start cinematic
         StartCoroutine(PlayStartScene());
-        IEnumerator PlayStartScene()
+        IEnumerator PlayStartScene() // Mudar velocidade do player
         {
+            yield return new WaitForSeconds(1f);
+
+            if (RadioAudio != null)
+                RadioAudio.Play();
+
             yield return new WaitForSeconds(StartSceneTime);
 
             // volta a camera a posição original
@@ -115,6 +118,7 @@ public class GameplayManager : MonoBehaviour
                 yield return null;
             }
 
+            playerCar.Follow.speed = 20;
             cameraControl.FollowDistance = followDist;
         }
     }

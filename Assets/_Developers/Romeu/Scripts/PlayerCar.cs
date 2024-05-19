@@ -1,3 +1,4 @@
+using _Developers.Vitor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PlayerCar : MonoBehaviour
     [field: SerializeField] public CarDamage carDamage { get; private set; }
     [field: SerializeField] public SirenController Siren { get; private set; }
     [field: SerializeField] public EngineSound Engine { get; private set; }
+    [field: SerializeField] public CarFollowPath Follow { get; private set; }
 
 
     [SerializeField, Header("Upgrades")] private GameObject ShieldObject;

@@ -21,26 +21,24 @@ public class MultipleObjectSpawner : PathSceneTool
     public bool useCustomScale = false;
     public Vector3 customScale = new Vector3(1, 1, 1);
     public bool alternateDistance = false;
+    public PathGenerator pathGenerator;
     [Range(0.1f, 15)] public float alternateDistanceValue = 5.0f;
 
     const float minSpacing = .1f;
 
-    void Start()
+    public void SetPathGenerator(PathGenerator pathGen)
     {
-        if (pathCreator == null)
-        {
-            pathCreator = PathGenerator.instance.pathCreatorInstance;
-        }
-        PathGenerator.instance.OnPathUpdated += Activate;
-    }
+        pathGenerator = pathGen;
+        pathCreator = pathGenerator.pathCreatorInstance;
 
-    public void Activate()
-    {
+        pathCreator.pathUpdated += Generate;
+
         Generate();
     }
 
     private void Generate()
     {
+        Debug.Log("Activating MultipleObjectSpawner");
         if (pathCreator != null && holder != null && prefabs.Length > 0)
         {
             DestroyObjects();
@@ -116,16 +114,19 @@ public class MultipleObjectSpawner : PathSceneTool
 
     void DestroyObjects()
     {
+        Debug.Log("Destroying objs");
         int numChildren = holder.transform.childCount;
         for (int i = numChildren - 1; i >= 0; i--)
         {
             DestroyImmediate(holder.transform.GetChild(i).gameObject, false);
         }
     }
+    
     //protected override void OnDestroy()
     //{
     //    base.OnDestroy();
-    //    PathGenerator.instance.OnPathUpdated -= Activate;
+    //    if(PathGenerator.instance != null)
+    //        PathGenerator.instance.OnPathUpdated -= Activate;
     //}
 
     protected override void PathUpdated()

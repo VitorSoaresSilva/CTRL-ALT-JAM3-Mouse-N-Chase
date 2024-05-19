@@ -14,24 +14,20 @@ namespace PathCreation.Examples
         public Vector3 rotationOffset = Vector3.zero;
         public bool spawnOnBothSides = true;
 
-        const float minSpacing = .1f;
+        public PathGenerator pathGenerator;
 
-        void Start()
+        public void SetPathGenerator(PathGenerator pathGen)
         {
-            if (pathCreator == null)
-            {
-                pathCreator = PathGenerator.instance.pathCreatorInstance;
-            }
-            PathGenerator.instance.OnPathUpdated += Activate;
-        }
+            pathGenerator = pathGen;
+            pathCreator = pathGenerator.pathCreatorInstance;
 
-        public void Activate()
-        {
+            pathCreator.pathUpdated += Generate;
             Generate();
         }
 
         void Generate()
         {
+            Debug.Log("Activating ConnectObjectSpawn");
             if (pathCreator != null && holder != null)
             {
                 DestroyObjects();
@@ -55,6 +51,8 @@ namespace PathCreation.Examples
 
                     Quaternion rotation = rot * Quaternion.Euler(rotationOffset);
 
+                    Debug.Log($"point: {point} | rot: {rot} | normal: {normal}");
+
                     GameObject obj = Instantiate(prefab, point + offset, rotation, holder.transform);
                     obj.transform.localScale = new Vector3(1, 1, 1);
 
@@ -68,7 +66,6 @@ namespace PathCreation.Examples
                 }
             }
         }
-
 
         void DestroyObjects()
         {
