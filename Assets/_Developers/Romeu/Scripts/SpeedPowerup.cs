@@ -30,8 +30,8 @@ public class SpeedPowerUp : MonoBehaviour
             {
                 // Inicie a corrotina SpeedBoost
                 originalSpeed = playerCar.Follow.speed;
-                if (originalSpeed == speedBoost) return;
-                StartCoroutine(SpeedBoost(playerCar));
+                if (originalSpeed != speedBoost)
+                    StartCoroutine(SpeedBoost(playerCar));
             }
 
             // Desative o objeto do power-up

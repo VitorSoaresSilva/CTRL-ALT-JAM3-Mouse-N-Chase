@@ -24,9 +24,10 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private Image bumperSlot;
 
     [SerializeField, Header("Path")] private PathCreator pathCreator;
-    [SerializeField] private int maxLaps = 5; // maximo de voltas até falhar
+    [SerializeField] private int maxLaps = 10; // maximo de voltas
     
     private float StartSceneTime = 5;
+    private float lapsToFail = 5;
     public float currentLap = 0;
 
     void OnEnable()
@@ -61,7 +62,7 @@ public class GameplayManager : MonoBehaviour
 
     private void Start()
     {
-
+        lapsToFail = UnityEngine.Random.Range(5, maxLaps);
     }
 
     public void StartGameplay() // wip
@@ -139,18 +140,21 @@ public class GameplayManager : MonoBehaviour
             }
         }
 
-        if(currentLap > maxLaps)
+        if(currentLap > lapsToFail)
         {
             if(FailPanel != null)
             {
                 FailPanel.SetActive(true);
                 playerCar.gameObject.SetActive(false);
+                StartCoroutine(EndGameplay());
             }
         }
     }
 
-    public void EndGameplay()
+    public IEnumerator EndGameplay()
     {
+        yield return new WaitForSeconds(5);
         if (SceneControl.instance != null) SceneControl.instance.ChangeScene("PoliceStation");
+        if (CareerPoints.instance != null) CareerPoints.instance.Save();
     }
 }
