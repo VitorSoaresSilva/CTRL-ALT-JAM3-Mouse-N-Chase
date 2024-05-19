@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 
 public class PathGenerator : MonoBehaviour
 {
+    public static PathGenerator instance { get; private set; }
+
     [Tooltip("Quantidade de pontos na rua")] [SerializeField] 
     private int pathLength = 10;
     [Tooltip("Distancia entre os pontos")] [SerializeField] 
@@ -17,15 +19,30 @@ public class PathGenerator : MonoBehaviour
     private float minAngle = -30;
     [Tooltip("Angulo máximo entre os pontos gerados")] [SerializeField]
     private float maxAngle = 30;
-    
+
+    public event Action OnPathUpdated;
+
     private Transform pathParent;
     private List<Vector3> pathPoints = new List<Vector3>();
     public PathCreator pathCreatorInstance;
     public CarFollowPath carFollowPath;
     private RoadMeshCreator _roadMeshCreator;
-    
+    //private ConnectObjectSpawn[] connectObjectSpawns;
+    //private MultipleObjectSpawner[] multipleObjectSpawners;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this; 
+        }
+    }
+
     void Start()
     {
+        //connectObjectSpawns = FindObjectsOfType<ConnectObjectSpawn>();
+        //multipleObjectSpawners = FindObjectsOfType<MultipleObjectSpawner>();
         _roadMeshCreator = pathCreatorInstance.GetComponent<RoadMeshCreator>();
         GeneratePath();
         SetPath();
@@ -91,5 +108,7 @@ public class PathGenerator : MonoBehaviour
         BezierPath bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
         pathCreatorInstance.bezierPath = bezierPath;
         _roadMeshCreator.TriggerUpdate();
+
+        OnPathUpdated?.Invoke();
     }
 }

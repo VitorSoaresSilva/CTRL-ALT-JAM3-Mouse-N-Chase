@@ -1,39 +1,45 @@
-using PathCreation.Examples;
 using PathCreation;
+using PathCreation.Examples;
 using UnityEngine;
 
+//[ExecuteInEditMode]
 public class MultipleObjectSpawner : PathSceneTool
 {
     public GameObject[] prefabs;
-    public Vector3[] prefabRotations; // Rotações para cada prefab
-    public float[] prefabHeights; // Alturas para cada prefab
+    public Vector3[] prefabRotations;
+    public float[] prefabHeights;
     public GameObject holder;
     public float spacing = 3;
     public float lateralOffset = 1.0f;
     public float heightOffset = 0.0f;
     public Vector3 rotationOffset = Vector3.zero;
     public bool spawnOnBothSides = true;
-    public bool invertXOnOtherSide = true; // Adicione esta linha
-    public bool randomOrderOnOtherSide = false; // Adicione esta linha
+    public bool invertXOnOtherSide = true;
+    public bool randomOrderOnOtherSide = false;
     public int spawnInterval = 3;
     public int instancesPerObject = 1;
-    public bool useCustomScale = false; // Nova opção para escala personalizada
-    public Vector3 customScale = new Vector3(1, 1, 1); // Escala personalizada
-    public bool alternateDistance = false; // Nova opção para alternar distância
-    public float alternateDistanceValue = 5.0f; // Valor da distância alternada
+    public bool useCustomScale = false;
+    public Vector3 customScale = new Vector3(1, 1, 1);
+    public bool alternateDistance = false;
+    public float alternateDistanceValue = 5.0f;
 
     const float minSpacing = .1f;
 
     void Start()
     {
-        if (pathCreator != null && holder != null && prefabs.Length > 0)
+        if (pathCreator == null)
         {
-            DestroyObjects();
-            Generate();
+            pathCreator = PathGenerator.instance.pathCreatorInstance;
         }
+        PathGenerator.instance.OnPathUpdated += Activate;
     }
 
-    void Generate()
+    public void Activate()
+    {
+        Generate();
+    }
+
+    private void Generate()
     {
         if (pathCreator != null && holder != null && prefabs.Length > 0)
         {
@@ -116,6 +122,11 @@ public class MultipleObjectSpawner : PathSceneTool
             DestroyImmediate(holder.transform.GetChild(i).gameObject, false);
         }
     }
+    //protected override void OnDestroy()
+    //{
+    //    base.OnDestroy();
+    //    PathGenerator.instance.OnPathUpdated -= Activate;
+    //}
 
     protected override void PathUpdated()
     {
