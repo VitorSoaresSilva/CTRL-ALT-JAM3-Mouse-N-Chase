@@ -22,8 +22,6 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private Image bumperSlot;
 
     [SerializeField, Header("Path")] private PathCreator pathCreator;
-    [SerializeField] private GameObject TunnelObject;
-    [SerializeField] private float TunnelDistance; // dist do inicio e fim do path
 
     //[SerializeField] private GameObject roadMesh;
     //[SerializeField] private GameObject[] enemyCars;
@@ -63,7 +61,6 @@ public class GameplayManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnTunnel();
 
     }
 
@@ -126,22 +123,5 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         HealthSlider.value = playerCar.carDamage.health / 100;
-    }
-
-    private void SpawnTunnel()
-    {
-        if(pathCreator != null && TunnelObject != null)
-        {
-            VertexPath path = pathCreator.path;
-            Vector3 endPoint = path.GetPointAtDistance(path.length);
-            Debug.Log(endPoint);
-            Instantiate(TunnelObject, endPoint, path.GetRotationAtDistance(path.length));
-
-            //Quaternion startRot = Quaternion.LookRotation(path.GetRotationAtDistance(TunnelDistance).eulerAngles, Vector3.up);
-            //Quaternion endRot = Quaternion.LookRotation(path.GetRotationAtDistance(path.length - TunnelDistance).eulerAngles, Vector3.up);
-            //GameObject startTunnel = Instantiate(TunnelObject, startPos, startRot);
-            //startTunnel.transform.LookAt(path.GetRotationAtDistance(TunnelDistance).eulerAngles);
-            //Instantiate(TunnelObject, endPos, endRot);
-        }
     }
 }

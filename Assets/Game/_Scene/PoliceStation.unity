@@ -5312,51 +5312,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneController
       objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: gameplayScene
-      value: Gameplay Edit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <BossClips>k__BackingField.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <RescueClips>k__BackingField.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <BossClips>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: ccbd95aa5377d4b44818b5a460065f75, type: 3}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <PursuitClips>k__BackingField.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <RescueClips>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 072eed452a7163e4285f87745a177d91, type: 3}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <PursuitClips>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: e76b1d5b8e8dcf346b2a4e7bffa01da6, type: 3}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <FastResponseClips>k__BackingField.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520971137204243810, guid: ab2149ef292cf5c419612ac5d725c577,
-        type: 3}
-      propertyPath: <FastResponseClips>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 5a0263cef39f9b24a9db62705e4baf02, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

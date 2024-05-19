@@ -216,9 +216,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6880616079743257414}
+  - {fileID: 122002914520906334}
   - {fileID: 8085013548760212961}
   - {fileID: 1660089024937100204}
-  - {fileID: 122002914520906334}
   - {fileID: 1303913338770556600}
   - {fileID: 7813029271743265277}
   m_Father: {fileID: 412094134433005633}
@@ -930,10 +930,9 @@ MonoBehaviour:
   shieldSlot: {fileID: 7663048365918125628}
   slotSlot: {fileID: 470232943104233909}
   bumperSlot: {fileID: 6216044383938496532}
-  roadMesh: {fileID: 0}
   pathCreator: {fileID: 0}
-  enemyCars: []
-  powerUps: []
+  TunnelObject: {fileID: 0}
+  TunnelDistance: 0
 --- !u!223 &4248249818298617008
 Canvas:
   m_ObjectHideFlags: 0
