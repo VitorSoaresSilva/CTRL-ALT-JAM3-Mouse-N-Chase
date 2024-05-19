@@ -12,6 +12,7 @@ namespace _Developers.Vitor
         public float speed = 5;
         public float lateralSpeed = 5;
         public float yOffset = 0;
+        public float xOffset = 0;
         public float distanceTravelled;
         public float maxDeltaX;
         public float endOffset = 10f;
@@ -29,12 +30,12 @@ namespace _Developers.Vitor
 
         private void OnEnable()
         {
-            steer.action.Enable();
-            right.action.Enable();
-            left.action.Enable();
-            dashRight.action.Enable();
-            dashLeft.action.Enable();
-            powerup.action.Enable();
+            if(steer != null) steer.action.Enable();
+            if(right != null) right.action.Enable();
+            if(left != null) left.action.Enable();
+            if(dashRight != null) dashRight.action.Enable();
+            if(dashLeft != null) dashLeft.action.Enable();
+            if(powerup != null) powerup.action.Enable();
         }
 
         public void SetPathCreator(PathCreator creator)
@@ -45,8 +46,12 @@ namespace _Developers.Vitor
         void FixedUpdate()
         {
             //float horizontalInput = Input.GetAxis("Right") - Input.GetAxis("Left");
-            float steerValue = steer.action.ReadValue<float>();
-            float horizontalInput = steerValue;
+            float horizontalInput = 0;
+            if (steer != null)
+            {
+                float steerValue = steer.action.ReadValue<float>();
+                horizontalInput = steerValue;
+            }
 
             if (horizontalInput != 0)
             {
@@ -56,6 +61,11 @@ namespace _Developers.Vitor
                 // Limita o movimento lateral
                 Vector3 carPosition = car.transform.localPosition;
                 carPosition.x = Mathf.Clamp(carPosition.x, -lateralLimit, lateralLimit);
+                car.transform.localPosition = carPosition;
+            } else if(xOffset > 0)
+            {
+                Vector3 carPosition = car.transform.localPosition;
+                carPosition.x = xOffset;
                 car.transform.localPosition = carPosition;
             }
             
