@@ -19,28 +19,15 @@ namespace _Developers.Vitor
         private float lastDirectionChangeTime;
         public float lateralLimit = 7f;
         public CarFollowPath player;
-
-        public bool firstApproach = false;
-        
-        public float initialApproachDistance = 40;
-        public float closeDistance = 15;
-        public float closestDistance = 5;
-        public float higherDistance = 20;
-        
-        public float velocityToIncreaseDistance = 24f;
-        public float velocityToSlightlyDecreaseDistance = 19f;
-        public float velocityToHighlyDecreaseDistance = 18f;
-        public float playerVelocity = 22f;
-        
-        
-        public float baseSpeed = 5f; // Velocidade base do inimigo
         public float minSpeedDifference = 0.5f; // Diferença mínima de velocidade quando próximo
         public float maxSpeedDifference = 3f; // Diferença máxima de velocidade quando distante
         public float minDistance = 5f; // Distância mínima para considerar a velocidade mínima
         public float maxDistance = 50f; // Distância máxima para considerar a velocidade máxima
-        // private float enemySpeed;
-        
-        
+        public float damageSpeedBoost = 5f; // Quantidade de aceleração ao sofrer dano
+        public float boostDuration = 2f; // Duração do boost em segundos
+        public float negativeOffsetAfterBoost = -1;
+        private bool isBoosted = false;
+        private float boostEndTime = 0f;
         void Start() {
             if (pathCreator != null)
             {
@@ -53,7 +40,6 @@ namespace _Developers.Vitor
             distanceTravelled = initialDistanceTravelled;
             player = playerRef;
             pathCreator = pathCreatorRef;
-            speed = velocityToHighlyDecreaseDistance;
         }
         
         void FixedUpdate()
@@ -84,7 +70,7 @@ namespace _Developers.Vitor
         }
         
         void OnPathChanged() {
-            distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+            distanceTravelled = 0;
         }
 
         private void UpdateVelocity()
@@ -92,14 +78,29 @@ namespace _Developers.Vitor
             // float currentDistance = distanceTravelled - player.distanceTravelled;
 
             float distance = distanceTravelled - player.distanceTravelled;
-
-            // Calcula a diferença de velocidade com base na distância
-            float speedDifference = Mathf.Lerp(minSpeedDifference, maxSpeedDifference, Mathf.InverseLerp(minDistance, maxDistance, distance));
-            speed = player.speed - speedDifference;
-
-            // Move o inimigo para frente com a velocidade calculada
-            // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-
+            if (isBoosted && Time.time >= boostEndTime)
+            {
+                isBoosted = false;
+            }
+            
+            if (!isBoosted)
+            {
+                // Calcula a diferença de velocidade com base na distância
+                float speedDifference = Mathf.Lerp(maxSpeedDifference, minSpeedDifference, Mathf.InverseLerp(minDistance, maxDistance, distance));
+                speed = player.speed - speedDifference;
+                if (distance < negativeOffsetAfterBoost)
+                {
+                    Boost();
+                }
+            }
+        }
+        [ContextMenu("Take Damage")]
+        public void Boost()
+        {
+            // Aumenta a velocidade temporariamente
+            isBoosted = true;
+            speed = player.speed + damageSpeedBoost;
+            boostEndTime = Time.time + boostDuration;
         }
     }
 }

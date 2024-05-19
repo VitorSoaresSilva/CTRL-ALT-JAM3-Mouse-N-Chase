@@ -140,8 +140,12 @@ MonoBehaviour:
   speed: 8
   lateralSpeed: 5
   yOffset: 0.1
+  distanceTravelled: 0
   maxDeltaX: 0
+  endOffset: 10
   car: {fileID: 7175667350867641469}
+  lateralLimit: 7
+  isAtTheEnd: 0
 --- !u!114 &4632126025990604678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,8 +193,16 @@ MonoBehaviour:
   speed: 5
   lateralSpeed: 5
   yOffset: 0
+  distanceTravelled: 0
   car: {fileID: 7175667350867641469}
   lateralLimit: 7
+  player: {fileID: 0}
+  minSpeedDifference: 0
+  maxSpeedDifference: 3
+  minDistance: 5
+  maxDistance: 50
+  damageSpeedBoost: 5
+  boostDuration: 6
 --- !u!1 &5700594235850370108
 GameObject:
   m_ObjectHideFlags: 0

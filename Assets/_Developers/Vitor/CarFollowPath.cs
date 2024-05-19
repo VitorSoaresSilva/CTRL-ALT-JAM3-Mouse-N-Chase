@@ -17,15 +17,10 @@ namespace _Developers.Vitor
         public Transform car;
         public float lateralLimit = 7f;
         public bool isAtTheEnd = false;
-        void Start() {
-        }
 
         public void SetPathCreator(PathCreator creator)
         {
             pathCreator = creator;
-            
-            // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
-            pathCreator.pathUpdated += OnPathChanged;
         }
         void FixedUpdate()
         {
@@ -64,10 +59,6 @@ namespace _Developers.Vitor
         {
             isAtTheEnd = false;
             distanceTravelled = 0;
-        }
-        
-        void OnPathChanged() {
-            distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
         }
     }
 }
