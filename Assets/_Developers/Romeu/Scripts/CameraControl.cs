@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CameraControl : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class CameraControl : MonoBehaviour
     void Awake()
     {
         Camera = GetComponent<Camera>();
+    }
+
+    private void Start()
+    {
+        if(CareerPoints.instance != null)
+        {
+            if (CareerPoints.instance.Points > 100000)
+                if (Camera.TryGetComponent(out Volume vol))
+                    vol.enabled = false;
+        }
     }
 
     void UpdateCamera()

@@ -1,3 +1,4 @@
+using _Developers.Vitor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,14 @@ public class SpeedPowerUp : MonoBehaviour
     public float speedBoost = 45f;
     public float duration = 5f;
     private PlayerCar playerCar;
+    //private List<EnemyCarFollowPath> enemies;
     float originalSpeed;
 
     void Start()
     {
         if (playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
+        //enemies.Clear();
+        //enemies.AddRange(FindObjectsByType<EnemyCarFollowPath>(FindObjectsSortMode.None));
     }
 
     void OnTriggerEnter(Collider other)

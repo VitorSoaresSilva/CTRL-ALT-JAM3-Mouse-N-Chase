@@ -467,6 +467,7 @@ MonoBehaviour:
   speed: 30
   lateralSpeed: 5
   yOffset: 0.1
+  xOffset: 0
   distanceTravelled: 0
   maxDeltaX: 0
   endOffset: 10
@@ -474,6 +475,7 @@ MonoBehaviour:
   car: {fileID: 7175667350867641469}
   lateralLimit: 6
   isAtTheEnd: 0
+  gameplayManager: {fileID: 0}
   steer:
     m_UseReference: 1
     m_Action:
@@ -1508,7 +1510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 0}
-  health: 100
+  health: 80
   damageTag: Obstacle
 --- !u!1 &8565547884583409863
 GameObject:
