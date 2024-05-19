@@ -282,6 +282,7 @@ MonoBehaviour:
   speed: 8
   lateralSpeed: 5
   yOffset: 0.1
+  xOffset: 0
   distanceTravelled: 0
   maxDeltaX: 0
   endOffset: 10
@@ -289,6 +290,7 @@ MonoBehaviour:
   car: {fileID: 7175667350867641469}
   lateralLimit: 7
   isAtTheEnd: 0
+  gameplayManager: {fileID: 0}
   steer:
     m_UseReference: 0
     m_Action:
@@ -407,7 +409,7 @@ MonoBehaviour:
   endOfPathInstruction: 0
   speed: 5
   lateralSpeed: 5
-  yOffset: 0
+  yOffset: 1.28
   distanceTravelled: 0
   car: {fileID: 7175667350867641469}
   lateralLimit: 7

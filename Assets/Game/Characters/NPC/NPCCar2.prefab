@@ -354,7 +354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4152978810813071935}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 288960c90449421c99ea589cab494f95, type: 3}
   m_Name: 
@@ -491,7 +491,7 @@ MonoBehaviour:
   endOfPathInstruction: 0
   speed: 5
   lateralSpeed: 5
-  yOffset: 0
+  yOffset: 0.29
   distanceTravelled: 0
   car: {fileID: 7175667350867641469}
   lateralLimit: 7
