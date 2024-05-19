@@ -2,6 +2,7 @@ using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static MainMenu;
 
@@ -130,5 +131,12 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         HealthSlider.value = playerCar.carDamage.health / 100;
+        if(playerCar != null)
+        {
+            if(playerCar.carDamage.health <= 0 || CareerPoints.instance.Points <= 0)
+            {
+                SceneControl.instance.ChangeScene("GameOver");
+            }
+        }
     }
 }

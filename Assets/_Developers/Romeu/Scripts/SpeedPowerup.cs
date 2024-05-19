@@ -17,11 +17,11 @@ public class SpeedPowerUp : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("SpeedPowerUp OnTriggerEnter");
+        //Debug.Log("SpeedPowerUp OnTriggerEnter");
         // Verifique se o objeto que entrou na colisão tem a tag "Player"
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Speeding");
+            //Debug.Log("Speeding");
             // Acesse o script PlayerCar no objeto do jogador
             if (playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
 

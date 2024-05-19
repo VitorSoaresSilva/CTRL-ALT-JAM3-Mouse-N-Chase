@@ -8,6 +8,10 @@ public class CarDamage : MonoBehaviour
     [Range(0, 100)] public float health = 100f; // Saúde inicial do carro
     public string damageTag = "Obstacle"; // Tag dos objetos que causam dano ao carro
 
+    private void Start()
+    {
+        if(car == null) car = GetComponentInParent<CarFollowPath>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
