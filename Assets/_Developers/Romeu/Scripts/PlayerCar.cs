@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerCar : MonoBehaviour
 {
     [field: SerializeField] public CarDamage carDamage { get; private set; }
+    [field: SerializeField] public SirenController Siren { get; private set; }
+    [field: SerializeField] public EngineSound Engine { get; private set; }
 
 
     [SerializeField, Header("Upgrades")] private GameObject ShieldObject;

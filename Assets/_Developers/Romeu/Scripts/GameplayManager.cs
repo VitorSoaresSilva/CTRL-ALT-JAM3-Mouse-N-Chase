@@ -108,10 +108,10 @@ public class GameplayManager : MonoBehaviour
         StartCoroutine(PlayStartScene());
         IEnumerator PlayStartScene()
         {
-
             yield return new WaitForSeconds(StartSceneTime);
-            // volta a camera a posição original
 
+            // volta a camera a posição original
+            playerCar.Siren.activateSiren = true;
             while(Mathf.Abs(cameraControl.FollowDistance - followDist) > 0.2f)
             {
                 cameraControl.FollowDistance = Mathf.Lerp(cameraControl.FollowDistance, followDist, SceneCameraSpeed * Time.deltaTime);
