@@ -10,19 +10,22 @@ public class CarUpgrades : MonoBehaviour
 
     void Start()
     {
-        if(ShieldObject != null)
-        { 
-            if(CareerPoints.instance.ShieldUnlocked) ShieldObject.SetActive(true);
-        }
-
-        if (SlotObject != null)
+        if(CareerPoints.instance != null)
         {
-            if (CareerPoints.instance.ShieldUnlocked) SlotObject.SetActive(true);
-        }
+            if(ShieldObject != null)
+            { 
+                if(CareerPoints.instance.ShieldUnlocked) ShieldObject.SetActive(true);
+            }
 
-        if (BumperObject != null)
-        {
-            if (CareerPoints.instance.ShieldUnlocked) BumperObject.SetActive(true);
+            if (SlotObject != null)
+            {
+                if (CareerPoints.instance.ShieldUnlocked) SlotObject.SetActive(true);
+            }
+
+            if (BumperObject != null)
+            {
+                if (CareerPoints.instance.ShieldUnlocked) BumperObject.SetActive(true);
+            }
         }
     }
 

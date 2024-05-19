@@ -401,7 +401,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: 370, y: -400, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -90}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!114 &89985341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3636,7 +3637,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: -140, y: 235, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!1 &738501520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,7 +3965,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: -150, y: -160, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!114 &759535275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4222,7 +4225,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: 345, y: -245, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -90}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!114 &809877353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7016,7 +7020,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: -155, y: 33, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!1 &1485899652
 GameObject:
   m_ObjectHideFlags: 0
@@ -9412,7 +9417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 0
-  gameplayScene: CarPathFollow
+  gameplayScene: Gameplay
   biomeScenes:
   - BiomeCorrupted
   - BiomeDesert
@@ -9763,7 +9768,8 @@ MonoBehaviour:
   GlobalPointer: {fileID: 217036744}
   <PointerPosition>k__BackingField: {x: -156, y: -355, z: 0}
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
-  transitionDuration: 1
+  randomMission: 0
+  _missionType: 0
 --- !u!1 &2061971379
 GameObject:
   m_ObjectHideFlags: 0
