@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 4632126025990604678}
   m_Layer: 0
   m_Name: PlayerCarPath
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,17 +463,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
-  speed: 10
+  speed: 15
   lateralSpeed: 5
   yOffset: 0.1
+  distanceTravelled: 0
   maxDeltaX: 0
   car: {fileID: 7175667350867641469}
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  lateralLimit: 7
 --- !u!114 &4632126025990604678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,11 +1567,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LookAt>k__BackingField: {fileID: 1380929733662744203}
-  <lookOffset>k__BackingField: {x: 0, y: 0, z: 0}
+  <lookOffset>k__BackingField: {x: 0, y: 4, z: 0}
   <Follow>k__BackingField: {fileID: 1380929733662744203}
-  <FollowDistance>k__BackingField: 21.1
-  <FollowHeight>k__BackingField: 15.9
-  <Smoothing>k__BackingField: 0.426
+  <FollowDistance>k__BackingField: 10
+  <FollowHeight>k__BackingField: 7
+  <Smoothing>k__BackingField: 0.5
   <updateMode>k__BackingField: 2
 --- !u!1001 &523371255886124084
 PrefabInstance:
