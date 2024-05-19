@@ -17,18 +17,17 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField, Header("Canvas")] private Canvas GameCanvas;
     [SerializeField] private Slider HealthSlider;
+    [SerializeField] private GameObject FailPanel;
 
     [SerializeField, Header("Upgrades")] private Image shieldSlot;
     [SerializeField] private Image slotSlot;
     [SerializeField] private Image bumperSlot;
 
     [SerializeField, Header("Path")] private PathCreator pathCreator;
-
-    //[SerializeField] private GameObject roadMesh;
-    //[SerializeField] private GameObject[] enemyCars;
-    //[SerializeField] private GameObject[] powerUps;
+    [SerializeField] private int maxLaps = 5; // maximo de voltas até falhar
     
     private float StartSceneTime = 5;
+    public float currentLap = 0;
 
     void OnEnable()
     {
@@ -139,5 +138,19 @@ public class GameplayManager : MonoBehaviour
                 SceneControl.instance.ChangeScene("GameOver");
             }
         }
+
+        if(currentLap > maxLaps)
+        {
+            if(FailPanel != null)
+            {
+                FailPanel.SetActive(true);
+                playerCar.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void EndGameplay()
+    {
+        if (SceneControl.instance != null) SceneControl.instance.ChangeScene("PoliceStation");
     }
 }

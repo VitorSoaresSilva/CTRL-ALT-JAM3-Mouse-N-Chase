@@ -20,6 +20,7 @@ namespace _Developers.Vitor
         public Transform car;
         public float lateralLimit = 7f;
         public bool isAtTheEnd = false;
+        public GameplayManager gameplayManager;
 
         [SerializeField] private InputActionProperty steer;
         [SerializeField] private InputActionProperty right;
@@ -36,6 +37,7 @@ namespace _Developers.Vitor
             if(dashRight != null) dashRight.action.Enable();
             if(dashLeft != null) dashLeft.action.Enable();
             if(powerup != null) powerup.action.Enable();
+            if(gameplayManager == null) gameplayManager = FindObjectOfType<GameplayManager>();
         }
 
         public void SetPathCreator(PathCreator creator)
@@ -75,8 +77,9 @@ namespace _Developers.Vitor
                 {
                     isAtTheEnd = true;
                     Invoke(nameof(ResetPath), 2);
-                    
+                    gameplayManager.currentLap++;
                 }
+
                 distanceTravelled += speed * Time.fixedDeltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
