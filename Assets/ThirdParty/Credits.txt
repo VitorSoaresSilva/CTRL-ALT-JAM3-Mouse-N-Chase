@@ -114,7 +114,8 @@ https://sketchfab.com/3d-models/oswald-the-lucky-rabbit-25cb18cc26e9470d86734b59
 peedr0o0 (Kingdom Hearts - Captain Pete)
 https://sketchfab.com/3d-models/kingdom-hearts-captain-pete-c10919f81747437f874f7d497b0f6df4
 
-
+ANIM
+mixamo https://www.mixamo.com/
 -------------------------
 
 
@@ -198,6 +199,9 @@ Rokay3D
 Supercyan
 23 Space Robots and Counting...
 Cartoon Palmtree and Umbrellas
+
+Player Animation
+Mixamo
 
 Devlopers Tools
 Sebastian Lague
