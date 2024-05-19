@@ -7,6 +7,7 @@ public class CarDamage : MonoBehaviour
     public CarFollowPath car; // Referência ao script CarFollowPath do carro
     [Range(0, 100)] public float health = 80f; // Saúde inicial do carro
     public string damageTag = "Obstacle"; // Tag dos objetos que causam dano ao carro
+    public bool takeDamage = true;
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class CarDamage : MonoBehaviour
     {
         Debug.Log("Entered damage coll");
         // Verifique se o carro colidiu com um objeto que causa dano
-        if (collision.gameObject.CompareTag(damageTag))
+        if (collision.gameObject.CompareTag(damageTag) && takeDamage)
         {
             // Calcule o dano com base na velocidade do carro
             float damage = car.speed;
