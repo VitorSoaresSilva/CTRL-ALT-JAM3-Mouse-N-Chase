@@ -1,21 +1,34 @@
-using PathCreation;
 using UnityEngine;
 
 namespace PathCreation.Examples
 {
 
-    // [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     public class ConnectObjectSpawn : PathSceneTool
     {
         public GameObject prefab;
         public GameObject holder;
         [Range(0.1f, 10)] public float spacing = 3;
         public float lateralOffset = 1.0f;
-        public float heightOffset = 0.0f; 
+        public float heightOffset = 0.0f;
         public Vector3 rotationOffset = Vector3.zero;
         public bool spawnOnBothSides = true;
 
         const float minSpacing = .1f;
+
+        void Start()
+        {
+            if (pathCreator == null)
+            {
+                pathCreator = PathGenerator.instance.pathCreatorInstance;
+            }
+            PathGenerator.instance.OnPathUpdated += Activate;
+        }
+
+        public void Activate()
+        {
+            Generate();
+        }
 
         void Generate()
         {
@@ -66,10 +79,17 @@ namespace PathCreation.Examples
             }
         }
 
+        //protected override void OnDestroy()
+        //{
+        //    base.OnDestroy();
+        //    PathGenerator.instance.OnPathUpdated -= Activate;
+        //}
+ 
         protected override void PathUpdated()
         {
             if (pathCreator != null)
             {
+                DestroyObjects();
                 Generate();
             }
         }

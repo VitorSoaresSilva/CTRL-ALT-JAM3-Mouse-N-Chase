@@ -73,6 +73,9 @@ https://assetstore.unity.com/packages/audio/sound-fx/engines-123836
 Tom Feldmann (OldCartoonMusicFree)
 https://assetstore.unity.com/packages/audio/music/orchestral/old-cartoon-music-pack-free-277325
 
+ElevenLabs (ElevenLabs)
+Audio de personagens
+
 Music
 Oleg Kyrylkovv https://pixabay.com/pt/users/music_for_videos-26992513/
 -------------------------
@@ -166,6 +169,7 @@ Dead Account
 Áudios
 Kristian Grundström
 Felipe Jardim
+ElevenLabs
 
 Música
 Oleg Kyrylkovv
