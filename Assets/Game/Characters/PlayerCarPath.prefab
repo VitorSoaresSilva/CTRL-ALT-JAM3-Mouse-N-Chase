@@ -462,14 +462,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
-  endOfPathInstruction: 0
+  endOfPathInstruction: 2
   speed: 15
   lateralSpeed: 5
   yOffset: 0.1
   distanceTravelled: 0
   maxDeltaX: 0
+  endOffset: 10
   car: {fileID: 7175667350867641469}
   lateralLimit: 7
+  isAtTheEnd: 0
 --- !u!114 &4632126025990604678
 MonoBehaviour:
   m_ObjectHideFlags: 0
