@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor.SearchService;
+using UnityEngine.EventSystems;
 
 //By FJB and Romeu
 public class MainMenu : MonoBehaviour
@@ -149,11 +150,13 @@ public class MainMenu : MonoBehaviour
     public void ChangeScene(string scene)
     {
         StartCoroutine(FadeOutAndLoadScene(scene));
+        FindObjectOfType<EventSystem>().enabled = false;
     }
 
     public void ChangeToRandomScene(UIButton MissionBtn)
     {
         StartCoroutine(FadeAndLoadBiome(MissionBtn.missionType));
+        FindObjectOfType<EventSystem>().enabled = false;
     }
 
     #region Private Methods
