@@ -28,6 +28,8 @@ public class PathGenerator : Singleton<PathGenerator>
     public GameObject tunnelPrefab;
     private ConnectObjectSpawn[] connectObjectSpawns;
     private MultipleObjectSpawner[] multipleObjectSpawners;
+    private GameObject startTunnel;
+    private GameObject endTunnel;
 
     void Start()
     {
@@ -121,13 +123,24 @@ public class PathGenerator : Singleton<PathGenerator>
         pathCreatorInstance.TriggerPathUpdate();
         carFollowPath.ResetPosition();
 
-        // Instancia tunel no final do caminho
         if(tunnelPrefab != null)
         {
             VertexPath path = pathCreatorInstance.path;
-            GameObject tunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(path.length -1, EndOfPathInstruction.Stop), Quaternion.identity);
+            // Instancia tunel no final do caminho
+            if(startTunnel == null)
+                startTunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(path.length -1, EndOfPathInstruction.Stop), Quaternion.identity);
+            else startTunnel.transform.position = path.GetPointAtDistance(path.length - 1, EndOfPathInstruction.Stop);
+            
+            //startTunnel.transform.Rotate(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
+            startTunnel.transform.rotation = Quaternion.Euler(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
 
-            tunnel.transform.Rotate(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
+            // Instancia tunel no inicio do caminho
+            if(endTunnel == null)
+                endTunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(0, EndOfPathInstruction.Stop), Quaternion.identity);
+            else endTunnel.transform.position = path.GetPointAtDistance(0, EndOfPathInstruction.Stop);
+
+            //endTunnel.transform.Rotate(0, path.GetRotationAtDistance(0, EndOfPathInstruction.Stop).eulerAngles.y, 0);
+            endTunnel.transform.rotation = Quaternion.Euler(0, path.GetRotationAtDistance(0, EndOfPathInstruction.Stop).eulerAngles.y, 0);
         }
     }
 

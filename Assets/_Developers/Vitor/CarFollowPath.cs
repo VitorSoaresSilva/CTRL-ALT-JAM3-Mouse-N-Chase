@@ -15,6 +15,7 @@ namespace _Developers.Vitor
         public float distanceTravelled;
         public float maxDeltaX;
         public float endOffset = 10f;
+        public float startOffset = 5f;
         public Transform car;
         public float lateralLimit = 7f;
         public bool isAtTheEnd = false;
@@ -64,6 +65,7 @@ namespace _Developers.Vitor
                 {
                     isAtTheEnd = true;
                     Invoke(nameof(ResetPath), 2);
+                    
                 }
                 distanceTravelled += speed * Time.fixedDeltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
@@ -79,7 +81,8 @@ namespace _Developers.Vitor
         public void ResetPosition()
         {
             isAtTheEnd = false;
-            distanceTravelled = 0;
+            //distanceTravelled = 0;
+            distanceTravelled = startOffset;
         }
     }
 }

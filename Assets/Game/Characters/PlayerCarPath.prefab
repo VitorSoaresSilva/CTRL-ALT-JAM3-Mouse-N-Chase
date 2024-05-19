@@ -470,9 +470,83 @@ MonoBehaviour:
   distanceTravelled: 0
   maxDeltaX: 0
   endOffset: 10
+  startOffset: 10
   car: {fileID: 7175667350867641469}
   lateralLimit: 6
   isAtTheEnd: 0
+  steer:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Steer
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f685b474-ad51-405d-a0fd-c3907f8c972f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5597207095133116727, guid: 18d4fb559e9221d4db50975b10b1efbb,
+      type: 3}
+  right:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 0788499c-fe7e-4d19-9a63-70a7b7799dc7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  left:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 517d41cd-dd9a-4e5f-bb9a-8fbfc2c76ef8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  dashRight:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Dash Right
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 44ee3709-2614-4773-984c-8c77cb469e45
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  dashLeft:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Dash Left
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cfb700b4-cb0a-4c24-b08e-3da5c53f2443
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  powerup:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Powerup
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 69a58d8a-beba-44da-b1dd-e6126945ae49
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &4632126025990604678
 MonoBehaviour:
   m_ObjectHideFlags: 0
