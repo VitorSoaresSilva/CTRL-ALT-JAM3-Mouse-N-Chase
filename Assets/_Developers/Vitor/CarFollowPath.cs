@@ -1,6 +1,7 @@
 using System;
 using PathCreation;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Developers.Vitor
 {
@@ -18,14 +19,34 @@ namespace _Developers.Vitor
         public float lateralLimit = 7f;
         public bool isAtTheEnd = false;
 
+        [SerializeField] private InputActionProperty steer;
+        [SerializeField] private InputActionProperty right;
+        [SerializeField] private InputActionProperty left;
+        [SerializeField] private InputActionProperty dashRight;
+        [SerializeField] private InputActionProperty dashLeft;
+        [SerializeField] private InputActionProperty powerup;
+
+        private void OnEnable()
+        {
+            steer.action.Enable();
+            right.action.Enable();
+            left.action.Enable();
+            dashRight.action.Enable();
+            dashLeft.action.Enable();
+            powerup.action.Enable();
+        }
+
         public void SetPathCreator(PathCreator creator)
         {
             pathCreator = creator;
         }
+
         void FixedUpdate()
         {
-            
-            float horizontalInput = Input.GetAxis("Right") - Input.GetAxis("Left");
+            //float horizontalInput = Input.GetAxis("Right") - Input.GetAxis("Left");
+            float steerValue = steer.action.ReadValue<float>();
+            float horizontalInput = steerValue;
+
             if (horizontalInput != 0)
             {
                 // Mover o carro lateralmente

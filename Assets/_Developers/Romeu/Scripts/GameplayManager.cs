@@ -97,7 +97,9 @@ public class GameplayManager : MonoBehaviour
 
         float followDist = cameraControl.FollowDistance;
         cameraControl.FollowDistance = -followDist;
-        playerCar.Follow.speed = 10;
+
+        float initialSpeed = playerCar.Follow.speed;
+        playerCar.Follow.speed = initialSpeed / 2;
 
         // Play start cinematic
         StartCoroutine(PlayStartScene());
@@ -115,10 +117,11 @@ public class GameplayManager : MonoBehaviour
             while(Mathf.Abs(cameraControl.FollowDistance - followDist) > 0.2f)
             {
                 cameraControl.FollowDistance = Mathf.Lerp(cameraControl.FollowDistance, followDist, SceneCameraSpeed * Time.deltaTime);
+                //playerCar.Follow.speed = 20; // lerp 
+                playerCar.Follow.speed = Mathf.Lerp(playerCar.Follow.speed, initialSpeed, SceneCameraSpeed * Time.deltaTime);
                 yield return null;
             }
 
-            playerCar.Follow.speed = 20;
             cameraControl.FollowDistance = followDist;
         }
     }
