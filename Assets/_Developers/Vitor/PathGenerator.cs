@@ -31,6 +31,7 @@ public class PathGenerator : Singleton<PathGenerator>
     //private ConnectObjectSpawn[] connectObjectSpawns;
     //private MultipleObjectSpawner[] multipleObjectSpawners;
     public Vector3 centerPosition;
+    public GameObject tunnelPrefab;
 
     private void Awake()
     {
@@ -120,6 +121,15 @@ public class PathGenerator : Singleton<PathGenerator>
         pathCreatorInstance.gameObject.transform.position = centerPosition;
         _roadMeshCreator.TriggerUpdate();
         carFollowPath.ResetPosition();
+
+        // Instancia tunel no final do caminho
+        if(tunnelPrefab != null)
+        {
+            VertexPath path = pathCreatorInstance.path;
+            GameObject tunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(path.length -1, EndOfPathInstruction.Stop), Quaternion.identity);
+
+            tunnel.transform.Rotate(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
+        }
     }
 
     public void CenterPath()

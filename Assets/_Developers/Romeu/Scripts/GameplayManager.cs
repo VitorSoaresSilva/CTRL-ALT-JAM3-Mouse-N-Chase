@@ -133,16 +133,14 @@ public class GameplayManager : MonoBehaviour
         if(pathCreator != null && TunnelObject != null)
         {
             VertexPath path = pathCreator.path;
-            Vector3 start = path.GetPointAtDistance(TunnelDistance);
-            Vector3 end = path.GetPointAtDistance(path.length - TunnelDistance);
-            Vector3 dir = end - start;
-            Vector3 startPos = start + dir * 0.5f;
-            Vector3 endPos = end - dir * 0.5f;
-            Quaternion startRot = Quaternion.LookRotation(path.GetRotationAtDistance(TunnelDistance).eulerAngles, Vector3.up);
-            Quaternion endRot = Quaternion.LookRotation(path.GetRotationAtDistance(path.length - TunnelDistance).eulerAngles, Vector3.up);
+            Vector3 endPoint = path.GetPointAtDistance(path.length);
+            Debug.Log(endPoint);
+            Instantiate(TunnelObject, endPoint, path.GetRotationAtDistance(path.length));
 
-            GameObject startTunnel = Instantiate(TunnelObject, startPos, startRot);
-            startTunnel.transform.LookAt(path.GetRotationAtDistance(TunnelDistance).eulerAngles);
+            //Quaternion startRot = Quaternion.LookRotation(path.GetRotationAtDistance(TunnelDistance).eulerAngles, Vector3.up);
+            //Quaternion endRot = Quaternion.LookRotation(path.GetRotationAtDistance(path.length - TunnelDistance).eulerAngles, Vector3.up);
+            //GameObject startTunnel = Instantiate(TunnelObject, startPos, startRot);
+            //startTunnel.transform.LookAt(path.GetRotationAtDistance(TunnelDistance).eulerAngles);
             //Instantiate(TunnelObject, endPos, endRot);
         }
     }
