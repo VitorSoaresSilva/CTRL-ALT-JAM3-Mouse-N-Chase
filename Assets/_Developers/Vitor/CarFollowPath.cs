@@ -13,17 +13,23 @@ namespace _Developers.Vitor
         public float yOffset = 0;
         public float distanceTravelled;
         public float maxDeltaX;
+        public float endOffset = 10f;
         public Transform car;
         public float lateralLimit = 7f;
+        public bool isAtTheEnd = false;
         void Start() {
-            if (pathCreator != null)
-            {
-                // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
-                pathCreator.pathUpdated += OnPathChanged;
-            }
+        }
+
+        public void SetPathCreator(PathCreator creator)
+        {
+            pathCreator = creator;
+            
+            // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
+            pathCreator.pathUpdated += OnPathChanged;
         }
         void FixedUpdate()
         {
+            
             float horizontalInput = Input.GetAxis("Right") - Input.GetAxis("Left");
             if (horizontalInput != 0)
             {
@@ -38,10 +44,26 @@ namespace _Developers.Vitor
             
             if (pathCreator != null)
             {
+                if (distanceTravelled >= pathCreator.path.length - endOffset && !isAtTheEnd)
+                {
+                    isAtTheEnd = true;
+                    Invoke(nameof(ResetPath), 2);
+                }
                 distanceTravelled += speed * Time.fixedDeltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }
+        }
+
+        public void ResetPath()
+        {
+            PathGenerator.instance.ResetPath();
+        }
+
+        public void ResetPosition()
+        {
+            isAtTheEnd = false;
+            distanceTravelled = 0;
         }
         
         void OnPathChanged() {

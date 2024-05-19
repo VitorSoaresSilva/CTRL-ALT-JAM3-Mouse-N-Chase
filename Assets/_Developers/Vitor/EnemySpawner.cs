@@ -21,13 +21,8 @@ namespace _Developers.Vitor
             // _pathGenerator.pathCreatorInstance.path.
             Vector3 spawnPosition = _pathGenerator.pathCreatorInstance.path.GetPointAtDistance(40);
             EnemyCarFollowPath enemyInstance = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            enemyInstance.distanceTravelled = 40;
+            enemyInstance.Init(_pathGenerator.carFollowPath,_pathGenerator.pathCreatorInstance, 40);
             enemyInstance.pathCreator = _pathGenerator.pathCreatorInstance;
-        }
-
-        private void Update()
-        {
-            
         }
     }
 }

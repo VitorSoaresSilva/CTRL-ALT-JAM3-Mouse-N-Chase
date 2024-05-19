@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using _Developers.Vitor;
 using PathCreation;
 using PathCreation.Examples;
+using PathCreation.Utility;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PathGenerator : MonoBehaviour
+public class PathGenerator : Singleton<PathGenerator>
 {
     public static PathGenerator instance { get; private set; }
 
@@ -29,7 +30,7 @@ public class PathGenerator : MonoBehaviour
     private RoadMeshCreator _roadMeshCreator;
     //private ConnectObjectSpawn[] connectObjectSpawns;
     //private MultipleObjectSpawner[] multipleObjectSpawners;
-
+    public Vector3 centerPosition;
 
     private void Awake()
     {
@@ -46,7 +47,7 @@ public class PathGenerator : MonoBehaviour
         _roadMeshCreator = pathCreatorInstance.GetComponent<RoadMeshCreator>();
         GeneratePath();
         SetPath();
-        carFollowPath.pathCreator = pathCreatorInstance;
+        carFollowPath.SetPathCreator(pathCreatorInstance);
         carFollowPath.enabled = true;
     }
     private void Update()
@@ -59,8 +60,15 @@ public class PathGenerator : MonoBehaviour
         }
     }
 
+    public void ResetPath()
+    {
+        GeneratePath();
+        SetPath();
+    }
+
     void GeneratePath()
     {
+        pathPoints.Clear();
         // path.Add(Vector2Int.zero); // Adiciona o ponto inicial ao caminho
         pathPoints.Add(Vector3.zero);
         // Vector3 nextPoint = Vector3.zero;
@@ -102,13 +110,40 @@ public class PathGenerator : MonoBehaviour
         // Cria o caminho com curvas suaves usando Bezier
         // pathCreator.bezierPath = new BezierPath(pathPoints, false, PathSpace.xyz);
     }
+    
     public void SetPath()
     {
         
         BezierPath bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
         pathCreatorInstance.bezierPath = bezierPath;
+        CenterPath();
+        pathCreatorInstance.gameObject.transform.position = centerPosition;
         _roadMeshCreator.TriggerUpdate();
+        carFollowPath.ResetPosition();
+    }
 
-        OnPathUpdated?.Invoke();
+    public void CenterPath()
+    {
+        Vector3 worldCentre = pathCreatorInstance.bezierPath.CalculateBoundsWithTransform (pathCreatorInstance.transform).center;
+        Vector3 transformPos = pathCreatorInstance.transform.position;
+        if (pathCreatorInstance.bezierPath.Space == PathSpace.xy) {
+            transformPos = new Vector3 (transformPos.x, transformPos.y, 0);
+        } else if (pathCreatorInstance.bezierPath.Space == PathSpace.xz) {
+            transformPos = new Vector3 (transformPos.x, 0, transformPos.z);
+        }
+        Vector3 worldCentreToTransform = transformPos - worldCentre;
+
+        if (worldCentre != pathCreatorInstance.transform.position) {
+            //Undo.RecordObject (creator, "Centralize Transform");
+            if (worldCentreToTransform != Vector3.zero) {
+                Vector3 localCentreToTransform = MathUtility.InverseTransformVector (worldCentreToTransform, pathCreatorInstance.transform, pathCreatorInstance.bezierPath.Space);
+                for (int i = 0; i < pathCreatorInstance.bezierPath.NumPoints; i++) {
+                    pathCreatorInstance.bezierPath.SetPoint (i, pathCreatorInstance.bezierPath.GetPoint (i) + localCentreToTransform, true);
+                }
+            }
+
+            pathCreatorInstance.transform.position = worldCentre;
+            pathCreatorInstance.bezierPath.NotifyPathModified();
+        }
     }
 }
