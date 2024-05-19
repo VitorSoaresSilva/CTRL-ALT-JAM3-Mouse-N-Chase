@@ -24,16 +24,19 @@ public class PlayerCar : MonoBehaviour
         {
             if(ShieldObject != null)
             { 
+                Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.ShieldUnlocked}");
                 if(CareerPoints.instance.ShieldUnlocked) ShieldObject.SetActive(true);
             }
 
             if (SlotObject != null)
             {
+                Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.SlotUnlocked}");
                 if (CareerPoints.instance.SlotUnlocked) SlotObject.SetActive(true);
             }
 
             if (BumperObject != null)
             {
+                Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.BumperUnlocked}");
                 if (CareerPoints.instance.BumperUnlocked) BumperObject.SetActive(true);
             }
         }

@@ -45,12 +45,16 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void Load()
     {
-        Points = PlayerPrefs.GetInt("Points", 100);
+        
+        Points = PlayerPrefs.GetInt("Points", 250);
         LostPoints = PlayerPrefs.GetInt("LostPoints", 0);
         FastResponseCompleted = PlayerPrefs.GetInt("FastResponseCompleted", 0);
         PursuitCompleted = PlayerPrefs.GetInt("PursuitCompleted", 0);
         RescueCompleted = PlayerPrefs.GetInt("RescueCompleted", 0);
         BossCompleted = PlayerPrefs.GetInt("BossCompleted", 0);
+
+        if (PlayerPrefs.HasKey("Points") == false)
+            Save();
 
         Log($"Points: {Points}");
         Log($"LostPoints: {LostPoints}");

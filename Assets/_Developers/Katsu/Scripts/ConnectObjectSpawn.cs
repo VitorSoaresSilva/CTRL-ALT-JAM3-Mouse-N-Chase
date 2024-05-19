@@ -51,7 +51,7 @@ namespace PathCreation.Examples
 
                     Quaternion rotation = rot * Quaternion.Euler(rotationOffset);
 
-                    Debug.Log($"point: {point} | rot: {rot} | normal: {normal}");
+                    //Debug.Log($"point: {point} | rot: {rot} | normal: {normal}");
 
                     GameObject obj = Instantiate(prefab, point + offset, rotation, holder.transform);
                     obj.transform.localScale = new Vector3(1, 1, 1);

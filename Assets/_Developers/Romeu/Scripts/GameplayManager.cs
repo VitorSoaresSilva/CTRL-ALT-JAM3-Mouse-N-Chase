@@ -135,6 +135,7 @@ public class GameplayManager : MonoBehaviour
         {
             if(playerCar.carDamage.health <= 0 || CareerPoints.instance.Points <= 0)
             {
+                CareerPoints.instance.Save();
                 SceneControl.instance.ChangeScene("GameOver");
             }
         }

@@ -15,7 +15,7 @@ public class CarDamage : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-
+        Debug.Log("Entered damage coll");
         // Verifique se o carro colidiu com um objeto que causa dano
         if (collision.gameObject.CompareTag(damageTag))
         {
