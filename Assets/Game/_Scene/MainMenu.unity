@@ -3378,25 +3378,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\n\n\nModels:\r\nErbeilo3D (Erbeilo3d_StylizeFreeProps)\r\nhttps://assetstore.unity.com/packages/3d/environments/stylize-free-props-trees-erbeilo3d-237015\r\n\r\nFalse
-    Wisp Studios (Cartoon_Farm_Crops)\r\nhttps://assetstore.unity.com/packages/3d/vegetation/plants/cartoon-farm-crops-79777#releases\r\n\r\nxiaolianhuastudio
-    (Fantasy_Kingdom_Pack_Lite)\r\nhttps://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-kindom-building-pack-lite-78378\r\n\r\nIoan
-    Stan (Low_Poly_Mini_Village)\r\nhttps://assetstore.unity.com/packages/3d/environments/low-poly-mini-village-free-131677\r\n\r\nJustCreate
-    (LowPolyFarmLite)\r\nhttps://assetstore.unity.com/packages/3d/environments/industrial/low-poly-farm-pack-lite-188100\r\n\r\nBigRookGames
-    (BigRookGames)\r\nhttps://assetstore.unity.com/packages/3d/vegetation/trees/stylized-hand-painted-nature-pack-free-177775\r\n\r\nRokay3D
-    (tractor and planter)\r\nhttps://assetstore.unity.com/packages/3d/vehicles/land/farm-machinery-low-poly-tractor-and-planter-94533\r\n\r\nSupercyan
-    (Supercyan Free Forest Sample)\r\nhttps://assetstore.unity.com/packages/3d/vegetation/environment-pack-free-forest-sample-168396\r\n\r\nJustCreate
-    (SimpleNaturePack)\r\nhttps://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153\r\n\r\n23
-    Space Robots and Counting... (Free Low Poly Desert Pack)\r\nhttps://assetstore.unity.com/packages/3d/environments/free-low-poly-desert-pack-106709\r\n\r\nCartoon
-    Palmtree and Umbrellas (Cartoon PalmTree and Umbrella)\r\nhttps://assetstore.unity.com/packages/3d/vegetation/cartoon-palmtree-and-umbrellas-58457\r\n\r\n-------------------------\r\nEffects
-    e SkyBox:\r\nJean Moreno (JMO Assets)\r\nhttps://assetstore.unity.com/packages/vfx/particles/cartoon-fx-remaster-free-109565\r\n\r\nLana
-    Studio (LaFinca) \r\nhttps://assetstore.unity.com/packages/vfx/particles/hyper-casual-fx-200333\r\nhttps://assetstore.unity.com/packages/2d/textures-materials/sky/midgard-skybox-273733\r\n\r\n-------------------------\r\nSounds:\r\nJeremy
-    Frobose (A-Symphony-of-Disarray_GameMusicPack)\r\nhttps://assetstore.unity.com/packages/audio/music/orchestral/a-symphony-of-disarray-game-music-pack-217536\r\n\r\nKristian
-    Grundstr\xF6m (Engines)\r\nhttps://assetstore.unity.com/packages/audio/sound-fx/engines-123836\r\n\r\nTom
-    Feldmann (OldCartoonMusicFree)\r\nhttps://assetstore.unity.com/packages/audio/music/orchestral/old-cartoon-music-pack-free-277325\r\n\r\n-------------------------\r\nTexture:\r\nChromisu
-    (Handpainted_Grass_and_Ground_Textures)\r\nhttps://assetstore.unity.com/packages/2d/textures-materials/nature/handpainted-grass-ground-textures-187634#reviews\r\n\r\n-------------------------\r\nTools\r\nSebastian
-    Lague (PathCreator)\r\nhttps://assetstore.unity.com/packages/tools/utilities/b-zier-path-creator-136082\r\n\r\n-------------------------\r\nUI\r\nClicking
-    hand\r\nhttps://openclipart.org/detail/346746/clicking-hand\r\n\r\nWrench Icon\r\nhttps://www.flaticon.com/free-icon/wrench_31056\n\n\n\n\n"
+  m_text: "\n\n\n\n\n\n\n\n\nProgramming:\r\n\r\n    Eduardo Romeu\r\n    Vitor Soares\r\n   
+    Felipe Jardim\r\n    IA Copilot\r\n\r\nVehicles:\r\n\r\n    Felipe Jardim\r\n\r\nLevel
+    Design:\r\n\r\n    Felipe Jardim\r\n\r\nUI:\r\n\r\n    Eduardo Romeu\r\n    Felipe
+    Jardim\r\n    IA Copilot\r\n    Clicking Hand\r\n    Wrench Icon\r\n    Remix
+    Icons\r\n    khurasan\r\n\r\nMain Character:\r\n\r\n    ELimar Luciano\r\n\r\nSecondary
+    Characters:\r\n\r\n    Dead Account\r\n\r\nAudio:\r\n\r\n    Kristian Grundstr\xF6m\r\n   
+    Felipe Jardim\r\n    ElevenLabs\r\n\r\nMusic:\r\n\r\n    Oleg Kyrylkovv\r\n   
+    Jeremy Frobose\r\n    Tom Feldmann\r\n\r\nTextures:\r\n\r\n    Chromisu\r\n   
+    FreeStylized\r\n\r\nEffects:\r\n\r\n    Jean Moreno\r\n    Lana Studio\r\n\r\nModels:\r\n\r\n   
+    Felipe Jardim\r\n\r\nModel Assets:\r\n\r\n    Erbeilo3D\r\n    False Wisp Studios\r\n   
+    xiaolianhuastudio\r\n    Ioan Stan\r\n    JustCreate\r\n    BigRookGames\r\n   
+    Rokay3D\r\n    Supercyan\r\n    23 Space Robots and Counting...\r\n    Cartoon
+    Palmtree and Umbrellas\r\n\r\nDevelopers Tools:\r\n\r\n    Sebastian Lague\r\n   
+    Micah Wilder\r\n\nHelp:\n\n    IA ChatGPT\n    IA Copilot\n\r\nSoftware:\r\n\r\n   
+    Unity\r\n    GitHub\r\n    Blender\r\n    Discord\r\n    WhatsApp\r\n    Jetbrains
+    Rider\r\n    Visual Studio Code\r\n    Adobe Substance Painter\r\n    Adobe Photoshop\n\n\n\n\n\n\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

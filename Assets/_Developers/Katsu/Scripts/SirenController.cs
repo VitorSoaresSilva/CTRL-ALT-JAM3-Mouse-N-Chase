@@ -21,6 +21,7 @@ public class SirenController : MonoBehaviour
         audioSource.spatialBlend = 1f;
         highPassFilter = GetComponent<AudioHighPassFilter>();
         highPassFilter.cutoffFrequency = 1000;
+        sirenMaterial.DisableKeyword("_EMISSION");
     }
     void Update()
     {
@@ -40,9 +41,10 @@ public class SirenController : MonoBehaviour
                 isClip1Playing = !isClip1Playing;
             }
 
+            sirenMaterial.EnableKeyword("_EMISSION");
             emissionIntensity = Mathf.PingPong(Time.time, lightBlinkInterval);
-            sirenMaterial.SetColor("_EmissionColor", Color.white * emissionIntensity);
-            sirenLight.intensity = emissionIntensity * 2; 
+            sirenMaterial.SetColor("_EmissionColor", Color.red * (emissionIntensity + 1));
+            sirenLight.intensity = emissionIntensity * 2;
         }
         else
         {
@@ -51,6 +53,7 @@ public class SirenController : MonoBehaviour
                 audioSource.Stop();
             }
             sirenMaterial.SetColor("_EmissionColor", Color.black);
+            sirenMaterial.DisableKeyword("_EMISSION");
             sirenLight.intensity = 0; 
         }
     }

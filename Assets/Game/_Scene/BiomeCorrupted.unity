@@ -522,7 +522,7 @@ MonoBehaviour:
   holder: {fileID: 218170866}
   spacing: 2
   lateralOffset: 22.01
-  heightOffset: 0
+  heightOffset: -0.06
   rotationOffset: {x: 180, y: 0, z: 90}
   spawnOnBothSides: 1
   invertXOnOtherSide: 1
@@ -532,6 +532,7 @@ MonoBehaviour:
   useCustomScale: 0
   customScale: {x: 1, y: 1, z: 1}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 1.09
 --- !u!4 &218170868
 Transform:
@@ -1031,6 +1032,7 @@ MonoBehaviour:
   heightOffset: -0.5
   rotationOffset: {x: 0, y: 0, z: 90}
   spawnOnBothSides: 1
+  pathGenerator: {fileID: 0}
 --- !u!4 &541983544
 Transform:
   m_ObjectHideFlags: 0
@@ -2278,6 +2280,7 @@ MonoBehaviour:
   useCustomScale: 1
   customScale: {x: 2, y: 2, z: 2}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 5.12
 --- !u!4 &1219470902
 Transform:

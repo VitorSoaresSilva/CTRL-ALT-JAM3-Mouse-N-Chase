@@ -143,7 +143,7 @@ Progração:
 Eduardo Romeu
 Vitor Soares
 Felipe Jardim
-Copilot
+IA Copilot
 
 Veículos:
 Felipe Jardim
@@ -154,7 +154,7 @@ Felipe Jardim
 UI:
 Eduardo Romeu
 Felipe Jardim
-Copilot
+IA Copilot
 Clicking hand
 Wrench Icon
 Remix Icons
@@ -202,6 +202,10 @@ Cartoon Palmtree and Umbrellas
 Devlopers Tools
 Sebastian Lague
 Micah Wilder
+
+Help
+IA Copilot
+IA ChatGPT
 
 Programas
 Unity

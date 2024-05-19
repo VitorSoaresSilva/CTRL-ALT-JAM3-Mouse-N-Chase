@@ -464,7 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   endOfPathInstruction: 2
-  speed: 20
+  speed: 30
   lateralSpeed: 5
   yOffset: 0.1
   distanceTravelled: 0
@@ -519,9 +519,9 @@ MonoBehaviour:
   <Siren>k__BackingField: {fileID: 1908816019517810544}
   <Engine>k__BackingField: {fileID: 3719884746842431248}
   <Follow>k__BackingField: {fileID: 1258468528146083678}
-  ShieldObject: {fileID: 0}
+  ShieldObject: {fileID: 5591748613887564613}
   SlotObject: {fileID: 0}
-  BumperObject: {fileID: 0}
+  BumperObject: {fileID: 6328608487937887012}
 --- !u!1 &5527529134646955672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8565547884583409863}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 

@@ -65,7 +65,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -78,11 +78,11 @@ MonoBehaviour:
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
-    showPathOptions: 0
+    showDisplayOptions: 1
+    showPathOptions: 1
     showVertexPathDisplayOptions: 1
     showVertexPathOptions: 1
-    showNormals: 0
+    showNormals: 1
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
@@ -105,5 +105,5 @@ MonoBehaviour:
   flattenSurface: 0
   roadMaterial: {fileID: 2100000, guid: b5df4735192845740bd11076dc9cdc99, type: 2}
   undersideMaterial: {fileID: 2100000, guid: c1d8d882244c5344fa86a8fd23246f81, type: 2}
-  textureTiling: 20
+  textureTiling: 75
   meshHolder: {fileID: 0}
