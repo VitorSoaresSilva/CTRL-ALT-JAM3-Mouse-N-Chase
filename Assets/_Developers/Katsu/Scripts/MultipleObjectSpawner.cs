@@ -21,7 +21,7 @@ public class MultipleObjectSpawner : PathSceneTool
     public bool useCustomScale = false;
     public Vector3 customScale = new Vector3(1, 1, 1);
     public bool alternateDistance = false;
-    public float alternateDistanceValue = 5.0f;
+    [Range(0.1f, 15)] public float alternateDistanceValue = 5.0f;
 
     const float minSpacing = .1f;
 
