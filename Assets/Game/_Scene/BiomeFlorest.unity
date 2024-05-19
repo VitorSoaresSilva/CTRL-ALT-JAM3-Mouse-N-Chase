@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: 8574412962073106934, guid: ac281032d04e5eb4196fa0cf76d443ae, type: 2}
   - {fileID: 8574412962073106934, guid: b56bc6e91d33bb441a3a2b7c029eb299, type: 2}
   - {fileID: 8574412962073106934, guid: aa90ddbd2c2eb4d4798ff53282b443d4, type: 2}
-  chunkCount: {x: 4, y: 4}
+  chunkCount: {x: 3, y: 3}
   sceneFilters: []
   bladeType: 2
   multipleMeshes: 1
@@ -287,7 +287,7 @@ MonoBehaviour:
   shadowMode: 0
   renderLayer:
     m_LayerIndex: 0
-  pointCount: 0.5
+  pointCount: 0.3
   multiplyByArea: 1
   pointLODFactor: 1
   randomiseSeed: 1
