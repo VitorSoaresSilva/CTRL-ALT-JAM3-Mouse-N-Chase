@@ -7,19 +7,30 @@ public class SpeedPowerUp : MonoBehaviour
 {
     public float speedBoost = 45f;
     public float duration = 5f;
+    private PlayerCar playerCar;
+    float originalSpeed;
+
+    void Start()
+    {
+        if (playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("SpeedPowerUp OnTriggerEnter");
         // Verifique se o objeto que entrou na colisão tem a tag "Player"
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Speeding");
             // Acesse o script PlayerCar no objeto do jogador
-            PlayerCar playerCar = other.gameObject.GetComponent<PlayerCar>();
+            if (playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
 
             // Se o PlayerCar script existir no objeto do jogador
             if (playerCar != null)
             {
                 // Inicie a corrotina SpeedBoost
+                originalSpeed = playerCar.Follow.speed;
+                if (originalSpeed == speedBoost) return;
                 StartCoroutine(SpeedBoost(playerCar));
             }
 
@@ -30,9 +41,6 @@ public class SpeedPowerUp : MonoBehaviour
 
     IEnumerator SpeedBoost(PlayerCar playerCar)
     {
-        // Salve a velocidade original do jogador
-        float originalSpeed = playerCar.Follow.speed;
-
         // Aumente a velocidade do jogador
         playerCar.Follow.speed = speedBoost;
 
