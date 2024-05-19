@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4941723417221604787}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47,13 +47,18 @@ MonoBehaviour:
   DestroyOnLoad: 0
   gameplayScene: Gameplay
   biomeScenes:
-  - BiomeCorrupted
+  - BiomePlain
   - BiomeDesert
-  - BiomeFlorest
   - BiomeMix
+  - BiomeFlorest
+  - BiomeCorrupted
   <currentMission>k__BackingField: 0
-  <FastResponseClips>k__BackingField: []
-  <PursuitClips>k__BackingField: []
-  <RescueClips>k__BackingField: []
-  <BossClips>k__BackingField: []
+  <FastResponseClips>k__BackingField:
+  - {fileID: 8300000, guid: 5a0263cef39f9b24a9db62705e4baf02, type: 3}
+  <PursuitClips>k__BackingField:
+  - {fileID: 8300000, guid: e76b1d5b8e8dcf346b2a4e7bffa01da6, type: 3}
+  <RescueClips>k__BackingField:
+  - {fileID: 8300000, guid: 072eed452a7163e4285f87745a177d91, type: 3}
+  <BossClips>k__BackingField:
+  - {fileID: 8300000, guid: ccbd95aa5377d4b44818b5a460065f75, type: 3}
   <PlayerResponseClips>k__BackingField: []

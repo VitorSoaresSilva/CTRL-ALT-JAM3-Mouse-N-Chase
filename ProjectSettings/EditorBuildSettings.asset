@@ -12,20 +12,23 @@ EditorBuildSettings:
     path: Assets/Game/_Scene/PoliceStation.unity
     guid: 8d51cc59858042749a55ad489c9f18e6
   - enabled: 1
-    path: Assets/Game/_Scene/BiomeCorrupted.unity
-    guid: 05b251349c1184c47a079f730b50d0af
+    path: Assets/Game/_Scene/Gameplay.unity
+    guid: a77cc619d438b9b41968078cf556ef5f
+  - enabled: 1
+    path: Assets/Game/_Scene/BiomePlain.unity
+    guid: 031184fb858aea94786088915f938787
   - enabled: 1
     path: Assets/Game/_Scene/BiomeDesert.unity
     guid: 34278db539b422a43ab193b5f4561b6b
   - enabled: 1
-    path: Assets/Game/_Scene/BiomeFlorest.unity
-    guid: fe3fc4b2d72ad534cac1a585de57ca5a
-  - enabled: 1
     path: Assets/Game/_Scene/BiomeMix.unity
     guid: f7628b87ba0c3c242bce4861a334d873
   - enabled: 1
-    path: Assets/Game/_Scene/Gameplay.unity
-    guid: a77cc619d438b9b41968078cf556ef5f
+    path: Assets/Game/_Scene/BiomeFlorest.unity
+    guid: fe3fc4b2d72ad534cac1a585de57ca5a
+  - enabled: 1
+    path: Assets/Game/_Scene/BiomeCorrupted.unity
+    guid: 05b251349c1184c47a079f730b50d0af
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 29e7ca4fd77eb50469d34da1090c82c8,
       type: 2}

@@ -328,6 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1974210550548022210, guid: 0d9e24110643cd0419c317a24b3c4735,
         type: 3}
+      propertyPath: editorData.showDisplayOptions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974210550548022210, guid: 0d9e24110643cd0419c317a24b3c4735,
+        type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[0].x
       value: -2.0000305
       objectReference: {fileID: 0}
@@ -588,7 +593,8 @@ MonoBehaviour:
   pathCreatorInstance: {fileID: 580152939}
   carFollowPath: {fileID: 1127237436}
   centerPosition: {x: 500, y: 0, z: 500}
-  tunnelPrefab: {fileID: 0}
+  tunnelPrefab: {fileID: 5361763871533186901, guid: 72bb18a9e19ace1409c8ffbf25d8f466,
+    type: 3}
 --- !u!4 &1547526979
 Transform:
   m_ObjectHideFlags: 0
