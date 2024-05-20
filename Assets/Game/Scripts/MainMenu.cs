@@ -45,6 +45,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private powerupSlot slotSlot;
     [SerializeField] private powerupSlot bumperSlot;
 
+    [SerializeField] private GameObject fastResponseBtn;
+    [SerializeField] private GameObject pursuitBtn;
+    [SerializeField] private GameObject rescueBtn;
+    [SerializeField] private GameObject bossBtn;
+    [SerializeField] private TextMeshProUGUI fastResponseQnt;
+    [SerializeField] private TextMeshProUGUI rescueQnt;
+    [SerializeField] private TextMeshProUGUI pursuitQnt;
+    [SerializeField] private TextMeshProUGUI bossQnt;
 
     #region Unity Methods
     private void OnEnable()
@@ -95,6 +103,31 @@ public class MainMenu : MonoBehaviour
                 bumperSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.BumperUnlocked);
                 bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
             }
+
+            if (fastResponseBtn != null)
+                fastResponseBtn.GetComponent<Button>().enabled = (CareerPoints.instance.FastResponseCompleted < 10);
+
+            if (pursuitBtn != null)
+                pursuitBtn.GetComponent<Button>().enabled = (CareerPoints.instance.PursuitCompleted < 10);
+
+            if (rescueBtn != null)
+                rescueBtn.GetComponent<Button>().enabled = (CareerPoints.instance.RescueCompleted < 10);
+
+            if (bossBtn != null)
+                bossBtn.GetComponent<Button>().enabled = (CareerPoints.instance.BossCompleted < 1);
+
+            if (fastResponseQnt != null)
+                fastResponseQnt.text = $"{CareerPoints.instance.FastResponseCompleted} / 10";
+
+            if (pursuitQnt != null)
+                pursuitQnt.text = $"{CareerPoints.instance.PursuitCompleted} / 10";
+
+            if (rescueQnt != null)
+                rescueQnt.text = $"{CareerPoints.instance.RescueCompleted} / 10";
+
+            if (bossQnt != null)
+                bossQnt.text = $"{CareerPoints.instance.BossCompleted} / 1";
+
         }
 
     }

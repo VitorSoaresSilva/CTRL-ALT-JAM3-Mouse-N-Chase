@@ -1434,6 +1434,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 0
+  FastResponseCompleted: 0
+  PursuitCompleted: 0
+  RescueCompleted: 0
+  BossCompleted: 0
   FastResponsePoints: 1500
   PursuitPoints: 1500
   RescuePoints: 1500
@@ -6421,6 +6425,14 @@ MonoBehaviour:
   bumperSlot:
     LockedIcon: {fileID: 1540617991}
     UnlockedIcon: {fileID: 107180092}
+  fastResponseBtn: {fileID: 1171023211}
+  pursuitBtn: {fileID: 1396896425}
+  rescueBtn: {fileID: 1926429004}
+  bossBtn: {fileID: 813682875}
+  fastResponseQnt: {fileID: 1319220838}
+  rescueQnt: {fileID: 796109775}
+  pursuitQnt: {fileID: 1760813743}
+  bossQnt: {fileID: 521973588}
 --- !u!224 &1470262098
 RectTransform:
   m_ObjectHideFlags: 0

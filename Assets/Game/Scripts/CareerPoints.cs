@@ -11,10 +11,31 @@ public class CareerPoints : Singleton<CareerPoints>
     public int MissionsCompleted { get => FastResponseCompleted + PursuitCompleted + RescueCompleted + BossCompleted; }
 
     // Missions
-    private int FastResponseCompleted = 0;
-    private int PursuitCompleted = 0;
-    private int RescueCompleted = 0;
-    private int BossCompleted = 0;
+    [HideInInspector] public int CurrentMissionPoints
+    {
+        get
+        {
+            if (SceneControl.instance != null)
+            {
+                switch (SceneControl.instance.currentMission)
+                {
+                    case MissionType.FastResponse:
+                        return FastResponsePoints;
+                    case MissionType.Pursuit:
+                        return PursuitPoints;
+                    case MissionType.Rescue:
+                        return RescuePoints;
+                    case MissionType.Boss:
+                        return BossPoints;
+                }
+            }
+            return 100;
+        }
+    }
+    [HideInInspector] public int FastResponseCompleted = 0;
+    [HideInInspector] public int PursuitCompleted = 0;
+    [HideInInspector] public int RescueCompleted = 0;
+    [HideInInspector] public int BossCompleted = 0;
     [SerializeField] int FastResponsePoints = 1500;
     [SerializeField] int PursuitPoints = 1500;
     [SerializeField] int RescuePoints = 1500;

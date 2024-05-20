@@ -27,7 +27,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private int maxLaps = 10; // maximo de voltas
     
     private float StartSceneTime = 5;
-    private float lapsToFail = 5;
+    public float lapsToFail = 5;
     public float currentLap = 0;
 
     void OnEnable()
@@ -146,6 +146,7 @@ public class GameplayManager : MonoBehaviour
             {
                 FailPanel.SetActive(true);
                 playerCar.gameObject.SetActive(false);
+                if(CareerPoints.instance != null) CareerPoints.instance.RemovePoints(CareerPoints.instance.CurrentMissionPoints);
                 StartCoroutine(EndGameplay());
             }
         }
