@@ -3002,7 +3002,7 @@ MonoBehaviour:
   highPassFilter: {fileID: 2253805369735356504}
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
-  sirenMaterial: {fileID: 2100000, guid: 46c825947816ceb4eaa04fbf558f34e9, type: 2}
+  sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
   sirenModel: {fileID: 3446222354200569034}
   sirenLight: {fileID: 3016136388499858637}
   lightBlinkInterval: 0.9
@@ -3999,7 +3999,7 @@ MonoBehaviour:
   highPassFilter: {fileID: 8861100155574647422}
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
-  sirenMaterial: {fileID: 2100000, guid: 46c825947816ceb4eaa04fbf558f34e9, type: 2}
+  sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
   sirenModel: {fileID: 4226294894334752872}
   sirenLight: {fileID: 4909833929844221715}
   lightBlinkInterval: 0.9
@@ -4416,7 +4416,7 @@ MonoBehaviour:
   highPassFilter: {fileID: 1578761801171859414}
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
-  sirenMaterial: {fileID: 2100000, guid: 46c825947816ceb4eaa04fbf558f34e9, type: 2}
+  sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
   sirenModel: {fileID: 4551625976868597848}
   sirenLight: {fileID: 8432901715813570123}
   lightBlinkInterval: 0.9
@@ -4968,7 +4968,7 @@ MonoBehaviour:
   highPassFilter: {fileID: 7783150146121170987}
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
-  sirenMaterial: {fileID: 2100000, guid: 46c825947816ceb4eaa04fbf558f34e9, type: 2}
+  sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
   sirenModel: {fileID: 5231375140106639016}
   sirenLight: {fileID: 7067872919634825362}
   lightBlinkInterval: 0.9
