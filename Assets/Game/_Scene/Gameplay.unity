@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.34209952, g: 0.3946359, b: 0.51367366, a: 1}
+  m_IndirectSpecularColor: {r: 0.3420784, g: 0.3946268, b: 0.5137085, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5108,6 +5108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad963c28b0237c4e88d9b35f927d9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayManager: {fileID: 0}
 --- !u!4 &285480937
 Transform:
   m_ObjectHideFlags: 0
@@ -5242,6 +5243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995abf7dbc9a23542949ca9802a329a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayManager: {fileID: 0}
 --- !u!4 &598135307
 Transform:
   m_ObjectHideFlags: 0
@@ -15537,6 +15539,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d34fe73a230b6c4789ec0cc91eba722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lapsToWin: 4
+  gameplayManager: {fileID: 0}
+  playerCar: {fileID: 0}
 --- !u!4 &1237953011
 Transform:
   m_ObjectHideFlags: 0
@@ -15710,14 +15715,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trafficCarPrefabs:
-  - {fileID: 1258468528146083678, guid: 41eca0371ed00674283f33b883c101c2, type: 3}
-  - {fileID: 1258468528146083678, guid: 38a62be4782953243aff01fa555749fe, type: 3}
-  - {fileID: 1258468528146083678, guid: 7d00872e8418e374daa7991a28d35d56, type: 3}
-  - {fileID: 1258468528146083678, guid: 982e5a63e569b50428dc25e62ac15e0b, type: 3}
-  spawnPoints:
-  - 5
+  - {fileID: -2131634809270129809, guid: 41eca0371ed00674283f33b883c101c2, type: 3}
+  - {fileID: -1430323756975209159, guid: 38a62be4782953243aff01fa555749fe, type: 3}
+  - {fileID: 7041950574247459013, guid: 7d00872e8418e374daa7991a28d35d56, type: 3}
+  - {fileID: -5946884935631998807, guid: 982e5a63e569b50428dc25e62ac15e0b, type: 3}
   minXOffset: -10
   maxXOffset: 10
+  amountSpawn: 20
 --- !u!1 &1762024218
 GameObject:
   m_ObjectHideFlags: 0
@@ -20654,6 +20658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395a5fb393138e241a62fbff7a3aea10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayManager: {fileID: 0}
 --- !u!4 &1830902520
 Transform:
   m_ObjectHideFlags: 0
@@ -20815,6 +20820,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d34fe73a230b6c4789ec0cc91eba722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lapsToWin: 4
+  gameplayManager: {fileID: 0}
+  playerCar: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
