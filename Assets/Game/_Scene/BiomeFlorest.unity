@@ -2486,6 +2486,7 @@ MonoBehaviour:
   useCustomScale: 0
   customScale: {x: 1, y: 1, z: 1}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 1.09
 --- !u!4 &458395242
 Transform:
@@ -3471,6 +3472,7 @@ MonoBehaviour:
   useCustomScale: 1
   customScale: {x: 2, y: 2, z: 2}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 1.09
 --- !u!4 &752542989
 Transform:
@@ -6560,6 +6562,7 @@ MonoBehaviour:
   useCustomScale: 1
   customScale: {x: 2, y: 2, z: 2}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 2.5
 --- !u!4 &1243604642
 Transform:
@@ -6630,6 +6633,7 @@ MonoBehaviour:
   useCustomScale: 0
   customScale: {x: 1, y: 1, z: 1}
   alternateDistance: 1
+  pathGenerator: {fileID: 0}
   alternateDistanceValue: 1.09
 --- !u!4 &1245742525
 Transform:
@@ -7524,6 +7528,7 @@ MonoBehaviour:
   heightOffset: 0.27
   rotationOffset: {x: 0, y: 0, z: 90}
   spawnOnBothSides: 1
+  pathGenerator: {fileID: 0}
 --- !u!4 &1498615672
 Transform:
   m_ObjectHideFlags: 0
