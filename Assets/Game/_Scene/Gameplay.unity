@@ -15465,7 +15465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbceb47d7fd46a7af769c53c8cb1d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyOnLoad: 0
+  DestroyOnLoad: 1
   pathLength: 50
   pathDistance: 50
   minAngle: -20
@@ -15507,6 +15507,7 @@ MonoBehaviour:
   - {fileID: -6232721783095306507, guid: 32f1b9382c8ae2549b7bfffe75dd6a90, type: 3}
   - {fileID: 1711840475351775023, guid: ad9f02471f80406449f92c925328b157, type: 3}
   - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
+  enemies: []
 --- !u!114 &1547526981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20822,6 +20823,7 @@ MonoBehaviour:
   policeTunnelPrefab: {fileID: 1942262821}
   damageTaken: 0
   tunnelSpawned: 0
+  completed: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
