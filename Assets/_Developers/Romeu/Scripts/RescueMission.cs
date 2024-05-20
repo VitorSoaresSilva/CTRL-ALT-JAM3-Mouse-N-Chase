@@ -17,7 +17,7 @@ public class RescueMission : MonoBehaviour
     {
         if (SceneControl.instance != null)
         {
-            if (SceneControl.instance.currentMission != MissionType.Pursuit)
+            if (SceneControl.instance.currentMission != MissionType.Rescue)
             {
                 Destroy(this.gameObject);
             }

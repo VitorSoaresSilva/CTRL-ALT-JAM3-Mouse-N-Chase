@@ -17,7 +17,7 @@ public class BossMission : MonoBehaviour
     {
         if (SceneControl.instance != null)
         {
-            if (SceneControl.instance.currentMission != MissionType.Pursuit)
+            if (SceneControl.instance.currentMission != MissionType.Boss)
             {
                 Destroy(this.gameObject);
             }
@@ -37,7 +37,7 @@ public class BossMission : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>();
         }
 
-        enemyInstances.AddRange(enemySpawner.SpawnEnemies(enemies));
+        enemyInstances.AddRange(enemySpawner.SpawnRandomEnemies(enemies));
 
         foreach (EnemyCarFollowPath enemy in enemyInstances)
         {

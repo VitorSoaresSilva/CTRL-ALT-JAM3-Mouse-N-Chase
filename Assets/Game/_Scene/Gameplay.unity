@@ -20629,7 +20629,7 @@ MonoBehaviour:
   - {fileID: -5946884935631998807, guid: 982e5a63e569b50428dc25e62ac15e0b, type: 3}
   minXOffset: -10
   maxXOffset: 10
-  amountSpawn: 20
+  amountSpawn: 15
 --- !u!1 &1830902518
 GameObject:
   m_ObjectHideFlags: 0
