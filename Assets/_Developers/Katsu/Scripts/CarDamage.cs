@@ -9,6 +9,9 @@ public class CarDamage : MonoBehaviour
     public string damageTag = "Obstacle"; // Tag dos objetos que causam dano ao carro
     public bool takeDamage = true;
 
+    public delegate void OnDamage();
+    public OnDamage onDamage;
+
     private void Start()
     {
         if(car == null) car = GetComponentInParent<CarFollowPath>();
@@ -28,6 +31,8 @@ public class CarDamage : MonoBehaviour
 
             // Atualize os pontos perdidos no CareerPoints
             CareerPoints.instance.RemovePoints((int)damage);
+
+            onDamage?.Invoke();
 
             // Verifique se o carro ainda tem saúde
             if (health <= 0)

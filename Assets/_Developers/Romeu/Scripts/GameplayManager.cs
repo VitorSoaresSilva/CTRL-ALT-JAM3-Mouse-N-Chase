@@ -8,7 +8,7 @@ using static MainMenu;
 
 public class GameplayManager : MonoBehaviour
 {
-    [SerializeField, Header("Player")] private PlayerCar playerCar;
+    [Header("Player")] public PlayerCar playerCar;
     [SerializeField] private CameraControl cameraControl;
 
     [SerializeField, Header("Start")] private float SceneCameraSpeed = 2f;
@@ -18,6 +18,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField, Header("Canvas")] private Canvas GameCanvas;
     [SerializeField] private Slider HealthSlider;
     [SerializeField] private GameObject FailPanel;
+    [SerializeField] private GameObject SucceedPanel;
 
     [SerializeField, Header("Upgrades")] private Image shieldSlot;
     [SerializeField] private Image slotSlot;
@@ -142,17 +143,31 @@ public class GameplayManager : MonoBehaviour
 
         if(currentLap > lapsToFail)
         {
-            if(FailPanel != null)
-            {
-                FailPanel.SetActive(true);
-                playerCar.gameObject.SetActive(false);
-                if(CareerPoints.instance != null) CareerPoints.instance.RemovePoints(CareerPoints.instance.CurrentMissionPoints);
-                StartCoroutine(EndGameplay());
-            }
+            EndGameplay(false);
         }
     }
 
-    public IEnumerator EndGameplay()
+    public void EndGameplay(bool success = false)
+    {
+        if(FailPanel != null)
+            FailPanel.SetActive(!success);
+        if(SucceedPanel != null)
+            SucceedPanel.SetActive(success);
+
+        playerCar.gameObject.SetActive(false);
+
+        if (CareerPoints.instance != null)
+        {
+            if(!success)
+                CareerPoints.instance.RemovePoints(CareerPoints.instance.CurrentMissionPoints);
+            else
+                CareerPoints.instance.CompleteMission(SceneControl.instance.currentMission);
+        }
+        
+        StartCoroutine(ExitGameplay(success));
+    }
+
+    private IEnumerator ExitGameplay(bool success = false)
     {
         yield return new WaitForSeconds(5);
         if (SceneControl.instance != null) SceneControl.instance.ChangeScene("PoliceStation");

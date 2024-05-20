@@ -6,8 +6,8 @@ public class FastResponseMission : MonoBehaviour
 {
     public float lapsToWin = 4;
     public GameplayManager gameplayManager;
-    public float 
-
+    public PlayerCar playerCar;
+    
     void OnEnable()
     {
         if(SceneControl.instance != null)
@@ -25,7 +25,12 @@ public class FastResponseMission : MonoBehaviour
         {
             gameplayManager = FindObjectOfType<GameplayManager>();
         }
+        if(playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
         
+        playerCar.carDamage.onDamage = () =>
+        {
+            gameplayManager.EndGameplay(false);
+        };
     }
 
     void Update()
@@ -33,6 +38,7 @@ public class FastResponseMission : MonoBehaviour
         if(gameplayManager.currentLap >= lapsToWin)
         {
             Debug.Log("Mission Complete");
+            gameplayManager.EndGameplay(true);
         }
     }
 }
