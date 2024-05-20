@@ -610,6 +610,7 @@ MonoBehaviour:
   damageSpeedBoost: 5
   boostDuration: 6
   negativeOffsetAfterBoost: -1
+  health: 100
 --- !u!114 &780440171879984969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +641,7 @@ GameObject:
   - component: {fileID: 8216813062532007083}
   - component: {fileID: 7771501608244170099}
   - component: {fileID: 6291790031975681071}
+  - component: {fileID: 371259141846556372}
   m_Layer: 0
   m_Name: LaneFollow
   m_TagString: Untagged
@@ -714,7 +716,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -759,6 +761,18 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &371259141846556372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972147708481555517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c018763ce7697fc4780e696a5c7aedb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6553338052530550325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1406,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
       type: 3}
+  skidEffectPrefab: {fileID: 0}
 --- !u!1001 &1173844188126536414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1546,6 +1561,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  skidEffectPrefab: {fileID: 0}
 --- !u!4 &7775908057597332684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
@@ -1699,6 +1715,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
       type: 3}
+  skidEffectPrefab: {fileID: 0}
 --- !u!1001 &8259601298248984810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1853,6 +1870,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  skidEffectPrefab: {fileID: 0}
 --- !u!4 &665470209899087608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,

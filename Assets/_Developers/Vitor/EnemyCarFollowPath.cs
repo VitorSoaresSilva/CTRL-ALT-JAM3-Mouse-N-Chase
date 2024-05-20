@@ -12,6 +12,7 @@ namespace _Developers.Vitor
         public float yOffset = 0;
         public float distanceTravelled;
         public Transform car;
+        public EnemyDamage damage;
         
         // Variáveis para controle de movimentação aleatória
         private float horizontalInput = 0f;
@@ -28,6 +29,12 @@ namespace _Developers.Vitor
         public float negativeOffsetAfterBoost = -1;
         private bool isBoosted = false;
         private float boostEndTime = 0f;
+
+        private void OnEnable()
+        {
+            if(damage == null) damage = GetComponentInChildren<EnemyDamage>();
+        }
+
         void Start() {
             if (pathCreator != null)
             {

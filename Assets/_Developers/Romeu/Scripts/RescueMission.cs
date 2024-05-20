@@ -1,3 +1,4 @@
+using _Developers.Vitor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,30 +6,50 @@ using UnityEngine;
 public class RescueMission : MonoBehaviour
 {
     public GameplayManager gameplayManager;
+    public EnemyCarFollowPath[] enemies;
+
+    public EnemySpawner enemySpawner;
+
+    List<EnemyCarFollowPath> enemyInstances = new();
+    public int destroyedEnemies = 0;
 
     void OnEnable()
     {
         if (SceneControl.instance != null)
         {
-            if (SceneControl.instance.currentMission != MissionType.Rescue)
+            if (SceneControl.instance.currentMission != MissionType.Pursuit)
             {
                 Destroy(this.gameObject);
             }
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        enemyInstances.Clear();
+
         if (gameplayManager == null)
         {
             gameplayManager = FindObjectOfType<GameplayManager>();
         }
-    }
+        if (enemySpawner == null)
+        {
+            enemySpawner = FindObjectOfType<EnemySpawner>();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        enemyInstances.AddRange(enemySpawner.SpawnEnemies(enemies));
+
+        foreach (EnemyCarFollowPath enemy in enemyInstances)
+        {
+            enemy.damage.onDie = () =>
+            {
+                destroyedEnemies++;
+                enemy.gameObject.SetActive(false);
+                if (destroyedEnemies >= enemies.Length)
+                {
+                    gameplayManager.EndGameplay(true);
+                }
+            };
+        }
     }
 }
