@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/_Scene/BiomeCorrupted.unity
     guid: 05b251349c1184c47a079f730b50d0af
+  - enabled: 1
+    path: Assets/Game/_Scene/GameOver.unity
+    guid: a00fa0e0e70c49b42b42304385d0dc06
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 29e7ca4fd77eb50469d34da1090c82c8,
       type: 2}
