@@ -591,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b23b48d0201224fb5c8f229a9ae641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <carDamage>k__BackingField: {fileID: 2740046953578790167}
+  <carDamage>k__BackingField: {fileID: 6118866199093792122}
   <Siren>k__BackingField: {fileID: 1908816019517810544}
   <Engine>k__BackingField: {fileID: 3719884746842431248}
   <Follow>k__BackingField: {fileID: 1258468528146083678}
@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 8216813062532007083}
   - component: {fileID: 7771501608244170099}
   - component: {fileID: 6291790031975681071}
+  - component: {fileID: 6118866199093792122}
   m_Layer: 0
   m_Name: LaneFollow
   m_TagString: Player
@@ -1023,6 +1024,22 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6118866199093792122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5972147708481555517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580822451d67f0a4b93726bc89494481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  car: {fileID: 0}
+  health: 80
+  damageTag: Obstacle
+  takeDamage: 1
 --- !u!1 &5973104575442184031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,14 +1473,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3911760657846870369}
   - component: {fileID: 7405643179354457423}
-  - component: {fileID: 2740046953578790167}
   m_Layer: 0
   m_Name: COLLISION0
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3911760657846870369
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,27 +1512,11 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1044490386882040481, guid: a53da2de086f8e94dbe471b99c88c660, type: 3}
---- !u!114 &2740046953578790167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7250805721480813361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580822451d67f0a4b93726bc89494481, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 0}
-  health: 80
-  damageTag: Obstacle
-  takeDamage: 1
 --- !u!1 &8565547884583409863
 GameObject:
   m_ObjectHideFlags: 0
