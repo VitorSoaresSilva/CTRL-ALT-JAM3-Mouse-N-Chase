@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6663468165168339}
   m_Layer: 0
   m_Name: COLLISION2
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 4769140664378080814}
   m_Layer: 0
   m_Name: CarHolder
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: -3025872444698079753}
   m_Layer: 0
   m_Name: NPCCar1
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   yOffset: 0
   distanceTravelled: 0
   car: {fileID: 7175667350867641469}
+  damage: {fileID: 0}
   lateralLimit: 7
   player: {fileID: 0}
   minSpeedDifference: 0
@@ -280,7 +281,6 @@ MonoBehaviour:
   damageSpeedBoost: 5
   boostDuration: 6
   negativeOffsetAfterBoost: -1
-  health: 100
 --- !u!114 &-3025872444698079753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 8839001503892272297}
   m_Layer: 0
   m_Name: CHASSIS_2_Parts
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 6446347038086728378}
   m_Layer: 0
   m_Name: LaneFollow
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -525,6 +525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018763ce7697fc4780e696a5c7aedb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 80
+  damageTag: Player
+  takeDamage: 1
 --- !u!1 &6553338052530550325
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +542,7 @@ GameObject:
   - component: {fileID: 3719884746842431248}
   m_Layer: 0
   m_Name: MovingPart
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,7 +716,7 @@ GameObject:
   - component: {fileID: 4383184469146709140}
   m_Layer: 0
   m_Name: CHASSIS_2_Paint
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -827,7 +830,7 @@ GameObject:
   - component: {fileID: 2254624244467891179}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1067,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 8824894310865949715, guid: 586fe6d8befc5fb4aaade83a800552f9,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1096,7 +1099,7 @@ PrefabInstance:
     - target: {fileID: 3772995798087584334, guid: c08a5ffd77644ba43b8719dc8d512b49,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4546259702341505268, guid: c08a5ffd77644ba43b8719dc8d512b49,
         type: 3}
@@ -1175,7 +1178,7 @@ PrefabInstance:
     - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
@@ -1305,7 +1308,7 @@ PrefabInstance:
     - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
@@ -1437,7 +1440,7 @@ PrefabInstance:
     - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
@@ -1569,7 +1572,7 @@ PrefabInstance:
     - target: {fileID: 8310338862777729036, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}
       propertyPath: m_TagString
-      value: Obstacle
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
         type: 3}

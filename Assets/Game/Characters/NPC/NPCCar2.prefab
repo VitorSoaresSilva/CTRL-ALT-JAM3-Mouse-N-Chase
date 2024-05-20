@@ -332,6 +332,7 @@ Transform:
   m_Children:
   - {fileID: 7175667350867641469}
   - {fileID: 4079735262754340551}
+  - {fileID: 4462459689113839601}
   m_Father: {fileID: 1380929733662744203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &3843623907010461159
@@ -432,7 +433,7 @@ GameObject:
   - component: {fileID: 780440171879984969}
   m_Layer: 0
   m_Name: NPCCar2
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -451,7 +452,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4769140664378080814}
-  - {fileID: 4462459689113839601}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &1258468528146083678
@@ -601,6 +601,7 @@ MonoBehaviour:
   yOffset: 0.29
   distanceTravelled: 0
   car: {fileID: 7175667350867641469}
+  damage: {fileID: 0}
   lateralLimit: 7
   player: {fileID: 0}
   minSpeedDifference: 0
@@ -610,7 +611,6 @@ MonoBehaviour:
   damageSpeedBoost: 5
   boostDuration: 6
   negativeOffsetAfterBoost: -1
-  health: 100
 --- !u!114 &780440171879984969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +773,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018763ce7697fc4780e696a5c7aedb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 80
+  damageTag: Player
+  takeDamage: 1
 --- !u!1 &6553338052530550325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1045,7 @@ GameObject:
   - component: {fileID: 6875492013800795225}
   m_Layer: 0
   m_Name: COLLISION
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1100,7 +1103,7 @@ GameObject:
   - component: {fileID: 2254624244467891179}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1113,12 +1116,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8565547884583409863}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13449828, y: 0.13449828, z: 0.69419754, w: 0.69419754}
-  m_LocalPosition: {x: -2.84, y: 0, z: -7.02}
+  m_LocalRotation: {x: 0.19020928, y: -0, z: -0, w: 0.9817436}
+  m_LocalPosition: {x: 0, y: 2.8400006, z: -7.019989}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1380929733662744203}
+  m_Father: {fileID: 4769140664378080814}
   m_LocalEulerAnglesHint: {x: 0, y: 21.93, z: 90}
 --- !u!20 &3746296109777491374
 Camera:
