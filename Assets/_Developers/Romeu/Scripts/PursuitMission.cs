@@ -37,7 +37,7 @@ public class PursuitMission : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>();
         }
 
-        enemyInstances.AddRange(enemySpawner.SpawnEnemies(enemies));
+        enemyInstances.AddRange(enemySpawner.SpawnRandomEnemies(enemies));
 
         foreach (EnemyCarFollowPath enemy in enemyInstances)
         {
