@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 1258468528146083678}
   - component: {fileID: 4632126025990604678}
   - component: {fileID: -6232721783095306507}
+  - component: {fileID: -550932163831633512}
   m_Layer: 0
   m_Name: NPCCar4
   m_TagString: Obstacle
@@ -421,6 +422,24 @@ MonoBehaviour:
   damageSpeedBoost: 5
   boostDuration: 6
   negativeOffsetAfterBoost: -1
+--- !u!114 &-550932163831633512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4152978810813071935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6abf5c2019851f44187627045af0dddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 1243568798607966820, guid: 9d61d17b2ef2c254ba4356b584eb7085,
+    type: 3}
+  effectPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+    type: 3}
+  help: {fileID: 0}
+  spawnObject: 0
 --- !u!1 &5972147708481555517
 GameObject:
   m_ObjectHideFlags: 0
