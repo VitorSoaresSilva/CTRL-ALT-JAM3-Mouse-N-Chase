@@ -1,4 +1,5 @@
 using _Developers.Vitor;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,10 @@ public class WheelController : MonoBehaviour
     public bool isFrontWheel;
     public bool rotateClockwise;
     public float baseRotationSpeedMultiplier = 1f;
-    public InputActionProperty turnLeftAction; 
-    public InputActionProperty turnRightAction; 
+    public InputActionProperty turnLeftAction;
+    public InputActionProperty turnRightAction;
+    public GameObject skidEffectPrefab; // A prefab do efeito de derrapagem
+    private GameObject currentSkidEffect; // O efeito de derrapagem atualmente ativo
 
     void OnEnable()
     {
@@ -37,6 +40,34 @@ public class WheelController : MonoBehaviour
             Vector3 newRotation = transform.localEulerAngles;
             newRotation.y = turnAmount * 30f; // 30 graus é o ângulo máximo de virada, ajuste conforme necessário
             transform.localEulerAngles = newRotation;
+
+            // Se o jogador está virando, inicia o efeito de derrapagem
+            if (turnAmount != 0 && currentSkidEffect == null)
+            {
+                StartSkidEffect();
+            }
+            // Se o jogador parou de virar, para o efeito de derrapagem
+            else if (turnAmount == 0 && currentSkidEffect != null)
+            {
+                StopSkidEffect();
+            }
         }
+    }
+
+    void StartSkidEffect()
+    {
+        // Cria o efeito de derrapagem atrás do pneu
+        Vector3 spawnPosition = transform.position - transform.forward;
+        currentSkidEffect = Instantiate(skidEffectPrefab, spawnPosition, Quaternion.identity);
+
+        // Ativa o efeito de derrapagem
+        currentSkidEffect.SetActive(true);
+    }
+
+    void StopSkidEffect()
+    {
+        // Destroi o efeito de derrapagem
+        Destroy(currentSkidEffect);
+        currentSkidEffect = null;
     }
 }
