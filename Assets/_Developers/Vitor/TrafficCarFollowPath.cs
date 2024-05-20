@@ -11,7 +11,8 @@ namespace _Developers.Vitor
         public float lateralSpeed = 5;
         public float yOffset = 0;
         public float distanceTravelled;
-        public Transform car;
+        public Transform movingPart;
+        public Transform visual;
         
         // Variáveis para controle de movimentação aleatória
         private float horizontalInput = 0f;
@@ -31,13 +32,19 @@ namespace _Developers.Vitor
             }
         }
 
-        public void Init(PathCreator pathCreatorRef, float initialDistanceTravelled, float direction)
+        public void Init(PathCreator pathCreatorRef, float initialDistanceTravelled, int direction)
         {
             distanceTravelled = initialDistanceTravelled;
             pathCreator = pathCreatorRef;
             _direction = direction;
             float xOffset = Random.Range(minXOffset, maxXOffset);
-            car.transform.localPosition += new Vector3(xOffset, 0, 0);
+            movingPart.transform.localPosition += new Vector3(xOffset, 0, 0);
+
+            if (direction == -1)
+            {
+                visual.Rotate(Vector3.up, 180f);
+                movingPart.Rotate(Vector3.up, 180f);
+            }
         }
         
         void FixedUpdate()
@@ -53,12 +60,12 @@ namespace _Developers.Vitor
             if (horizontalInput != 0)
             {
                 float deltaX = horizontalInput * lateralSpeed * Time.fixedDeltaTime;
-                car.transform.Translate(Vector3.right * deltaX);
+                movingPart.transform.Translate(Vector3.right * deltaX);
                 
                 // Limita o movimento lateral
-                Vector3 carPosition = car.transform.localPosition;
+                Vector3 carPosition = movingPart.transform.localPosition;
                 carPosition.x = Mathf.Clamp(carPosition.x, -lateralLimit, lateralLimit);
-                car.transform.localPosition = carPosition;
+                movingPart.transform.localPosition = carPosition;
             }
             if (pathCreator != null)
             {

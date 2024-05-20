@@ -493,8 +493,12 @@ MonoBehaviour:
   lateralSpeed: 5
   yOffset: 0.1
   distanceTravelled: 0
-  car: {fileID: 7175667350867641469}
+  movingPart: {fileID: 7175667350867641469}
+  visual: {fileID: 4079735262754340551}
   lateralLimit: 7
+  changeDirection: 0
+  minXOffset: -5
+  maxXOffset: 5
 --- !u!1 &5972147708481555517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1262,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
       type: 3}
+  skidEffectPrefab: {fileID: 0}
 --- !u!1001 &1173844188126536414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1397,6 +1402,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  skidEffectPrefab: {fileID: 0}
 --- !u!4 &7775908057597332684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
@@ -1550,6 +1556,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -2757418986503596629, guid: 18d4fb559e9221d4db50975b10b1efbb,
       type: 3}
+  skidEffectPrefab: {fileID: 0}
 --- !u!1001 &8259601298248984810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1689,6 +1696,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  skidEffectPrefab: {fileID: 0}
 --- !u!4 &665470209899087608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8909182465342418450, guid: 1e839c3af3904cb4d82b960a0b4a5c9f,
