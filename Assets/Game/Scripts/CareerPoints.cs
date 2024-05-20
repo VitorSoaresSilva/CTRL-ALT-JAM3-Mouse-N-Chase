@@ -115,9 +115,15 @@ public class CareerPoints : Singleton<CareerPoints>
         }
     }
 
-    public bool CheckGameOver()
+    public void ResetProgress()
     {
-        return Points < 0;
+        Points = 250;
+        LostPoints = 0;
+        FastResponseCompleted = 0;
+        PursuitCompleted = 0;
+        RescueCompleted = 0;
+        BossCompleted = 0;
+        Save();
     }
 
     void Log(string text)

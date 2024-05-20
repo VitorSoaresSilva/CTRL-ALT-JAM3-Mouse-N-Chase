@@ -7,6 +7,11 @@ public class FastResponseMission : MonoBehaviour
     public float lapsToWin = 4;
     public GameplayManager gameplayManager;
     public PlayerCar playerCar;
+    public GameObject policeTunnelPrefab;
+
+    public int damageTaken = 0;
+    public bool tunnelSpawned = false;
+    public bool completed = false;
     
     void OnEnable()
     {
@@ -29,16 +34,28 @@ public class FastResponseMission : MonoBehaviour
         
         playerCar.carDamage.onDamage = () =>
         {
-            gameplayManager.EndGameplay(false);
+            damageTaken++;
+            if(damageTaken > 2)
+            {
+                gameplayManager.EndGameplay(false);
+            }
         };
     }
 
     void Update()
     {
-        if(gameplayManager.currentLap >= lapsToWin)
+        if(gameplayManager.currentLap >= lapsToWin && !completed)
         {
             Debug.Log("Mission Complete");
             gameplayManager.EndGameplay(true);
+            completed = true;
+        }
+
+        if(gameplayManager.currentLap >= lapsToWin - 1 && !tunnelSpawned)
+        {
+            PathGenerator.instance.tunnelPrefab = policeTunnelPrefab;
+            Debug.Log("Changed tunnel prefab");
+            tunnelSpawned = true;
         }
     }
 }

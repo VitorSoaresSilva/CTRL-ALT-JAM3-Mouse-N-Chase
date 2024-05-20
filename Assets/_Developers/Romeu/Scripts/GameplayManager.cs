@@ -103,6 +103,8 @@ public class GameplayManager : MonoBehaviour
         float initialSpeed = playerCar.Follow.speed;
         playerCar.Follow.speed = initialSpeed / 2;
 
+        playerCar.carDamage.takeDamage = false;
+
         // Play start cinematic
         StartCoroutine(PlayStartScene());
         IEnumerator PlayStartScene() // Mudar velocidade do player
@@ -125,6 +127,7 @@ public class GameplayManager : MonoBehaviour
             }
 
             cameraControl.FollowDistance = followDist;
+            playerCar.carDamage.takeDamage = true;
         }
     }
 
