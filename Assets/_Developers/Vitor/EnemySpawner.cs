@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -10,6 +11,8 @@ namespace _Developers.Vitor
         public EnemyCarFollowPath[] enemyPrefabs;
         // private PathCreator _pathCreator;
         private PathGenerator _pathGenerator;
+
+        public List<EnemyCarFollowPath> enemies = new();
 
         private void Awake()
         {
@@ -25,6 +28,11 @@ namespace _Developers.Vitor
             EnemyCarFollowPath enemyInstance = Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
             enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, 40);
             enemyInstance.pathCreator = _pathGenerator.pathCreatorInstance;
+        }
+
+        public void SpawnEnemy()
+        {
+
         }
     }
 }
