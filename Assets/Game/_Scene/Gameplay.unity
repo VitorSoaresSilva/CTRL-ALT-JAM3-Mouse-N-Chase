@@ -5110,7 +5110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameplayManager: {fileID: 1192794885}
   enemies:
-  - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
+  - {fileID: -6232721783095306507, guid: 26324625c9050aa43ad250f3f011f570, type: 3}
   enemySpawner: {fileID: 1547526980}
   destroyedEnemies: 0
 --- !u!4 &285480937
@@ -10150,6 +10150,7 @@ MonoBehaviour:
   - {fileID: -6232721783095306507, guid: 17cccd7285eac344187534c9358fa826, type: 3}
   - {fileID: 1711840475351775023, guid: ad9f02471f80406449f92c925328b157, type: 3}
   - {fileID: -6232721783095306507, guid: 32f1b9382c8ae2549b7bfffe75dd6a90, type: 3}
+  - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
   enemySpawner: {fileID: 1547526980}
   destroyedEnemies: 0
 --- !u!4 &598135307
@@ -20468,6 +20469,79 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1001 &1306660975
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 517
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 472
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380929733662744203, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152978810813071935, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerCarSecret
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152978810813071935, guid: 0890be6fe1cedb24a946e3f17abb93d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0890be6fe1cedb24a946e3f17abb93d8, type: 3}
 --- !u!1 &1313903993
 GameObject:
   m_ObjectHideFlags: 0
@@ -20609,6 +20683,7 @@ MonoBehaviour:
   - {fileID: -6232721783095306507, guid: 32f1b9382c8ae2549b7bfffe75dd6a90, type: 3}
   - {fileID: 1711840475351775023, guid: ad9f02471f80406449f92c925328b157, type: 3}
   - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
+  - {fileID: -6232721783095306507, guid: 26324625c9050aa43ad250f3f011f570, type: 3}
   enemies: []
 --- !u!114 &1547526981
 MonoBehaviour:
@@ -20663,7 +20738,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1711840475351775023, guid: ad9f02471f80406449f92c925328b157, type: 3}
   - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 1547526980}
   destroyedEnemies: 0
 --- !u!4 &1830902520
 Transform:
@@ -20850,3 +20925,4 @@ SceneRoots:
   - {fileID: 580152938}
   - {fileID: 1079524573}
   - {fileID: 1942262818}
+  - {fileID: 1306660975}
