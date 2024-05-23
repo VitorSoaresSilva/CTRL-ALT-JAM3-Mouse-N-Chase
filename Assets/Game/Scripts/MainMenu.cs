@@ -128,6 +128,8 @@ public class MainMenu : MonoBehaviour
             if (bossQnt != null)
                 bossQnt.text = $"{CareerPoints.instance.BossCompleted} / 1";
 
+            if(SceneControl.instance != null)
+                SceneControl.instance.ToggleLoading(false);
         }
 
     }
@@ -180,12 +182,14 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    // Called by Start Game button
     public void ChangeScene(string scene)
     {
         StartCoroutine(FadeOutAndLoadScene(scene));
         FindObjectOfType<EventSystem>().enabled = false;
     }
 
+    // Called by mission buttons
     public void ChangeToRandomScene(UIButton MissionBtn)
     {
         StartCoroutine(FadeAndLoadBiome(MissionBtn.missionType));
@@ -193,36 +197,78 @@ public class MainMenu : MonoBehaviour
     }
 
     #region Private Methods
+    private IEnumerator FadeOutAndLoadScene(string scene)
+    {
+        if (SceneControl.instance != null)
+        {
+            SceneControl.instance.ToggleLoading(true);
+            StartCoroutine(FadeOutMusic());
+            yield return new WaitForSeconds(fadeInDuration);
+            SceneControl.instance.ChangeScene(scene);
+        }
+        yield return null;
+        //SceneControl.instance.ToggleLoading(false);
+    }
+
     private IEnumerator FadeAndLoadBiome(MissionType missionType)
     {
-        StartCoroutine(FadeOutMusic());
-
-        if (Fade.instance != null)
-            Fade.instance.FadeIn();
-
-        yield return new WaitForSeconds(fadeInDuration);
-
         if (SceneControl.instance != null)
+        {
+            SceneControl.instance.ToggleLoading(true);
+            StartCoroutine(FadeOutMusic());
+            yield return new WaitForSeconds(fadeInDuration);
             SceneControl.instance.LoadBiomeScene(missionType);
-        else
-        {   // fallback
-            SceneManager.LoadSceneAsync(gameScenes[Random.Range(0, gameScenes.Length)]);
-            SceneManager.LoadSceneAsync(sceneName);
+
+        }
+
+        yield return null;
+    }
+
+
+    private IEnumerator FadeInMusic()
+    {
+        //float startTime = Time.time;
+
+        //while (Time.time < startTime + fadeInDuration)
+        //{
+        //    float t = (Time.time - startTime) / fadeInDuration;
+        //    audioSource.volume = t * Volume;
+
+        //    yield return null;
+        //}
+        //audioSource.volume = Volume;
+
+        float elapsedTime = 0;
+        float startVolume = audioSource.volume;
+        while (elapsedTime < fadeInDuration)
+        {
+            audioSource.volume = Mathf.Lerp(startVolume, 1, elapsedTime / fadeInDuration);
+            yield return null;
+            elapsedTime += Time.deltaTime;
         }
     }
 
-    private IEnumerator FadeOutAndLoadScene(string scene)
+    private IEnumerator FadeOutMusic()
     {
-        StartCoroutine(FadeOutMusic());
+        //float startTime = Time.time;
 
-        if(Fade.instance != null)
-            Fade.instance.FadeIn();
-            
-        yield return new WaitForSeconds(fadeInDuration);
+        //while (Time.time < startTime + fadeInDuration)
+        //{
+        //    float t = (Time.time - startTime) / fadeInDuration;
+        //    audioSource.volume = Volume - t * Volume;
 
-        if (SceneControl.instance != null)
-            SceneControl.instance.ChangeScene(scene); 
-        else SceneManager.LoadSceneAsync(scene);
+        //    yield return null;
+        //}
+        //audioSource.volume = 0;
+
+        float elapsedTime = 0;
+        float startVolume = audioSource.volume;
+        while (elapsedTime < fadeInDuration)
+        {
+            audioSource.volume = Mathf.Lerp(startVolume, 0, elapsedTime / fadeInDuration);
+            yield return null;
+            elapsedTime += Time.deltaTime;
+        }
     }
 
     private void PlayNextAudioClip()
@@ -230,7 +276,7 @@ public class MainMenu : MonoBehaviour
         if (AudioClips.Length > 0)
         {
             int rndIndex = Random.Range(0, AudioClips.Length);
-            if(rndIndex == currentAudioIndex)
+            if (rndIndex == currentAudioIndex)
             {
                 rndIndex = (rndIndex + 1) % AudioClips.Length;
             }
@@ -238,34 +284,6 @@ public class MainMenu : MonoBehaviour
             currentAudioIndex = rndIndex;
             audioSource.Play();
         }
-    }
-
-    private IEnumerator FadeInMusic()
-    {
-        float startTime = Time.time;
-
-        while (Time.time < startTime + fadeInDuration)
-        {
-            float t = (Time.time - startTime) / fadeInDuration;
-            audioSource.volume = t * Volume;
-
-            yield return null;
-        }
-        audioSource.volume = Volume;
-    }
-
-    private IEnumerator FadeOutMusic()
-    {
-        float startTime = Time.time;
-
-        while (Time.time < startTime + fadeInDuration)
-        {
-            float t = (Time.time - startTime) / fadeInDuration;
-            audioSource.volume = Volume - t * Volume;
-
-            yield return null;
-        }
-        audioSource.volume = 0;
     }
     #endregion
 

@@ -1,7 +1,4 @@
 using System.Collections;
-//using System.Collections.Generic;
-//using Unity.VisualScripting;
-//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +7,7 @@ public enum MissionType { FastResponse, Pursuit, Rescue, Boss }
 
 public class SceneControl : Singleton<SceneControl>
 {
+    [SerializeField] private Canvas loadingCanvas;
     [SerializeField] private string gameplayScene = "Gameplay"; // carrega junto ao bioma
     [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
 
@@ -24,47 +22,64 @@ public class SceneControl : Singleton<SceneControl>
 
     public GameplayManager gameplayManager { get; private set; }
 
-    public void ChangeScene(string sceneName)
+    public void OnEnable()
     {
-        SceneManager.LoadSceneAsync(sceneName);
+        if (loadingCanvas == null)
+            loadingCanvas = transform.GetComponentInChildren<Canvas>();
     }
 
-    public void LoadBiomeScene(MissionType missionType)
+    public Coroutine ChangeScene(string sceneName)
+    {
+        //if(loadingCanvas != null) loadingCanvas.gameObject.SetActive(true);
+        return StartCoroutine(SceneChanging(sceneName));
+    }
+
+    IEnumerator SceneChanging(string sceneName, bool additive = false)
+    {
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, (additive) ? LoadSceneMode.Additive : LoadSceneMode.Single);
+        
+        loadOp.allowSceneActivation = false;
+
+        while (!loadOp.isDone)
+        {
+            if(loadOp.progress >= 0.9f)
+            {
+                loadOp.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+        
+        //if(loadingCanvas != null) loadingCanvas.gameObject.SetActive(false);
+    }
+
+    public Coroutine LoadBiomeScene(MissionType missionType)
     {
         currentMission = missionType;
-        StartCoroutine(LoadBiomes());
+        //if (loadingCanvas != null) loadingCanvas.gameObject.SetActive(true);
+        return StartCoroutine(LoadBiomes());
     }
 
     IEnumerator LoadBiomes()
     {
-        AsyncOperation biomeLoad = SceneManager.LoadSceneAsync(biomeScenes[Random.Range(0, biomeScenes.Length)]);
-        biomeLoad.allowSceneActivation = false;
+        yield return null;
+        string rndBiome = biomeScenes[Random.Range(0, biomeScenes.Length)];
 
-        while (!biomeLoad.isDone)
+        yield return StartCoroutine(SceneChanging(rndBiome));
+
+        yield return StartCoroutine(SceneChanging(gameplayScene, true));
+
+        //if (loadingCanvas != null) loadingCanvas.gameObject.SetActive(false);
+
+        if (gameplayManager != null)
         {
-            if (biomeLoad.progress >= 0.9f)
-            {
-                biomeLoad.allowSceneActivation = true;
-            }
-            yield return null;
-        }
-
-        AsyncOperation gameLoad = SceneManager.LoadSceneAsync(gameplayScene, LoadSceneMode.Additive);
-        gameLoad.allowSceneActivation = false;
-
-        while (!gameLoad.isDone)
-        {
-            if (gameLoad.progress >= 0.9f)
-            {
-                gameLoad.allowSceneActivation = true;
-            }
-            yield return null;
-        }
-
-        if(gameplayManager != null)
-        {
+            SceneControl.instance.ToggleLoading(false);
             gameplayManager.StartGameplay();
         }
+    }
+
+    public void ToggleLoading(bool visible)
+    {
+        if (loadingCanvas != null) loadingCanvas.gameObject.SetActive(visible);
     }
 
     public void AddGameplayManager(GameplayManager manager)
