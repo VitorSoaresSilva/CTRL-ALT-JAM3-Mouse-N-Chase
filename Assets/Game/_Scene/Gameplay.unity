@@ -20913,6 +20913,8 @@ MonoBehaviour:
   gameplayManager: {fileID: 1192794885}
   playerCar: {fileID: 1942262819}
   policeTunnelPrefab: {fileID: 1942262821}
+  damageAudio: {fileID: 8300000, guid: 4cc1c4064e493f44e9c5f1f02eee11f3, type: 3}
+  policeTunnel: {fileID: 0}
   damageTaken: 0
   tunnelSpawned: 0
   completed: 0
