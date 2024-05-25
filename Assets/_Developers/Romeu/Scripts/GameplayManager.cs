@@ -44,7 +44,7 @@ public class GameplayManager : MonoBehaviour
 
         if(secretCar != null && CareerPoints.instance != null)
         {
-            if(CareerPoints.instance.SecretCarUnlocked)
+            if(CareerPoints.instance.usingSecretCar)
             {
                 playerCar = secretCar;
                 cameraControl = secretCar.GetComponentInChildren<CameraControl>();

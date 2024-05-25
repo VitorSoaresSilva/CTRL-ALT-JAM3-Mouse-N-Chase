@@ -9,7 +9,7 @@ public class EnemyDamage : MonoBehaviour
     [Range(0, 100)] public float health = 80f; // Saúde inicial
     public string damageTag = "Player"; // Tag dos objetos que causam dano ao carro
     public bool takeDamage = true;
-
+    public GameObject dieParticle;
     public delegate void OnDamage();
     public OnDamage onDamage;
 
@@ -38,6 +38,7 @@ public class EnemyDamage : MonoBehaviour
             // Verifique se o carro ainda tem saúde
             if (health <= 0)
             {
+                if(dieParticle != null) dieParticle.SetActive(true);
                 onDie?.Invoke();
                 // O carro foi destruído, faça algo aqui (por exemplo, terminar o jogo ou destruir o carro)
             }
