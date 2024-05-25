@@ -187,10 +187,12 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
   sirenMaterial: {fileID: 2100000, guid: 46c825947816ceb4eaa04fbf558f34e9, type: 2}
-  sirenModel: {fileID: 1737833723225996334}
+  sirenMaterial2: {fileID: 0}
   sirenLight: {fileID: 7393764565471503189}
+  sirenLight2: {fileID: 0}
   lightBlinkInterval: 0.9
   activateSiren: 0
+  activateAlternateLights: 0
 --- !u!82 &6289450847065751173
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1537,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4462459689113839601
 Transform:
   m_ObjectHideFlags: 0

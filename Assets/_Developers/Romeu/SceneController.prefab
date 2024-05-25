@@ -323,6 +323,7 @@ MonoBehaviour:
   - BiomeMix
   - BiomeFlorest
   - BiomeCorrupted
+  - BiomeOcean
   <currentMission>k__BackingField: 0
   <FastResponseClips>k__BackingField:
   - {fileID: 8300000, guid: 5a0263cef39f9b24a9db62705e4baf02, type: 3}

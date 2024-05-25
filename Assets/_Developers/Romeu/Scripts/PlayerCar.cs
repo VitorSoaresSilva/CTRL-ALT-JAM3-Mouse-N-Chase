@@ -24,7 +24,7 @@ public class PlayerCar : MonoBehaviour
         {
             if(ShieldObject != null)
             { 
-                Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.ShieldUnlocked}");
+                //Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.ShieldUnlocked}");
                 if(CareerPoints.instance.ShieldUnlocked) ShieldObject.SetActive(true);
                 if (carDamage != null) carDamage.health += 10;
             }
@@ -37,7 +37,7 @@ public class PlayerCar : MonoBehaviour
 
             if (BumperObject != null)
             {
-                Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.BumperUnlocked}");
+                //Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.BumperUnlocked}");
                 if (CareerPoints.instance.BumperUnlocked) BumperObject.SetActive(true);
                 if(carDamage != null) carDamage.health += 10;
             }

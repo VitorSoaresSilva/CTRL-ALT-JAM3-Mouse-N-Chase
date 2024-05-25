@@ -38,7 +38,7 @@ public class MultipleObjectSpawner : PathSceneTool
 
     private void Generate()
     {
-        Debug.Log("Activating MultipleObjectSpawner");
+        //Debug.Log("Activating MultipleObjectSpawner");
         if (pathCreator != null && holder != null && prefabs.Length > 0)
         {
             DestroyObjects();
@@ -114,7 +114,7 @@ public class MultipleObjectSpawner : PathSceneTool
 
     void DestroyObjects()
     {
-        Debug.Log("Destroying objs");
+        //Debug.Log("Destroying objs");
         int numChildren = holder.transform.childCount;
         for (int i = numChildren - 1; i >= 0; i--)
         {

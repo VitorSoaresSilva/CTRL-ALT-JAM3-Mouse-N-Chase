@@ -24,7 +24,7 @@ public class CarDamage : MonoBehaviour
         if (collision.gameObject.CompareTag(damageTag) && takeDamage)
         {
             // Calcule o dano com base na velocidade do carro
-            float damage = car.speed;
+            float damage = car.speed / 1.25f;
 
             // Diminua a saúde do carro
             health -= damage;
@@ -33,12 +33,6 @@ public class CarDamage : MonoBehaviour
             CareerPoints.instance.RemovePoints((int)damage);
 
             onDamage?.Invoke();
-
-            // Verifique se o carro ainda tem saúde
-            if (health <= 0)
-            {
-                // O carro foi destruído, faça algo aqui (por exemplo, terminar o jogo ou destruir o carro)
-            }
         }
     }
 }

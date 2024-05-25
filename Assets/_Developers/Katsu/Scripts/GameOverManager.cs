@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.Collections;
+using UnityEditor.SearchService;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -27,12 +29,13 @@ public class GameOverManager : MonoBehaviour
             CareerPoints.instance.ResetProgress();
         }
 
-        Invoke(nameof(GoToMenu), delayBeforeMenu);
+        //Invoke(nameof(GoToMenu), delayBeforeMenu);
     }
 
-    void GoToMenu()
+    public void GoToMenu()
     {
         Debug.Log("GoToMenu");
+        SceneControl.instance.ToggleLoading(true);
         SceneControl.instance.ChangeScene("MainMenu");
     }
 }

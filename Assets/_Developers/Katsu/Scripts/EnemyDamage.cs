@@ -23,7 +23,7 @@ public class EnemyDamage : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Entered enemy damage coll");
+        //Debug.Log("Entered enemy damage coll");
 
         if (collision.gameObject.CompareTag(damageTag) && takeDamage)
         {

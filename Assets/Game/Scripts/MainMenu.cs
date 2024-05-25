@@ -76,7 +76,7 @@ public class MainMenu : MonoBehaviour
 
         if(CareerPoints.instance != null)
         {
-            Debug.Log("Showing Career Points");
+            //Debug.Log("Showing Career Points");
             if(pointsText != null)
                 pointsText.text = $"{CareerPoints.instance.Points}";
 
@@ -104,17 +104,21 @@ public class MainMenu : MonoBehaviour
                 bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
             }
 
-            if (fastResponseBtn != null)
-                fastResponseBtn.GetComponent<Button>().enabled = (CareerPoints.instance.FastResponseCompleted < 10);
-
+            if(fastResponseBtn != null)
+                DisableBtn(fastResponseBtn.GetComponent<Button>(), CareerPoints.instance.FastResponseCompleted >= 10);
             if (pursuitBtn != null)
-                pursuitBtn.GetComponent<Button>().enabled = (CareerPoints.instance.PursuitCompleted < 10);
+                DisableBtn(pursuitBtn.GetComponent<Button>(), CareerPoints.instance.PursuitCompleted >= 10);
+            if(rescueBtn != null)
+                DisableBtn(rescueBtn.GetComponent<Button>(), CareerPoints.instance.RescueCompleted >= 10);
+            if(bossBtn != null)
+                DisableBtn(bossBtn.GetComponent<Button>(), CareerPoints.instance.BossCompleted >= 1);
 
-            if (rescueBtn != null)
-                rescueBtn.GetComponent<Button>().enabled = (CareerPoints.instance.RescueCompleted < 10);
-
-            if (bossBtn != null)
-                bossBtn.GetComponent<Button>().enabled = (CareerPoints.instance.BossCompleted < 1);
+            void DisableBtn(Button btn, bool condition)
+            {
+                if (!condition) return;
+                btn.onClick.RemoveAllListeners();
+                btn.interactable = false;
+            }
 
             if (fastResponseQnt != null)
                 fastResponseQnt.text = $"{CareerPoints.instance.FastResponseCompleted} / 10";

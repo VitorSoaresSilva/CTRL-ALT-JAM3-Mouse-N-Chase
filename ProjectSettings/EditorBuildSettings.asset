@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/_Scene/GameOver.unity
     guid: a00fa0e0e70c49b42b42304385d0dc06
+  - enabled: 1
+    path: Assets/Game/_Scene/BiomeOcean.unity
+    guid: 290620e9cc0ae5745957ccde594ebe2e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 29e7ca4fd77eb50469d34da1090c82c8,
       type: 2}

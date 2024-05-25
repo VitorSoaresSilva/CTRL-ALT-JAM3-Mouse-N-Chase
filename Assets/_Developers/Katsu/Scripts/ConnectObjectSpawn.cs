@@ -27,7 +27,7 @@ namespace PathCreation.Examples
 
         void Generate()
         {
-            Debug.Log("Activating ConnectObjectSpawn");
+            //Debug.Log("Activating ConnectObjectSpawn");
             if (pathCreator != null && holder != null)
             {
                 DestroyObjects();

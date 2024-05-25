@@ -60,14 +60,21 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void RemovePoints(int points)
     {
-        this.Points -= points;
+        Debug.Log($"Points to remove {points}");
+        if (this.Points - points < 1)
+        {
+            if (this.Points != 1) this.Points = 1;
+            else this.Points = 0;
+        }
+        else this.Points -= points;
+
         LostPoints += points;
     }
 
     public void Load()
     {
         
-        Points = PlayerPrefs.GetInt("Points", 250);
+        Points = PlayerPrefs.GetInt("Points", 1000);
         LostPoints = PlayerPrefs.GetInt("LostPoints", 0);
         FastResponseCompleted = PlayerPrefs.GetInt("FastResponseCompleted", 0);
         PursuitCompleted = PlayerPrefs.GetInt("PursuitCompleted", 0);
@@ -117,8 +124,8 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void ResetProgress()
     {
-        Points = 250;
-        LostPoints = 0;
+        Points = 1000;
+        //LostPoints = 0;
         FastResponseCompleted = 0;
         PursuitCompleted = 0;
         RescueCompleted = 0;

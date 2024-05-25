@@ -1,6 +1,7 @@
 using PathCreation;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private Slider HealthSlider;
     [SerializeField] private GameObject FailPanel;
     [SerializeField] private GameObject SucceedPanel;
+    [SerializeField] private TextMeshProUGUI pointsValueText;
 
     [SerializeField, Header("Upgrades")] private Image shieldSlot;
     [SerializeField] private Image slotSlot;
@@ -66,7 +68,7 @@ public class GameplayManager : MonoBehaviour
         lapsToFail = UnityEngine.Random.Range(5, maxLaps);
     }
 
-    public void StartGameplay() // wip
+    public void StartGameplay()
     {
         //Debug.Log("Starting gameplay");
         playerCar.gameObject.SetActive(true);
@@ -135,16 +137,18 @@ public class GameplayManager : MonoBehaviour
     void Update()
     {
         HealthSlider.value = playerCar.carDamage.health / 100;
-        if(playerCar != null)
+        pointsValueText.text = CareerPoints.instance.Points.ToString();
+
+        if (playerCar != null)
         {
-            if(playerCar.carDamage.health <= 0 || CareerPoints.instance.Points <= 0)
+            if(CareerPoints.instance.Points <= 0)
             {
                 CareerPoints.instance.Save();
                 SceneControl.instance.ChangeScene("GameOver");
             }
         }
 
-        if(currentLap > lapsToFail)
+        if(playerCar.carDamage.health <= 0 || currentLap > lapsToFail)
         {
             EndGameplay(false);
         }
@@ -161,10 +165,8 @@ public class GameplayManager : MonoBehaviour
 
         if (CareerPoints.instance != null)
         {
-            if(!success)
-                CareerPoints.instance.RemovePoints(CareerPoints.instance.CurrentMissionPoints);
-            else
-                CareerPoints.instance.CompleteMission(SceneControl.instance.currentMission);
+            if(success) CareerPoints.instance.CompleteMission(SceneControl.instance.currentMission);
+            else CareerPoints.instance.RemovePoints(250);
         }
         
         StartCoroutine(ExitGameplay(success));
