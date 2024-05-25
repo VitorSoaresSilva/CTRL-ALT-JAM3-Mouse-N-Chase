@@ -9,7 +9,7 @@ public class SceneControl : Singleton<SceneControl>
 {
     [SerializeField] private Canvas loadingCanvas;
     [SerializeField] private string gameplayScene = "Gameplay"; // carrega junto ao bioma
-    [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix" };
+    [SerializeField] private string[] biomeScenes = new string[] { "BiomeCorrupted", "BiomeDesert", "BiomeFlorest", "BiomeMix", "BiomePlain", "BiomeOcean"  };
 
     [field:SerializeField] public MissionType currentMission { get; private set; }
 
