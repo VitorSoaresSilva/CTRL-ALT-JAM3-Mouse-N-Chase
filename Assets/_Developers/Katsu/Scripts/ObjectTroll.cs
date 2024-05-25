@@ -38,7 +38,7 @@ public class ObjectTroll : MonoBehaviour
             help.SetActive(false); // Desativa o objeto
             yield return new WaitForSeconds(25); // Espera 25 segundos
             help.SetActive(true); // Ativa o objeto novamente
-            yield return new WaitForSeconds(5); // Espera 5 segundos
+            yield return new WaitForSeconds(3); // Espera 3 segundos
             help.SetActive(false); // Desativa o objeto novamente
         }
     }
