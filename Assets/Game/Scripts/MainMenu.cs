@@ -44,6 +44,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField, Header("Upgrades")] private powerupSlot shieldSlot;
     [SerializeField] private powerupSlot slotSlot;
     [SerializeField] private powerupSlot bumperSlot;
+    [SerializeField] private Button secretCarSlot;
 
     [SerializeField] private GameObject fastResponseBtn;
     [SerializeField] private GameObject pursuitBtn;
@@ -102,6 +103,13 @@ public class MainMenu : MonoBehaviour
             {
                 bumperSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.BumperUnlocked);
                 bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
+            }
+
+            if (secretCarSlot != null && CareerPoints.instance.SecretCarUnlocked)
+            {
+                secretCarSlot.gameObject.SetActive(true);
+                bossBtn.GetComponent<Button>().navigation = new Navigation() 
+                { mode = Navigation.Mode.Explicit, selectOnRight = secretCarSlot };
             }
 
             if(fastResponseBtn != null)
@@ -178,6 +186,16 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("OnStartButton was called.");
         StartCoroutine(FadeOutAndLoadScene(sceneName));
+    }
+
+    public void ToggleSecretCar()
+    {
+        if(CareerPoints.instance != null)
+        {
+            CareerPoints.instance.usingSecretCar = !CareerPoints.instance.usingSecretCar;
+            if(secretCarSlot != null) 
+                secretCarSlot.GetComponentInChildren<TextMeshProUGUI>().color = (CareerPoints.instance.usingSecretCar) ? Color.blue : Color.red;
+        }
     }
 
     public void QuitGame()

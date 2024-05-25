@@ -9,6 +9,7 @@ public class CareerPoints : Singleton<CareerPoints>
     public int Points { get; private set; }
     public int LostPoints { get; private set; }
     public int MissionsCompleted { get => FastResponseCompleted + PursuitCompleted + RescueCompleted + BossCompleted; }
+    public bool usingSecretCar = false;
 
     // Missions
     [HideInInspector] public int CurrentMissionPoints
@@ -32,6 +33,7 @@ public class CareerPoints : Singleton<CareerPoints>
             return 100;
         }
     }
+
     [HideInInspector] public int FastResponseCompleted = 0;
     [HideInInspector] public int PursuitCompleted = 0;
     [HideInInspector] public int RescueCompleted = 0;
@@ -45,6 +47,7 @@ public class CareerPoints : Singleton<CareerPoints>
     public bool ShieldUnlocked { get => Points >= 10000; }
     public bool SlotUnlocked { get => Points >= 20000; }
     public bool BumperUnlocked { get => Points >= 30000; }
+    public bool SecretCarUnlocked { get; private set; }
 
     public bool debug = false;
 
@@ -73,13 +76,13 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void Load()
     {
-        
         Points = PlayerPrefs.GetInt("Points", 1000);
         LostPoints = PlayerPrefs.GetInt("LostPoints", 0);
         FastResponseCompleted = PlayerPrefs.GetInt("FastResponseCompleted", 0);
         PursuitCompleted = PlayerPrefs.GetInt("PursuitCompleted", 0);
         RescueCompleted = PlayerPrefs.GetInt("RescueCompleted", 0);
         BossCompleted = PlayerPrefs.GetInt("BossCompleted", 0);
+        SecretCarUnlocked = PlayerPrefs.GetInt("SecretCarUnlocked", 0) == 1;
 
         if (PlayerPrefs.HasKey("Points") == false)
             Save();
@@ -91,12 +94,18 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void Save()
     {
+        if (!SecretCarUnlocked)
+        {
+            SecretCarUnlocked = FastResponseCompleted == 9 && PursuitCompleted == 1 && RescueCompleted == 1;
+            usingSecretCar = true;
+        }
         PlayerPrefs.SetInt("Points", Points);
         PlayerPrefs.SetInt("LostPoints", LostPoints);
         PlayerPrefs.SetInt("FastResponseCompleted", FastResponseCompleted);
         PlayerPrefs.SetInt("PursuitCompleted", PursuitCompleted);
         PlayerPrefs.SetInt("RescueCompleted", RescueCompleted);
         PlayerPrefs.SetInt("BossCompleted", BossCompleted);
+        PlayerPrefs.SetInt("SecretCarUnlocked", SecretCarUnlocked ? 1 : 0);
     }
 
     public void CompleteMission(MissionType mission)

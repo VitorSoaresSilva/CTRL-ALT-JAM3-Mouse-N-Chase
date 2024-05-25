@@ -10,6 +10,7 @@ using static MainMenu;
 public class GameplayManager : MonoBehaviour
 {
     [Header("Player")] public PlayerCar playerCar;
+    [Header("Player")] public PlayerCar secretCar;
     [SerializeField] private CameraControl cameraControl;
 
     [SerializeField, Header("Start")] private float SceneCameraSpeed = 2f;
@@ -40,6 +41,15 @@ public class GameplayManager : MonoBehaviour
         if(HealthSlider == null) HealthSlider = GameCanvas.GetComponentInChildren<Slider>(true);
         if(cameraControl == null) cameraControl = FindObjectOfType<CameraControl>();
         if(playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
+
+        if(secretCar != null && CareerPoints.instance != null)
+        {
+            if(CareerPoints.instance.SecretCarUnlocked)
+            {
+                playerCar = secretCar;
+                cameraControl = secretCar.GetComponentInChildren<CameraControl>();
+            }
+        }
 
         if(CareerPoints.instance != null)
         {

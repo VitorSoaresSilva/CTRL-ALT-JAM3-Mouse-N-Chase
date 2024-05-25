@@ -21,8 +21,6 @@ public class SirenController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.spatialBlend = 1f;
-        highPassFilter = GetComponent<AudioHighPassFilter>();
-        highPassFilter.cutoffFrequency = 1000;
         sirenMaterial.DisableKeyword("_EMISSION");
         if (sirenMaterial2 != null) // verifica se o segundo material está definido
         {
