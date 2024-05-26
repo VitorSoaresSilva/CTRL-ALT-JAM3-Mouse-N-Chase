@@ -44,9 +44,9 @@ public class CareerPoints : Singleton<CareerPoints>
     [SerializeField] int BossPoints = 3000;
 
     // Powerups
-    public bool ShieldUnlocked { get => Points >= 10000; }
-    public bool SlotUnlocked { get => Points >= 20000; }
-    public bool BumperUnlocked { get => Points >= 30000; }
+    public bool BumperUnlocked { get => Points >= 15000; }
+    public bool ShieldUnlocked { get => Points >= 30000; }
+    public bool SlotUnlocked { get => Points >= 45000; }
     public bool SecretCarUnlocked { get; private set; }
 
     public bool debug = false;
