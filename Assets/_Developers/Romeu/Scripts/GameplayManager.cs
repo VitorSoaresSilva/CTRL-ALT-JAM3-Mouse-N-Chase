@@ -29,10 +29,11 @@ public class GameplayManager : MonoBehaviour
 
     [SerializeField, Header("Path")] private PathCreator pathCreator;
     [SerializeField] private int maxLaps = 10; // maximo de voltas
-    
+
     private float StartSceneTime = 5;
     public float lapsToFail = 5;
     public float currentLap = 0;
+    public bool isIntroPlaying = false;
 
     void OnEnable()
     {
@@ -44,10 +45,16 @@ public class GameplayManager : MonoBehaviour
 
         if(secretCar != null && CareerPoints.instance != null)
         {
-            if(CareerPoints.instance.usingSecretCar)
+            // Validação: carro secreto só pode ser usado se liberado E selecionado no menu
+            if(CareerPoints.instance.SecretCarUnlocked && CareerPoints.instance.usingSecretCar)
             {
                 playerCar = secretCar;
                 cameraControl = secretCar.GetComponentInChildren<CameraControl>();
+            }
+            else
+            {
+                // Se não está liberado ou não foi selecionado, sempre usa o carro padrão
+                CareerPoints.instance.usingSecretCar = false;
             }
         }
 
@@ -82,6 +89,7 @@ public class GameplayManager : MonoBehaviour
     {
         //Debug.Log("Starting gameplay");
         playerCar.gameObject.SetActive(true);
+        isIntroPlaying = true;
 
         if(SceneControl.instance != null)
         {
@@ -140,6 +148,7 @@ public class GameplayManager : MonoBehaviour
 
             cameraControl.FollowDistance = followDist;
             playerCar.carDamage.takeDamage = true;
+            isIntroPlaying = false;
         }
     }
 

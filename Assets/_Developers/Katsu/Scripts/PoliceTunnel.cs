@@ -11,4 +11,10 @@ public class PoliceTunnel : MonoBehaviour
             controlledObject.SetActive(isActive);
         }
     }
+
+    public void ActivatePolice()
+    {
+        SetActive(true);
+    }
 }
+

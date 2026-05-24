@@ -31,6 +31,10 @@ public class PathGenerator : Singleton<PathGenerator>
     private GameObject startTunnel;
     private GameObject endTunnel;
 
+    // Propriedades públicas para acessar os tunnels
+    public GameObject StartTunnel => startTunnel;
+    public GameObject EndTunnel => endTunnel;
+
     void Start()
     {
         connectObjectSpawns = FindObjectsByType<ConnectObjectSpawn>(FindObjectsSortMode.None);
