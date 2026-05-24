@@ -113,13 +113,29 @@ public class MainMenu : MonoBehaviour
             }
 
             if(fastResponseBtn != null)
-                DisableBtn(fastResponseBtn.GetComponent<Button>(), CareerPoints.instance.FastResponseCompleted >= 10);
+            {
+                Button fastResponseButton = fastResponseBtn.GetComponent<Button>();
+                // Desabilitar se completada 10 vezes OU se não está desbloqueada
+                DisableBtn(fastResponseButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.FastResponse) || CareerPoints.instance.FastResponseCompleted >= 10);
+            }
             if (pursuitBtn != null)
-                DisableBtn(pursuitBtn.GetComponent<Button>(), CareerPoints.instance.PursuitCompleted >= 10);
+            {
+                Button pursuitButton = pursuitBtn.GetComponent<Button>();
+                // Desabilitar se completada 10 vezes OU se não está desbloqueada
+                DisableBtn(pursuitButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Pursuit) || CareerPoints.instance.PursuitCompleted >= 10);
+            }
             if(rescueBtn != null)
-                DisableBtn(rescueBtn.GetComponent<Button>(), CareerPoints.instance.RescueCompleted >= 10);
+            {
+                Button rescueButton = rescueBtn.GetComponent<Button>();
+                // Desabilitar se completada 10 vezes OU se não está desbloqueada
+                DisableBtn(rescueButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Rescue) || CareerPoints.instance.RescueCompleted >= 10);
+            }
             if(bossBtn != null)
-                DisableBtn(bossBtn.GetComponent<Button>(), CareerPoints.instance.BossCompleted >= 1);
+            {
+                Button bossButton = bossBtn.GetComponent<Button>();
+                // Desabilitar se completada 1 vez OU se não está desbloqueada
+                DisableBtn(bossButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Boss) || CareerPoints.instance.BossCompleted >= 1);
+            }
 
             void DisableBtn(Button btn, bool condition)
             {

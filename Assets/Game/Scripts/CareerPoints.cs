@@ -43,9 +43,25 @@ public class CareerPoints : Singleton<CareerPoints>
     [SerializeField] int RescuePoints = 1500;
     [SerializeField] int BossPoints = 3000;
 
-    // Powerups
-    public bool BumperUnlocked { get => Points >= 15000; }
-    public bool ShieldUnlocked { get => Points >= 30000; }
+    // Powerups - Desbloqueio Permanente
+    private bool _shieldUnlockedPermanent = false;
+    private bool _bumperUnlockedPermanent = false;
+
+    public bool ShieldUnlockedPermanent 
+    { 
+        get => _shieldUnlockedPermanent;
+        private set => _shieldUnlockedPermanent = value;
+    }
+
+    public bool BumperUnlockedPermanent 
+    { 
+        get => _bumperUnlockedPermanent;
+        private set => _bumperUnlockedPermanent = value;
+    }
+
+    // Desbloqueio automático por pontos (visível apenas se tem pontos suficientes E não foi permanentemente desbloqueado)
+    public bool ShieldUnlocked { get => ShieldUnlockedPermanent || Points >= 30000; }
+    public bool BumperUnlocked { get => BumperUnlockedPermanent || Points >= 15000; }
     public bool SlotUnlocked { get => Points >= 45000; }
     public bool SecretCarUnlocked { get; private set; }
 
@@ -59,6 +75,19 @@ public class CareerPoints : Singleton<CareerPoints>
     public void AddPoints(int points)
     {
         this.Points += points;
+
+        // Verificar desbloqueios permanentes de upgrades
+        if (!ShieldUnlockedPermanent && Points >= 30000)
+        {
+            ShieldUnlockedPermanent = true;
+            Log("Shield Upgrade Desbloqueado Permanentemente!");
+        }
+
+        if (!BumperUnlockedPermanent && Points >= 15000)
+        {
+            BumperUnlockedPermanent = true;
+            Log("Bumper Upgrade Desbloqueado Permanentemente!");
+        }
     }
 
     public void RemovePoints(int points)
@@ -84,6 +113,10 @@ public class CareerPoints : Singleton<CareerPoints>
         BossCompleted = PlayerPrefs.GetInt("BossCompleted", 0);
         SecretCarUnlocked = PlayerPrefs.GetInt("SecretCarUnlocked", 0) == 1;
 
+        // Carregar desbloqueios permanentes de upgrades
+        ShieldUnlockedPermanent = PlayerPrefs.GetInt("ShieldUnlockedPermanent", 0) == 1;
+        BumperUnlockedPermanent = PlayerPrefs.GetInt("BumperUnlockedPermanent", 0) == 1;
+
         if (PlayerPrefs.HasKey("Points") == false)
             Save();
 
@@ -99,6 +132,7 @@ public class CareerPoints : Singleton<CareerPoints>
             SecretCarUnlocked = FastResponseCompleted == 9 && PursuitCompleted == 1 && RescueCompleted == 1;
             usingSecretCar = true;
         }
+
         PlayerPrefs.SetInt("Points", Points);
         PlayerPrefs.SetInt("LostPoints", LostPoints);
         PlayerPrefs.SetInt("FastResponseCompleted", FastResponseCompleted);
@@ -106,6 +140,10 @@ public class CareerPoints : Singleton<CareerPoints>
         PlayerPrefs.SetInt("RescueCompleted", RescueCompleted);
         PlayerPrefs.SetInt("BossCompleted", BossCompleted);
         PlayerPrefs.SetInt("SecretCarUnlocked", SecretCarUnlocked ? 1 : 0);
+
+        // Salvar desbloqueios permanentes de upgrades
+        PlayerPrefs.SetInt("ShieldUnlockedPermanent", ShieldUnlockedPermanent ? 1 : 0);
+        PlayerPrefs.SetInt("BumperUnlockedPermanent", BumperUnlockedPermanent ? 1 : 0);
     }
 
     public void CompleteMission(MissionType mission)
@@ -129,6 +167,13 @@ public class CareerPoints : Singleton<CareerPoints>
                 AddPoints(BossPoints);
                 break;
         }
+
+        // Verificar desbloqueio do carro secreto (15 completações totais)
+        if (!SecretCarUnlocked && MissionsCompleted >= 15)
+        {
+            SecretCarUnlocked = true;
+            Log("Carro Secreto Desbloqueado!");
+        }
     }
 
     public void ResetProgress()
@@ -140,6 +185,34 @@ public class CareerPoints : Singleton<CareerPoints>
         RescueCompleted = 0;
         BossCompleted = 0;
         Save();
+    }
+
+    /// <summary>
+    /// Verifica se uma missão está desbloqueada
+    /// FastResponse: sempre desbloqueada (padrão)
+    /// Pursuit: desbloqueada após completar FastResponse 1 vez
+    /// Rescue: desbloqueada após completar Pursuit 1 vez
+    /// Boss: desbloqueada após completar cada missão 10 vezes (total 30)
+    /// </summary>
+    public bool IsMissionUnlocked(MissionType mission)
+    {
+        switch (mission)
+        {
+            case MissionType.FastResponse:
+                return true; // Sempre desbloqueada
+
+            case MissionType.Pursuit:
+                return FastResponseCompleted >= 1; // Após 1 vez FastResponse
+
+            case MissionType.Rescue:
+                return PursuitCompleted >= 1; // Após 1 vez Pursuit
+
+            case MissionType.Boss:
+                return FastResponseCompleted >= 10 && PursuitCompleted >= 10 && RescueCompleted >= 10;
+
+            default:
+                return false;
+        }
     }
 
     void Log(string text)

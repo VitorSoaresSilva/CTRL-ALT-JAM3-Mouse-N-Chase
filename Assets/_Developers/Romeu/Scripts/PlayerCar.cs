@@ -19,28 +19,32 @@ public class PlayerCar : MonoBehaviour
 
     void Start()
     {
-        // Upgrades
-        if(CareerPoints.instance != null)
+        // Upgrades - Ativar visualmente e aplicar bonus de saúde
+        if(CareerPoints.instance != null && carDamage != null)
         {
-            if(ShieldObject != null)
+            // Shield Upgrade
+            if(ShieldObject != null && CareerPoints.instance.ShieldUnlocked)
             { 
-                //Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.ShieldUnlocked}");
-                if(CareerPoints.instance.ShieldUnlocked) ShieldObject.SetActive(true);
-                if (carDamage != null) carDamage.health += 10;
+                ShieldObject.SetActive(true);
+                // Adicionar saúde permanentemente ao desbloquear
+                if (CareerPoints.instance.ShieldUnlockedPermanent)
+                    carDamage.health += 10;
             }
 
-            //if (SlotObject != null)
-            //{
-            //    Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.SlotUnlocked}");
-            //    if (CareerPoints.instance.SlotUnlocked) SlotObject.SetActive(true);
-            //}
-
-            if (BumperObject != null)
+            // Bumper Upgrade
+            if (BumperObject != null && CareerPoints.instance.BumperUnlocked)
             {
-                //Debug.Log($"ShieldObject Unlocked: {CareerPoints.instance.BumperUnlocked}");
-                if (CareerPoints.instance.BumperUnlocked) BumperObject.SetActive(true);
-                if(carDamage != null) carDamage.health += 10;
+                BumperObject.SetActive(true);
+                // Adicionar saúde permanentemente ao desbloquear
+                if (CareerPoints.instance.BumperUnlockedPermanent)
+                    carDamage.health += 10;
             }
+
+            // Slot Upgrade (comentado no original)
+            //if (SlotObject != null && CareerPoints.instance.SlotUnlocked)
+            //{
+            //    SlotObject.SetActive(true);
+            //}
         }
     }
 
