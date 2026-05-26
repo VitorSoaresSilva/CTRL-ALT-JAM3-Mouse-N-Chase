@@ -38,6 +38,14 @@ public class CarPathControl : MonoBehaviour
 
     void Update()
     {
+        // Validar e limpar velocidade inválida do rigidbody
+        if (rigidBody != null && !_Developers.Vitor.ValidationUtility.IsValidVelocity(rigidBody.velocity, 300f))
+        {
+            Debug.LogWarning($"[CarPathControl] Velocidade inválida detectada: {rigidBody.velocity}. Resetando para zero.");
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
+        }
+
         float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
         float speedFactor = Mathf.InverseLerp(0, maxSpeed, forwardSpeed);
         float currentMotorTorque = Mathf.Lerp(motorTorque, 0, speedFactor);

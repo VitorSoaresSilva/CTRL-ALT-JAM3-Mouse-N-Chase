@@ -1,0 +1,17 @@
+﻿# License – Commercial Use
+
+This asset is licensed under the **Unity Asset Store End User License Agreement** (EULA).  
+By purchasing or downloading this asset, you agree to the following:
+
+- ✅ You may use this asset in **personal and commercial Unity projects**
+- ❌ You may **not redistribute, resell, or repackage** this asset, in part or in full
+- ❌ You may not include this asset in other asset packs or public repositories
+- ✅ You may modify it for use within your own games or products
+
+For more information, see the official EULA:  
+https://unity.com/legal/as-terms
+
+---
+
+**Created by MonoLimbo Studio**  
+monolimbostudio@gmail.com

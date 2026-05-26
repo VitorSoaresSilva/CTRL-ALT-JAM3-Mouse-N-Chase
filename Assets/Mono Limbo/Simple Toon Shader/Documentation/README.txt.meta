@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: de9a3f0d8a150654789462858f53c005
+timeCreated: 1425440388
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 318465
+  packageName: Simple Toon Shader
+  packageVersion: 1.0
+  assetPath: Assets/Mono Limbo/Simple Toon Shader/Documentation/README.txt
+  uploadId: 754448

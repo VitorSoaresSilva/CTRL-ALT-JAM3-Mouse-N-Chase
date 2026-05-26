@@ -6,6 +6,7 @@ using UnityEngine;
 public class PursuitMission : MonoBehaviour
 {
     public GameplayManager gameplayManager;
+    public bool allowChaoticTraffic = true; // Flag para permitir trânsito caótico
     public EnemyCarFollowPath[] enemies;
 
     public EnemySpawner enemySpawner;

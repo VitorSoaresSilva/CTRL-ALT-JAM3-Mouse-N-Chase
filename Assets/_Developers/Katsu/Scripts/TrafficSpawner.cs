@@ -22,6 +22,8 @@ namespace _Developers.Vitor
         // Distâncias de segurança para evitar spawn perto do início e fim
         public float startSafetyDistance = 30f;
         public float endSafetyDistance = 30f;
+        // Distância de bloqueio próximo ao tunnel (evitar spawn antes do player ter visão)
+        public float tunnelBlockDistance = 50f;
         private GameplayManager _gameplayManager;
 
         private void Awake()
@@ -41,6 +43,8 @@ namespace _Developers.Vitor
 
         private IEnumerator SpawnTrafficAfterIntro()
         {
+            Debug.Log("TrafficSpawner: Aguardando término da introdução...");
+
             // Aguardar a introdução terminar
             if (_gameplayManager != null)
             {
@@ -48,6 +52,11 @@ namespace _Developers.Vitor
                 {
                     yield return null;
                 }
+                Debug.Log("TrafficSpawner: Introdução terminada! Iniciando spawn de traffic...");
+            }
+            else
+            {
+                Debug.LogWarning("TrafficSpawner: GameplayManager não encontrado! Iniciando spawn imediatamente...");
             }
 
             // Agora spawnar os carros de tráfego
@@ -55,6 +64,8 @@ namespace _Developers.Vitor
             {
                 SpawnTrafficCar(GetSafeSpawnDistance());
             }
+
+            Debug.Log($"TrafficSpawner: {amountSpawn} carros spawned com sucesso!");
         }
 
         private float GetSafeSpawnDistance()
@@ -71,7 +82,22 @@ namespace _Developers.Vitor
             }
 
             // Gerar distância aleatória dentro da zona segura
-            return Random.Range(safeMinDist, safeMaxDist);
+            float spawnDistance = Random.Range(safeMinDist, safeMaxDist);
+
+            // Evitar spawn muito perto do tunnel (final do caminho)
+            // Se o spawn ficar muito perto do final, afastar mais
+            if (spawnDistance > pathLength - tunnelBlockDistance)
+            {
+                spawnDistance = pathLength - tunnelBlockDistance - 5f;
+
+                // Se ainda não conseguir lugar seguro, tentar no início
+                if (spawnDistance < safeMinDist)
+                {
+                    spawnDistance = safeMinDist + Random.Range(5f, 20f);
+                }
+            }
+
+            return spawnDistance;
         }
 
         private void SpawnTrafficCar(float spawnDistance)

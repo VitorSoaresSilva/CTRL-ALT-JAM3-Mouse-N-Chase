@@ -35,6 +35,15 @@ public class PathGenerator : Singleton<PathGenerator>
     public GameObject StartTunnel => startTunnel;
     public GameObject EndTunnel => endTunnel;
 
+    // Flags para validação de timing
+    private bool isPathValid = false;
+    private bool isMeshReady = false;
+    private int lastValidatedPointCount = 0; // Cache para evitar validações repetidas
+    private bool enablePathValidation = true; // Flag para desabilitar validação se necessário
+    public bool IsPathValid => isPathValid;
+    public bool IsMeshReady => isMeshReady;
+    public bool EnablePathValidation { get => enablePathValidation; set => enablePathValidation = value; }
+
     void Start()
     {
         connectObjectSpawns = FindObjectsByType<ConnectObjectSpawn>(FindObjectsSortMode.None);
@@ -74,21 +83,22 @@ public class PathGenerator : Singleton<PathGenerator>
     void GeneratePath()
     {
         pathPoints.Clear();
-        // path.Add(Vector2Int.zero); // Adiciona o ponto inicial ao caminho
         pathPoints.Add(Vector3.zero);
-        // Vector3 nextPoint = Vector3.zero;
         Vector3 currentPosition = Vector3.zero;
-        // bool validPoint = false;
+        int maxAttempts = 100; // Timeout para evitar loop infinito
+
         while (pathPoints.Count < pathLength)
         {
             Vector3 nextPoint = Vector3.zero;
+            bool validPoint = false;
+            int attempts = 0;
 
             // Gera um ponto candidato
-            bool validPoint = false;
-            while (!validPoint)
+            while (!validPoint && attempts < maxAttempts)
             {
                 nextPoint = currentPosition + Random.insideUnitSphere * pathDistance;
                 nextPoint.y = 0;
+
                 // Verifica se o próximo ponto está dentro dos limites de ângulo em relação ao ponto anterior
                 if (pathPoints.Count > 1)
                 {
@@ -96,6 +106,7 @@ public class PathGenerator : Singleton<PathGenerator>
                     Vector3 nextDirection = (nextPoint - currentPosition).normalized;
                     float angle = Vector3.Angle(lastDirection, nextDirection);
 
+                    // Validar ângulo: aceitar mudanças de direção suaves (0 a 90 graus é bom)
                     if (angle >= minAngle && angle <= maxAngle)
                     {
                         validPoint = true;
@@ -105,26 +116,67 @@ public class PathGenerator : Singleton<PathGenerator>
                 {
                     validPoint = true;
                 }
+
+                attempts++;
             }
 
-            // Adiciona o ponto ao caminho se for válido
-            pathPoints.Add(nextPoint);
-            currentPosition = nextPoint;
+            // Se encontrou ponto válido, adiciona; se não, tenta com ângulo mais permissivo
+            if (validPoint)
+            {
+                pathPoints.Add(nextPoint);
+                currentPosition = nextPoint;
+            }
+            else if (pathPoints.Count > 1)
+            {
+                // Fallback: gerar ponto com ângulo mais permissivo (curvas mais suaves)
+                Vector3 lastDirection = (pathPoints[pathPoints.Count - 1] - pathPoints[pathPoints.Count - 2]).normalized;
+                nextPoint = currentPosition + lastDirection * pathDistance * 0.8f;
+                nextPoint += Random.insideUnitSphere * (pathDistance * 0.3f);
+                nextPoint.y = 0;
+
+                pathPoints.Add(nextPoint);
+                currentPosition = nextPoint;
+            }
         }
 
-        // Cria o caminho com curvas suaves usando Bezier
-        // pathCreator.bezierPath = new BezierPath(pathPoints, false, PathSpace.xyz);
+        isPathValid = false; // Path ainda não foi validado após geração
+        Debug.Log($"PathGenerator: Caminho gerado com {pathPoints.Count} pontos");
     }
     
     public void SetPath()
     {
-        
+
         BezierPath bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
         pathCreatorInstance.bezierPath = bezierPath;
         CenterPath();
         pathCreatorInstance.gameObject.transform.position = centerPosition;
+
+        // Validar continuidade do path apenas se a validação estiver ativada e o número de pontos mudou
+        if (enablePathValidation && lastValidatedPointCount != pathPoints.Count)
+        {
+            if (!ValidatePathContinuity())
+            {
+                Debug.LogWarning("Path contém buracos/desconexões! Regenerando uma vez...");
+                pathPoints.Clear();
+                lastValidatedPointCount = 0;
+                GeneratePath();
+                // Reconstruir bezier com os novos pontos
+                bezierPath = new BezierPath (pathPoints, false, PathSpace.xyz);
+                pathCreatorInstance.bezierPath = bezierPath;
+                CenterPath();
+                pathCreatorInstance.gameObject.transform.position = centerPosition;
+            }
+            lastValidatedPointCount = pathPoints.Count;
+        }
+
+        isPathValid = true;
+
         _roadMeshCreator.TriggerUpdate();
         pathCreatorInstance.TriggerPathUpdate();
+
+        // Pequeno delay para garantir que a mesh foi criada antes de marcar como pronta
+        StartCoroutine(MarkMeshReady());
+
         carFollowPath.ResetPosition();
 
         if(tunnelPrefab != null)
@@ -134,8 +186,7 @@ public class PathGenerator : Singleton<PathGenerator>
             if(startTunnel == null)
                 startTunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(path.length -1, EndOfPathInstruction.Stop), Quaternion.identity);
             else startTunnel.transform.position = path.GetPointAtDistance(path.length - 1, EndOfPathInstruction.Stop);
-            
-            //startTunnel.transform.Rotate(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
+
             startTunnel.transform.rotation = Quaternion.Euler(0, path.GetRotationAtDistance(path.length - 1, EndOfPathInstruction.Stop).eulerAngles.y, 0);
 
             // Instancia tunel no inicio do caminho
@@ -143,9 +194,54 @@ public class PathGenerator : Singleton<PathGenerator>
                 endTunnel = Instantiate(tunnelPrefab, path.GetPointAtDistance(0, EndOfPathInstruction.Stop), Quaternion.identity);
             else endTunnel.transform.position = path.GetPointAtDistance(0, EndOfPathInstruction.Stop);
 
-            //endTunnel.transform.Rotate(0, path.GetRotationAtDistance(0, EndOfPathInstruction.Stop).eulerAngles.y, 0);
             endTunnel.transform.rotation = Quaternion.Euler(0, path.GetRotationAtDistance(0, EndOfPathInstruction.Stop).eulerAngles.y, 0);
         }
+    }
+
+    /// <summary>
+    /// Valida a continuidade do path verificando se não há buracos entre segmentos
+    /// Validação otimizada: apenas verifica, sem logs excessivos
+    /// </summary>
+    private bool ValidatePathContinuity()
+    {
+        if (pathPoints.Count < 2) return false;
+
+        // Verificar distância máxima permitida entre pontos consecutivos
+        float maxDistanceBetweenPoints = pathDistance * 2.5f; // Tolerância aumentada para evitar regeneração desnecessária
+
+        int holesDetected = 0;
+        for (int i = 0; i < pathPoints.Count - 1; i++)
+        {
+            float distance = Vector3.Distance(pathPoints[i], pathPoints[i + 1]);
+            if (distance > maxDistanceBetweenPoints)
+            {
+                holesDetected++;
+                // Log apenas do primeiro buraco para não poluir console
+                if (holesDetected == 1)
+                {
+                    Debug.LogWarning($"Buraco detectado no path entre pontos {i} e {i + 1}");
+                }
+            }
+        }
+
+        if (holesDetected == 0)
+        {
+            Debug.Log("Path validado com sucesso");
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning($"Path contém {holesDetected} buracos - regenerando");
+            return false;
+        }
+    }
+
+    IEnumerator MarkMeshReady()
+    {
+        // Esperar um frame para garantir que a mesh foi renderizada
+        yield return null;
+        isMeshReady = true;
+        Debug.Log("Mesh pronta para o gameplay");
     }
 
     public void CenterPath()

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: faf083c53b53ead48a72e5bc8b6f49fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 318465
+  packageName: Simple Toon Shader
+  packageVersion: 1.0
+  assetPath: Assets/Mono Limbo/Simple Toon Shader/Volumes/CinemachineVoulme.asset
+  uploadId: 754448

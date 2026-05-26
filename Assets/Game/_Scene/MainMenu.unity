@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -153,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 0
+  usingSecretCar: 0
   FastResponseCompleted: 0
   PursuitCompleted: 0
   RescueCompleted: 0
@@ -408,6 +408,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -90}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!114 &89985341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +776,7 @@ GameObject:
   - component: {fileID: 171003114}
   - component: {fileID: 171003113}
   m_Layer: 5
-  m_Name: CTRL ALT Logo
+  m_Name: MnC Logo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -818,7 +821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4392f95c66274f046b0c4b010108b655, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c78058077c5576549b7326e20222e387, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2775,12 +2778,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &631460054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,14 +3316,15 @@ MonoBehaviour:
     Characters:\r\n\r\n    Dead Account\r\n\r\nAudio:\r\n\r\n    Kristian Grundstr\xF6m\r\n   
     Felipe Jardim\r\n    ElevenLabs\r\n\r\nMusic:\r\n\r\n    Oleg Kyrylkovv\r\n   
     Jeremy Frobose\r\n    Tom Feldmann\r\n\r\nTextures:\r\n\r\n    Chromisu\r\n   
-    FreeStylized\r\n\r\nEffects:\r\n\r\n    Jean Moreno\r\n    Lana Studio\r\n\r\nModels:\r\n\r\n   
-    Felipe Jardim\r\n\r\nModel Assets:\r\n\r\n    Erbeilo3D\r\n    False Wisp Studios\r\n   
-    xiaolianhuastudio\r\n    Ioan Stan\r\n    JustCreate\r\n    BigRookGames\r\n   
-    Rokay3D\r\n    Supercyan\r\n    23 Space Robots and Counting...\r\n    Cartoon
-    Palmtree and Umbrellas\r\n\r\nDevelopers Tools:\r\n\r\n    Sebastian Lague\r\n   
-    Micah Wilder\r\n\nAcknowledgements:\n\n    IA ChatGPT\n    IA Copilot\n\r\nSoftware:\r\n\r\n   
-    Unity\r\n    GitHub\r\n    Blender\r\n    Discord\r\n    WhatsApp\r\n    Jetbrains
-    Rider\r\n    Visual Studio Code\r\n    Adobe Substance Painter\r\n    Adobe Photoshop\n\n\n\n\n\n\n\n\n\n\n\n"
+    FreeStylized\r\n\r\nEffects:\r\n\r\n    Jean Moreno\r\n    Lana Studio\r\n   
+    Mono Limbo\n\r\nModels:\r\n\r\n    Felipe Jardim\r\n\r\nModel Assets:\r\n\r\n   
+    Erbeilo3D\r\n    False Wisp Studios\r\n    xiaolianhuastudio\r\n    Ioan Stan\r\n   
+    JustCreate\r\n    BigRookGames\r\n    Rokay3D\r\n    Supercyan\r\n    23 Space
+    Robots and Counting...\r\n    Cartoon Palmtree and Umbrellas\r\n\r\nDevelopers
+    Tools:\r\n\r\n    Sebastian Lague\r\n    Micah Wilder\r\n\nAcknowledgements:\n\n   
+    IA ChatGPT\n    IA Copilot\n\r\nSoftware:\r\n\r\n    Unity\r\n    GitHub\r\n   
+    Blender\r\n    Discord\r\n    WhatsApp\r\n    Jetbrains Rider\r\n    Visual Studio
+    Code\r\n    Adobe Substance Painter\r\n    Adobe Photoshop\n\n\n\n\n\n\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3564,6 +3568,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!1 &738501520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,6 +3900,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!114 &759535275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4154,6 +4164,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -90}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!114 &809877353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6525,6 +6538,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!1 &1485899652
 GameObject:
   m_ObjectHideFlags: 0
@@ -7751,6 +7767,7 @@ MonoBehaviour:
   bumperSlot:
     LockedIcon: {fileID: 0}
     UnlockedIcon: {fileID: 0}
+  secretCarSlot: {fileID: 0}
   fastResponseBtn: {fileID: 0}
   pursuitBtn: {fileID: 0}
   rescueBtn: {fileID: 0}
@@ -8428,6 +8445,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &1904253850
 GameObject:
   m_ObjectHideFlags: 0
@@ -9003,6 +9021,9 @@ MonoBehaviour:
   <PointerRotation>k__BackingField: {x: 0, y: 180, z: -88.25}
   randomMission: 0
   _missionType: 0
+  ProgressText: {fileID: 0}
+  LockIcon: {fileID: 0}
+  UnlockedVisuals: []
 --- !u!1 &2061971379
 GameObject:
   m_ObjectHideFlags: 0

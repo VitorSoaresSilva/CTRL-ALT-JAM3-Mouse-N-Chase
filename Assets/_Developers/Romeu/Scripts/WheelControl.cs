@@ -29,6 +29,21 @@ public class WheelControl : MonoBehaviour
     void Update()
     {
         wheelCollider.GetWorldPose(out position, out rotation);
+
+        // Validar posição antes de aplicar
+        if (!_Developers.Vitor.ValidationUtility.IsValidVector3(position))
+        {
+            Debug.LogWarning($"[WheelControl] Posição inválida da roda: {position}");
+            return;
+        }
+
+        // Validar rotação antes de aplicar
+        if (!_Developers.Vitor.ValidationUtility.IsValidQuaternion(rotation))
+        {
+            Debug.LogWarning($"[WheelControl] Rotação inválida da roda: {rotation}");
+            return;
+        }
+
         wheelModel.transform.position = position;
         wheelModel.transform.rotation = rotation;
 

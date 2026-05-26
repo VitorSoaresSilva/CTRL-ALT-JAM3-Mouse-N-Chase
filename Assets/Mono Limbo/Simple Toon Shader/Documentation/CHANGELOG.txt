@@ -1,0 +1,12 @@
+﻿Simple Toon Shader - Changelog
+
+v1.0.0 - May 05, 2025
+- Initial release
+- Supports URP (2022.3+)
+- Includes light ramp, shadow tint, and specular toggle
+- Demo scene with 2 characters and lighting setup
+
+v1.5.0 – Nov 14, 2025
+
+- Improved layout
+- Better test models for different scenarios

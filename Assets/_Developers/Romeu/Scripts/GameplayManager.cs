@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static MainMenu;
+using _Developers.Vitor;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -30,10 +31,18 @@ public class GameplayManager : MonoBehaviour
     [SerializeField, Header("Path")] private PathCreator pathCreator;
     [SerializeField] private int maxLaps = 10; // maximo de voltas
 
+    [SerializeField, Header("Chaotic Traffic")] private bool enableChaoticTraffic = true;
+    [SerializeField] private float chaoticTrafficChance = 0.5f;
+
     private float StartSceneTime = 5;
     public float lapsToFail = 5;
     public float currentLap = 0;
     public bool isIntroPlaying = false;
+    public bool isChaoticTraffic { get; private set; } = false;
+
+    // Proteção contra GameOver múltiplo
+    private bool gameplayEnded = false;
+    public bool HasGameplayEnded => gameplayEnded;
 
     void OnEnable()
     {
@@ -80,6 +89,29 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        Debug.Log("[GameplayManager] OnDisable - Limpando antes de descarregar cena");
+
+        // Resetar flag de gameplay
+        gameplayEnded = false;
+
+        // Parar coroutines ativas do GameplayManager
+        StopAllCoroutines();
+
+        // Limpar referencia em SceneControl
+        if (SceneControl.instance != null)
+        {
+            SceneControl.instance.AddGameplayManager(null);
+        }
+
+
+        if (playerCar != null && playerCar.carDamage != null)
+        {
+            playerCar.carDamage.onDamage = null;
+        }
+    }
+
     private void Start()
     {
         lapsToFail = UnityEngine.Random.Range(5, maxLaps);
@@ -90,6 +122,8 @@ public class GameplayManager : MonoBehaviour
         //Debug.Log("Starting gameplay");
         playerCar.gameObject.SetActive(true);
         isIntroPlaying = true;
+
+        InitializeChaoticTraffic();
 
         if(SceneControl.instance != null)
         {
@@ -175,6 +209,16 @@ public class GameplayManager : MonoBehaviour
 
     public void EndGameplay(bool success = false)
     {
+        // Proteção contra múltiplas chamadas
+        if (gameplayEnded)
+        {
+            Debug.LogWarning("[GameplayManager] EndGameplay já foi chamado! Ignorando chamada duplicada.");
+            return;
+        }
+
+        gameplayEnded = true;
+        Debug.Log($"[GameplayManager] EndGameplay iniciado (sucesso: {success})");
+
         if(FailPanel != null)
             FailPanel.SetActive(!success);
         if(SucceedPanel != null)
@@ -187,14 +231,379 @@ public class GameplayManager : MonoBehaviour
             if(success) CareerPoints.instance.CompleteMission(SceneControl.instance.currentMission);
             else CareerPoints.instance.RemovePoints(250);
         }
-        
+
+        // Limpar recursos ANTES de iniciar a coroutine de saida
+        CleanupGameplay();
+
+        // Iniciar saida DEPOIS da limpeza (para nao ser parada por StopAllCoroutines)
         StartCoroutine(ExitGameplay(success));
+    }
+
+    private void CleanupGameplay()
+    {
+        Debug.Log("[GameplayManager] Iniciando limpeza de recursos de gameplay");
+
+        // NÃO parar StopAllCoroutines() aqui! Pode parar a coroutine ExitGameplay()
+        // que foi iniciada APÓS esta limpeza
+
+        // 1. Parar e limpar TrafficSpawner completamente
+        CleanupTrafficSpawner();
+
+        // 3. Destruir todos os carros de tráfego spawados
+        TrafficCarFollowPath[] trafficCars = FindObjectsByType<TrafficCarFollowPath>(FindObjectsSortMode.None);
+        foreach (TrafficCarFollowPath trafficCar in trafficCars)
+        {
+            if (trafficCar != null)
+            {
+                Destroy(trafficCar.gameObject);
+            }
+        }
+        Debug.Log($"[GameplayManager] {trafficCars.Length} carros de tráfego destruídos");
+
+        // 4. Parar todas as missões e limpar seus listeners
+        FastResponseMission fastResponse = FindObjectOfType<FastResponseMission>();
+        if (fastResponse != null)
+        {
+            fastResponse.StopAllCoroutines();
+            // Limpar listeners do carDamage
+            if (playerCar != null && playerCar.carDamage != null)
+            {
+                playerCar.carDamage.onDamage = null;
+            }
+            Destroy(fastResponse.gameObject);
+        }
+
+        PursuitMission pursuit = FindObjectOfType<PursuitMission>();
+        if (pursuit != null)
+        {
+            pursuit.StopAllCoroutines();
+            Destroy(pursuit.gameObject);
+        }
+
+        RescueMission rescue = FindObjectOfType<RescueMission>();
+        if (rescue != null)
+        {
+            rescue.StopAllCoroutines();
+            Destroy(rescue.gameObject);
+        }
+
+        BossMission boss = FindObjectOfType<BossMission>();
+        if (boss != null)
+        {
+            boss.StopAllCoroutines();
+            Destroy(boss.gameObject);
+        }
+
+        Debug.Log("[GameplayManager] Missoes paradas e destruidas");
+
+        // 5. Resetar flags importantes
+        isIntroPlaying = false;
+        currentLap = 0;
+
+        // 6. Limpar spawners de objetos multiplos
+        MultipleObjectSpawner[] spawners = FindObjectsByType<MultipleObjectSpawner>(FindObjectsSortMode.None);
+        foreach (MultipleObjectSpawner spawner in spawners)
+        {
+            if (spawner != null)
+            {
+                spawner.StopAllCoroutines();
+            }
+        }
+
+        // 7. Limpar Rigidbodies com velocidades invalidas
+        Rigidbody[] rigidbodies = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            if (rb != null && rb.gameObject != null && rb.gameObject != playerCar?.gameObject)
+            {
+                // Resetar velocidade invalida
+                if (!_Developers.Vitor.ValidationUtility.IsValidVelocity(rb.velocity))
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    Debug.LogWarning($"[GameplayManager] Rigidbody com velocidade invalida resetado: {rb.gameObject.name}");
+                }
+            }
+        }
+
+        // 8. Resetar estado do PlayerCar se necessario
+        if (playerCar != null && playerCar.carDamage != null)
+        {
+            // Limpar todos os listeners
+            playerCar.carDamage.onDamage = null;
+        }
+
+        // 9. Resetar TimeScale caso esteja alterado
+        if (Time.timeScale != 1f)
+        {
+            Debug.LogWarning($"[GameplayManager] Time.timeScale estava {Time.timeScale}, resetando para 1");
+            Time.timeScale = 1f;
+        }
+
+        // 10. Parar PathGenerator se ainda estiver gerando
+        CleanupPathGenerator();
+
+        // 11. Cancelar todos os Invokes pendentes em GameplayManager
+        CancelInvoke();
+
+        // 12. Resetar velocidades de Rigidbodies válidos (mantendo apenas safe values)
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            if (rb != null && rb.gameObject != null && rb.gameObject.CompareTag("Player") == false)
+            {
+                // Para objetos não-player, setar velocidades baixas para evitar física pesada
+                if (rb.velocity.magnitude > 5f)
+                {
+                    rb.velocity = rb.velocity * 0.1f; // Reduzir drasticamente
+                    rb.angularVelocity = rb.angularVelocity * 0.1f;
+                }
+            }
+        }
+
+        // 13. Limpar todos os listeners de eventos
+        CleanupListeners();
+
+        Debug.Log("[GameplayManager] Limpeza de recursos completa");
+    }
+
+    private void InitializeChaoticTraffic()
+    {
+        if (!enableChaoticTraffic)
+        {
+            isChaoticTraffic = false;
+            Debug.Log("Trânsito caótico desativado globalmente");
+            return;
+        }
+
+        bool missionAllowsChaotic = true;
+
+        FastResponseMission fastResponseMission = FindObjectOfType<FastResponseMission>();
+        if (fastResponseMission != null)
+        {
+            missionAllowsChaotic = fastResponseMission.allowChaoticTraffic;
+        }
+        else
+        {
+            PursuitMission pursuitMission = FindObjectOfType<PursuitMission>();
+            if (pursuitMission != null)
+            {
+                missionAllowsChaotic = pursuitMission.allowChaoticTraffic;
+            }
+            else
+            {
+                RescueMission rescueMission = FindObjectOfType<RescueMission>();
+                if (rescueMission != null)
+                {
+                    missionAllowsChaotic = rescueMission.allowChaoticTraffic;
+                }
+                else
+                {
+                    BossMission bossMission = FindObjectOfType<BossMission>();
+                    if (bossMission != null)
+                    {
+                        missionAllowsChaotic = bossMission.allowChaoticTraffic;
+                    }
+                }
+            }
+        }
+
+        if (!missionAllowsChaotic)
+        {
+            isChaoticTraffic = false;
+            Debug.Log("Trânsito caótico bloqueado por esta missão");
+            return;
+        }
+
+        isChaoticTraffic = Random.value < chaoticTrafficChance;
+
+        if (isChaoticTraffic)
+        {
+            Debug.Log("Trânsito caótico ATIVADO!");
+            ApplyChaoticTrafficSettings();
+        }
+        else
+        {
+            Debug.Log("Trânsito caótico desativado nesta sessão");
+        }
+    }
+
+    private void ApplyChaoticTrafficSettings()
+    {
+        // SetChaoticMode foi removido do MultipleObjectSpawner
+        // Modo caotico agora controlado apenas em TrafficSpawner e EnemySpawner
+        Debug.Log("[GameplayManager] Modo caotico ativado para traffic");
     }
 
     private IEnumerator ExitGameplay(bool success = false)
     {
         yield return new WaitForSeconds(5);
-        if (SceneControl.instance != null) SceneControl.instance.ChangeScene("PoliceStation");
-        if (CareerPoints.instance != null) CareerPoints.instance.Save();
+
+        // Unload a cena Gameplay para liberar memoria
+        Debug.Log("[GameplayManager] Descarregando Gameplay scene");
+        SceneManager.UnloadSceneAsync("Gameplay");
+
+        // Trocar para cena do menu
+        if (SceneControl.instance != null) 
+        {
+            SceneControl.instance.ChangeScene("PoliceStation");
+        }
+
+        // Salvar progresso
+        if (CareerPoints.instance != null) 
+        {
+            CareerPoints.instance.Save();
+        }
+    }
+
+    /// <summary>
+    /// Limpa todos os listeners de eventos
+    /// </summary>
+    private void CleanupListeners()
+    {
+        Debug.Log("[GameplayManager] Iniciando limpeza de listeners");
+
+        // 1. Limpar listeners do PlayerCar
+        if (playerCar != null && playerCar.carDamage != null)
+        {
+            playerCar.carDamage.onDamage = null;
+            Debug.Log("[GameplayManager] onDamage listener removido");
+        }
+
+        // 2. Limpar listeners de todas as missions
+        FastResponseMission fastResponse = FindObjectOfType<FastResponseMission>();
+        if (fastResponse != null && playerCar != null && playerCar.carDamage != null)
+        {
+            playerCar.carDamage.onDamage = null;
+        }
+
+        // 3. Limpar listeners de PursuitMission
+        PursuitMission pursuit = FindObjectOfType<PursuitMission>();
+        if (pursuit != null)
+        {
+            // Limpar listeners de onDie de enemies
+            EnemyCarFollowPath[] enemies = FindObjectsByType<EnemyCarFollowPath>(FindObjectsSortMode.None);
+            foreach (EnemyCarFollowPath enemy in enemies)
+            {
+                if (enemy != null && enemy.damage != null)
+                {
+                    enemy.damage.onDie = null;
+                }
+            }
+        }
+
+        // 4. Limpar eventos de Scene Manager
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Remover se estava registrado
+
+        Debug.Log("[GameplayManager] Limpeza de listeners completa");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Placeholder para remover listener
+    }
+
+    /// <summary>
+    /// Audita problemas de duplicação e acúmulo após GameOver
+    /// </summary>
+    public static void GameOverAudit()
+    {
+        Debug.Log("========== [AUDIT] Iniciando validação de acúmulo após GameOver ==========");
+
+        // 1. Verificar duplicação de Singletons
+        Debug.Log("[AUDIT] Verificando Singletons...");
+        PathGenerator.AuditInstances();
+        if (CareerPoints.instance != null)
+        {
+            CareerPoints.AuditInstances();
+        }
+
+        // 2. Contar objetos de gameplay ainda ativos
+        Debug.Log("[AUDIT] Contando objetos de gameplay...");
+        TrafficCarFollowPath[] trafficCars = FindObjectsByType<TrafficCarFollowPath>(FindObjectsSortMode.None);
+        Debug.Log($"[AUDIT] TrafficCars ativas: {trafficCars.Length}");
+
+        TrafficSpawner[] trafficSpawners = FindObjectsByType<TrafficSpawner>(FindObjectsSortMode.None);
+        Debug.Log($"[AUDIT] TrafficSpawners ativos: {trafficSpawners.Length}");
+
+        EnemyCarFollowPath[] enemies = FindObjectsByType<EnemyCarFollowPath>(FindObjectsSortMode.None);
+        Debug.Log($"[AUDIT] EnemyCars ativos: {enemies.Length}");
+
+        // 3. Verificar coroutines ativas
+        Debug.Log("[AUDIT] Verificando coroutines ativas...");
+        foreach (TrafficSpawner spawner in trafficSpawners)
+        {
+            if (spawner != null)
+            {
+                Debug.LogWarning($"[AUDIT] TrafficSpawner ativo ainda está rodando coroutines!");
+            }
+        }
+
+        // 4. Verificar Rigidbodies com velocidades anormais
+        Debug.Log("[AUDIT] Verificando Rigidbodies...");
+        Rigidbody[] rigidbodies = FindObjectsByType<Rigidbody>(FindObjectsSortMode.None);
+        int abnormalRigidbodies = 0;
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            if (rb != null && !ValidationUtility.IsValidVelocity(rb.velocity))
+            {
+                abnormalRigidbodies++;
+                Debug.LogWarning($"[AUDIT] Rigidbody com velocidade anormal: {rb.gameObject.name} - vel: {rb.velocity}");
+            }
+        }
+        Debug.Log($"[AUDIT] Rigidbodies com velocidade anormal: {abnormalRigidbodies}/{rigidbodies.Length}");
+
+        // 5. Verificar TimeScale
+        Debug.Log($"[AUDIT] Time.timeScale: {Time.timeScale}");
+        if (Time.timeScale != 1f)
+        {
+            Debug.LogWarning("[AUDIT] TimeScale nao esta em 1!");
+        }
+
+        // 6. Contar cenas ativas
+        Debug.Log("[AUDIT] Cenas carregadas...");
+        int sceneCount = SceneManager.sceneCount;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            Debug.Log($"  [{i}] {scene.name} (objetos: {scene.rootCount})");
+        }
+
+        Debug.Log("========== [AUDIT] Validação concluída ==========");
+    }
+
+    /// <summary>
+    /// Limpa completamente o PathGenerator
+    /// </summary>
+    private void CleanupPathGenerator()
+    {
+        PathGenerator pathGen = FindObjectOfType<PathGenerator>();
+        if (pathGen != null)
+        {
+            // Parar todas as coroutines de geração
+            pathGen.StopAllCoroutines();
+
+            // Desativar validação de path
+            pathGen.EnablePathValidation = false;
+
+            Debug.Log("[GameplayManager] PathGenerator parado e validação desativada");
+        }
+    }
+
+    /// <summary>
+    /// Limpa completamente o TrafficSpawner
+    /// </summary>
+    private void CleanupTrafficSpawner()
+    {
+        TrafficSpawner trafficSpawner = FindObjectOfType<TrafficSpawner>();
+        if (trafficSpawner != null)
+        {
+            // Parar todas as coroutines
+            trafficSpawner.StopAllCoroutines();
+
+            // Cancelar invokes
+            trafficSpawner.CancelInvoke();
+
+            Debug.Log("[GameplayManager] TrafficSpawner parado completamente");
+        }
     }
 }

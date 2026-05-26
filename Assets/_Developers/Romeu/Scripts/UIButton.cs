@@ -81,10 +81,13 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
                 ProgressText.gameObject.SetActive(isMissionUnlocked);
 
             // Ativar/desativar UnlockedVisuals baseado em desbloqueio
-            foreach (GameObject visual in UnlockedVisuals)
+            if (UnlockedVisuals != null)
             {
-                if (visual != null)
-                    visual.SetActive(isMissionUnlocked);
+                foreach (GameObject visual in UnlockedVisuals)
+                {
+                    if (visual != null)
+                        visual.SetActive(isMissionUnlocked);
+                }
             }
         }
 
@@ -121,10 +124,13 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
                 ProgressText.gameObject.SetActive(false);
 
             // Desativar UnlockedVisuals se bloqueado
-            foreach (GameObject visual in UnlockedVisuals)
+            if (UnlockedVisuals != null)
             {
-                if (visual != null)
-                    visual.SetActive(false);
+                foreach (GameObject visual in UnlockedVisuals)
+                {
+                    if (visual != null)
+                        visual.SetActive(false);
+                }
             }
 
             previouslySelectedButton = this;
@@ -140,10 +146,13 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
             ProgressText.gameObject.SetActive(true);
 
         // Ativar UnlockedVisuals quando desbloqueado
-        foreach (GameObject visual in UnlockedVisuals)
+        if (UnlockedVisuals != null)
         {
-            if (visual != null)
-                visual.SetActive(true);
+            foreach (GameObject visual in UnlockedVisuals)
+            {
+                if (visual != null)
+                    visual.SetActive(true);
+            }
         }
 
         // Mostrar StartText apenas se a missão estiver desbloqueada
@@ -191,10 +200,13 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
 
         // UnlockedVisuals permanece ativado se a missão estiver desbloqueada
         bool isUnlocked = CareerPoints.instance != null && CareerPoints.instance.IsMissionUnlocked(missionType);
-        foreach (GameObject visual in UnlockedVisuals)
+        if (UnlockedVisuals != null)
         {
-            if (visual != null)
-                visual.SetActive(isUnlocked);
+            foreach (GameObject visual in UnlockedVisuals)
+            {
+                if (visual != null)
+                    visual.SetActive(isUnlocked);
+            }
         }
     }
 

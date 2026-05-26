@@ -13,7 +13,7 @@ namespace _Developers.Vitor
         public float distanceTravelled;
         public Transform movingPart;
         public Transform visual;
-        
+
         // Variáveis para controle de movimentação aleatória
         private float horizontalInput = 0f;
         private float changeDirectionInterval = 8f; // Intervalo de tempo para mudar a direção
@@ -25,6 +25,11 @@ namespace _Developers.Vitor
         public bool changeDirection = false;
         public float minXOffset = -5f;
         public float maxXOffset = 5f;
+
+        // Melhorias de física e rotação suave
+        public float rotationSmoothSpeed = 5f; // Velocidade de suavização da rotação
+        private Quaternion targetRotation;
+        private Quaternion lastRotation;
         void Start() {
             if (pathCreator != null)
             {
@@ -61,7 +66,7 @@ namespace _Developers.Vitor
             {
                 float deltaX = horizontalInput * lateralSpeed * Time.fixedDeltaTime;
                 movingPart.transform.Translate(Vector3.right * deltaX);
-                
+
                 // Limita o movimento lateral
                 Vector3 carPosition = movingPart.transform.localPosition;
                 carPosition.x = Mathf.Clamp(carPosition.x, -lateralLimit, lateralLimit);
@@ -70,8 +75,36 @@ namespace _Developers.Vitor
             if (pathCreator != null)
             {
                 distanceTravelled += speed * _direction * Time.fixedDeltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+                // Obter nova posição do path
+                Vector3 newPosition = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
+
+                // Validar posição antes de aplicar
+                if (ValidationUtility.IsValidVector3(newPosition))
+                {
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    Debug.LogError($"[TrafficCarFollowPath] Posição inválida do path: {newPosition}. Destruindo carro de tráfego.");
+                    Destroy(gameObject);
+                    return;
+                }
+
+                // Obter rotação alvo do path
+                targetRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+                // Validar rotação
+                if (!ValidationUtility.IsValidQuaternion(targetRotation))
+                {
+                    Debug.LogError($"[TrafficCarFollowPath] Rotação inválida do path: {targetRotation}");
+                    Destroy(gameObject);
+                    return;
+                }
+
+                // Aplicar rotação suave ao invés de rotação instantânea
+                // Isso evita giros bruscos e mantém movimento natural
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSmoothSpeed * Time.fixedDeltaTime);
             }
         }
         

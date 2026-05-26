@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d56cd7bf27b75ac47ac33bcc60b487f4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 318465
+  packageName: Simple Toon Shader
+  packageVersion: 1.0
+  assetPath: Assets/Mono Limbo/Simple Toon Shader/Mats/Shader Graphs_Cel.mat
+  uploadId: 754448

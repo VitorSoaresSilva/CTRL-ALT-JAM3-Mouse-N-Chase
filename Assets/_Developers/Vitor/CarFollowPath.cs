@@ -81,8 +81,33 @@ namespace _Developers.Vitor
                 }
 
                 distanceTravelled += speed * Time.fixedDeltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+                // Obter a nova posição do path
+                Vector3 newPosition = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);
+
+                // Validar posição antes de aplicar
+                if (ValidationUtility.IsValidVector3(newPosition))
+                {
+                    transform.position = newPosition;
+                }
+                else
+                {
+                    Debug.LogError($"[CarFollowPath] Posição inválida do path para carro player: {newPosition}. Resetando.");
+                    ResetPosition();
+                }
+
+                // Obter nova rotação do path
+                Quaternion newRotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+
+                // Validar rotação antes de aplicar
+                if (ValidationUtility.IsValidQuaternion(newRotation))
+                {
+                    transform.rotation = newRotation;
+                }
+                else
+                {
+                    Debug.LogError($"[CarFollowPath] Rotação inválida do path: {newRotation}");
+                }
             }
         }
 
