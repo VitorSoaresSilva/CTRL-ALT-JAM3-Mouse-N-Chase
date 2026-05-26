@@ -1576,6 +1576,10 @@ MonoBehaviour:
   PursuitPoints: 1500
   RescuePoints: 1500
   BossPoints: 3000
+  shieldUnlockPoints: 15000
+  bumperUnlockPoints: 7000
+  slotUnlockPoints: 20000
+  bumperDamageReduction: 33
   debug: 0
 --- !u!4 &324890450
 Transform:
@@ -7208,6 +7212,8 @@ MonoBehaviour:
   - BiomeDesert
   - BiomeFlorest
   - BiomeMix
+  - BiomeOcean
+  - BiomePlain
   AudioClips:
   - {fileID: 8300000, guid: 17ba4253fc7fd4ea7804dece25fb8f32, type: 3}
   - {fileID: 8300000, guid: b77acbb374058480dbeae07444542e03, type: 3}

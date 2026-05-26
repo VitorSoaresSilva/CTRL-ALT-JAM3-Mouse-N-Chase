@@ -3003,10 +3003,12 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
   sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
-  sirenModel: {fileID: 3446222354200569034}
+  sirenMaterial2: {fileID: 0}
   sirenLight: {fileID: 3016136388499858637}
+  sirenLight2: {fileID: 0}
   lightBlinkInterval: 0.9
   activateSiren: 1
+  activateAlternateLights: 0
 --- !u!82 &8584352279265898612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4000,10 +4002,12 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
   sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
-  sirenModel: {fileID: 4226294894334752872}
+  sirenMaterial2: {fileID: 0}
   sirenLight: {fileID: 4909833929844221715}
+  sirenLight2: {fileID: 0}
   lightBlinkInterval: 0.9
   activateSiren: 1
+  activateAlternateLights: 0
 --- !u!82 &8498372177633540803
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4220,7 +4224,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8807903, z: -0, w: 0.4735066}
   m_LocalPosition: {x: -23.872612, y: 2.5487337, z: 30.265678}
-  m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4666004279315792034}
@@ -4417,10 +4421,12 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
   sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
-  sirenModel: {fileID: 4551625976868597848}
+  sirenMaterial2: {fileID: 0}
   sirenLight: {fileID: 8432901715813570123}
+  sirenLight2: {fileID: 0}
   lightBlinkInterval: 0.9
   activateSiren: 1
+  activateAlternateLights: 0
 --- !u!82 &2615266742853038719
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4969,10 +4975,12 @@ MonoBehaviour:
   clip1: {fileID: 8300000, guid: 8ad1787e507ca744bb760da51f98897b, type: 3}
   clip2: {fileID: 8300000, guid: 3d73e02897a448a4bba61a7d463d5405, type: 3}
   sirenMaterial: {fileID: 2100000, guid: b814e15c861c63b468c9643c333d7294, type: 2}
-  sirenModel: {fileID: 5231375140106639016}
+  sirenMaterial2: {fileID: 0}
   sirenLight: {fileID: 7067872919634825362}
+  sirenLight2: {fileID: 0}
   lightBlinkInterval: 0.9
   activateSiren: 1
+  activateAlternateLights: 0
 --- !u!82 &8513975489012405217
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5689,7 +5697,7 @@ Transform:
   m_GameObject: {fileID: 6192148109011833917}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.445075, y: 0.57276154, z: -6.6321173}
+  m_LocalPosition: {x: 5.445075, y: -0.66, z: -6.6321173}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7272,7 +7280,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7675079, z: -0, w: 0.64103943}
   m_LocalPosition: {x: 7.807387, y: 2.5487337, z: -8.704325}
-  m_LocalScale: {x: 2.2500002, y: 2.25, z: 2.2500002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3675532360440623913}
@@ -8055,7 +8063,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.8807903, z: -0, w: 0.4735066}
   m_LocalPosition: {x: -23.872612, y: 2.5487337, z: -7.1518235}
-  m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 810879521769967452}
@@ -8385,7 +8393,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7675079, z: -0, w: 0.64103943}
   m_LocalPosition: {x: 7.807387, y: 2.5487337, z: 28.71318}
-  m_LocalScale: {x: 2.2500002, y: 2.25, z: 2.2500002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3117279030688798747}

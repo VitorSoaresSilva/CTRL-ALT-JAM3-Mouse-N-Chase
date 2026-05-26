@@ -60,6 +60,14 @@ public class CarDamage : MonoBehaviour
             lastDamageTime = Time.time;
 
             float damage = car.speed / 1.25f;
+
+            // Aplicar redução de dano do Bumper Upgrade se desbloqueado permanentemente
+            if (CareerPoints.instance != null && CareerPoints.instance.BumperUnlockedPermanent)
+            {
+                float damageReduction = CareerPoints.instance.BumperDamageReduction / 100f;
+                damage *= (1f - damageReduction);
+            }
+
             health -= damage;
 
             CareerPoints.instance.RemovePoints((int)damage);

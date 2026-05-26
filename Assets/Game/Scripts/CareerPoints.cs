@@ -47,7 +47,15 @@ public class CareerPoints : Singleton<CareerPoints>
     private bool _shieldUnlockedPermanent = false;
     private bool _bumperUnlockedPermanent = false;
 
-    public bool ShieldUnlockedPermanent 
+    // Pontos necessários para desbloquear upgrades (editável na Unity)
+    [SerializeField] private int shieldUnlockPoints = 15000;
+    [SerializeField] private int bumperUnlockPoints = 7000;
+    [SerializeField] private int slotUnlockPoints = 25000;
+
+    // Bônus do Bumper Upgrade (redução de dano em %)
+    [SerializeField, Range(0f, 100f)] private float bumperDamageReduction = 33f; // 33% de redução = 1 chance extra
+
+    public bool ShieldUnlockedPermanent
     { 
         get => _shieldUnlockedPermanent;
         private set => _shieldUnlockedPermanent = value;
@@ -60,10 +68,13 @@ public class CareerPoints : Singleton<CareerPoints>
     }
 
     // Desbloqueio automático por pontos (visível apenas se tem pontos suficientes E não foi permanentemente desbloqueado)
-    public bool ShieldUnlocked { get => ShieldUnlockedPermanent || Points >= 30000; }
-    public bool BumperUnlocked { get => BumperUnlockedPermanent || Points >= 15000; }
-    public bool SlotUnlocked { get => Points >= 45000; }
+    public bool ShieldUnlocked { get => ShieldUnlockedPermanent || Points >= shieldUnlockPoints; }
+    public bool BumperUnlocked { get => BumperUnlockedPermanent || Points >= bumperUnlockPoints; }
+    public bool SlotUnlocked { get => Points >= slotUnlockPoints; }
     public bool SecretCarUnlocked { get; private set; }
+
+    // Propriedade para acessar a redução de dano do Bumper
+    public float BumperDamageReduction => bumperDamageReduction;
 
     public bool debug = false;
 
@@ -77,13 +88,13 @@ public class CareerPoints : Singleton<CareerPoints>
         this.Points += points;
 
         // Verificar desbloqueios permanentes de upgrades
-        if (!ShieldUnlockedPermanent && Points >= 30000)
+        if (!ShieldUnlockedPermanent && Points >= shieldUnlockPoints)
         {
             ShieldUnlockedPermanent = true;
             Log("Shield Upgrade Desbloqueado Permanentemente!");
         }
 
-        if (!BumperUnlockedPermanent && Points >= 15000)
+        if (!BumperUnlockedPermanent && Points >= bumperUnlockPoints)
         {
             BumperUnlockedPermanent = true;
             Log("Bumper Upgrade Desbloqueado Permanentemente!");

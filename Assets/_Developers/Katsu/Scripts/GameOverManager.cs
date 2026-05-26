@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using System.Collections;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 
 public class GameOverManager : MonoBehaviour
 {
