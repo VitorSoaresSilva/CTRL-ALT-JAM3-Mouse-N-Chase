@@ -16,6 +16,9 @@ public class EnemyDamage : MonoBehaviour
     public delegate void OnDie();
     public OnDie onDie;
 
+    private int hitCount = 0; // Contador de hits do jogador
+    private const int maxHits = 5; // Máximo de hits necessários para prender o inimigo
+
     private void Start()
     {
         if (car == null) car = GetComponentInParent<EnemyCarFollowPath>();
@@ -33,14 +36,17 @@ public class EnemyDamage : MonoBehaviour
             // Diminua a saúde do carro
             health -= damage;
 
+            // Incrementa contador de hits
+            hitCount++;
+
             onDamage?.Invoke();
 
-            // Verifique se o carro ainda tem saúde
-            if (health <= 0)
+            // Verifique se atingiu 5 hits (inimigo preso)
+            if (hitCount >= maxHits)
             {
                 if(dieParticle != null) dieParticle.SetActive(true);
                 onDie?.Invoke();
-                // O carro foi destruído, faça algo aqui (por exemplo, terminar o jogo ou destruir o carro)
+                // O carro foi preso, faça algo aqui (por exemplo, terminar o jogo ou destruir o carro)
             }
         }
     }

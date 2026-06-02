@@ -30,6 +30,11 @@ namespace _Developers.Vitor
         private bool isBoosted = false;
         private float boostEndTime = 0f;
 
+        // Boost aleatório
+        public float randomBoostInterval = 5f; // Intervalo entre 4-6 segundos
+        public float randomBoostChance = 0.3f; // 30% de chance de boost aleatório
+        private float lastRandomBoostCheckTime = 0f;
+
         private void OnEnable()
         {
             if(damage == null) damage = GetComponentInChildren<EnemyDamage>();
@@ -40,6 +45,14 @@ namespace _Developers.Vitor
             {
                 pathCreator.pathUpdated += OnPathChanged;
             }
+
+            // Conectar callback de dano para disparar boost ao sofrer colisão
+            if (damage != null)
+            {
+                damage.onDamage += OnTakeDamage;
+            }
+
+            lastRandomBoostCheckTime = Time.time;
         }
 
         public void Init(CarFollowPath playerRef, PathCreator pathCreatorRef, float initialDistanceTravelled)
@@ -60,7 +73,7 @@ namespace _Developers.Vitor
             {
                 float deltaX = horizontalInput * lateralSpeed * Time.fixedDeltaTime;
                 car.transform.Translate(Vector3.right * deltaX);
-                
+
                 // Limita o movimento lateral
                 Vector3 carPosition = car.transform.localPosition;
                 carPosition.x = Mathf.Clamp(carPosition.x, -lateralLimit, lateralLimit);
@@ -74,11 +87,37 @@ namespace _Developers.Vitor
             }
 
             UpdateVelocity();
+
+            // Verificar boost aleatório
+            CheckRandomBoost();
         }
-        
+
         void OnPathChanged() {
             distanceTravelled = 0;
             Debug.Log("Path Changed");
+        }
+
+        // Callback para dano - acelera o inimigo
+        private void OnTakeDamage()
+        {
+            Boost();
+        }
+
+        // Verificar e aplicar boost aleatório periodicamente
+        private void CheckRandomBoost()
+        {
+            if (Time.time - lastRandomBoostCheckTime > randomBoostInterval && !isBoosted)
+            {
+                // Sorteia intervalo aleatório (4-6 segundos)
+                randomBoostInterval = Random.Range(4f, 6f);
+                lastRandomBoostCheckTime = Time.time;
+
+                // 30% de chance de fazer boost
+                if (Random.value < randomBoostChance)
+                {
+                    Boost();
+                }
+            }
         }
 
         private void UpdateVelocity()

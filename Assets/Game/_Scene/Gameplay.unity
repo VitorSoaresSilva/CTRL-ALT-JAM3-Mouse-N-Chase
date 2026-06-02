@@ -5589,6 +5589,12 @@ MonoBehaviour:
   - {fileID: -6232721783095306507, guid: 32f1b9382c8ae2549b7bfffe75dd6a90, type: 3}
   enemySpawner: {fileID: 1547526980}
   destroyedEnemies: 0
+  missionTimeLimit: 180
+  timerText: {fileID: 666230165}
+  enemiesStatusText: {fileID: 666230163}
+  missionHudVisuals:
+  - {fileID: 666230164}
+  - {fileID: 666230166}
 --- !u!4 &598135307
 Transform:
   m_ObjectHideFlags: 0
@@ -5604,6 +5610,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1237953011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &666230163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3617050431947640250, guid: e3db855a8f28dfc44849fded8370b0de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192794884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &666230164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7380011370223036087, guid: e3db855a8f28dfc44849fded8370b0de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192794884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &666230165 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8633284530596010869, guid: e3db855a8f28dfc44849fded8370b0de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192794884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &666230166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7249085715675496632, guid: e3db855a8f28dfc44849fded8370b0de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192794884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &788233622
 GameObject:
   m_ObjectHideFlags: 0
@@ -10750,11 +10792,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -75
       objectReference: {fileID: 0}
-    - target: {fileID: 2675260148874688235, guid: e3db855a8f28dfc44849fded8370b0de,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2755458314161238148, guid: e3db855a8f28dfc44849fded8370b0de,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10800,16 +10837,6 @@ PrefabInstance:
       propertyPath: cameraControl
       value: 
       objectReference: {fileID: 1942262820}
-    - target: {fileID: 5376012999307265937, guid: e3db855a8f28dfc44849fded8370b0de,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528779287749536113, guid: e3db855a8f28dfc44849fded8370b0de,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5642905129156421110, guid: e3db855a8f28dfc44849fded8370b0de,
         type: 3}
       propertyPath: m_IsActive
@@ -10907,8 +10934,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2067050605}
-  - {fileID: 1830902520}
   - {fileID: 598135307}
+  - {fileID: 1830902520}
   - {fileID: 285480937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
