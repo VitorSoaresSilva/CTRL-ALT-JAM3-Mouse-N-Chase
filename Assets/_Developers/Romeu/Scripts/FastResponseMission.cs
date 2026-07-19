@@ -86,6 +86,10 @@ public class FastResponseMission : MonoBehaviour
         // Log para debug
         Debug.Log($"FastResponseMission started - Laps to win: {lapsToWin}, Max hits allowed: {maxHitsAllowed}");
 
+        // Contador estático persiste entre reloads — zera ao começar a fase
+        SpeedPowerUp.ResetSpeedPowerUpCounter();
+        speedPowerUpCollected = false;
+
         // Registrar callback de dano - incrementa contador de batidas
         playerCar.carDamage.onDamage = () =>
         {
@@ -108,6 +112,7 @@ public class FastResponseMission : MonoBehaviour
 
         // Atualizar UI de hits inicial
         UpdateHitsDisplay();
+        UpdateSpeedPowerUpCounter();
 
         // Ativar HUDs específicos da missão
         ActivateMissionHuds(true);
