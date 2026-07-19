@@ -75,91 +75,97 @@ public class MainMenu : MonoBehaviour
         if(creditsScrollRect)
             creditsScrollRect.verticalNormalizedPosition = (creditsScrollDirection) ? 0 : 1;
 
-        if(CareerPoints.instance != null)
+        RefreshHubUI();
+    }
+
+    public void RefreshHubUI()
+    {
+        if (CareerPoints.instance == null)
+            return;
+
+        if (pointsText != null)
+            pointsText.text = $"{CareerPoints.instance.Points}";
+
+        if (completedMissionsText != null)
+            completedMissionsText.text = $"{CareerPoints.instance.MissionsCompleted}";
+
+        if (lostPointsText != null)
+            lostPointsText.text = $"{CareerPoints.instance.LostPoints}";
+
+        if (shieldSlot.LockedIcon != null && shieldSlot.UnlockedIcon != null)
         {
-            //Debug.Log("Showing Career Points");
-            if(pointsText != null)
-                pointsText.text = $"{CareerPoints.instance.Points}";
-
-            if (completedMissionsText != null)
-                completedMissionsText.text = $"{CareerPoints.instance.MissionsCompleted}";
-
-            if (lostPointsText != null)
-                lostPointsText.text = $"{CareerPoints.instance.LostPoints}";
-
-            if(shieldSlot.LockedIcon != null && shieldSlot.UnlockedIcon != null)
-            {
-                shieldSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.ShieldUnlocked);
-                shieldSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.ShieldUnlocked);
-            }
-
-            if (slotSlot.LockedIcon != null && slotSlot.UnlockedIcon != null)
-            {
-                slotSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.SlotUnlocked);
-                slotSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.SlotUnlocked);
-            }
-
-            if (bumperSlot.LockedIcon != null && bumperSlot.UnlockedIcon != null)
-            {
-                bumperSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.BumperUnlocked);
-                bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
-            }
-
-            if (secretCarSlot != null && CareerPoints.instance.SecretCarUnlocked)
-            {
-                secretCarSlot.gameObject.SetActive(true);
-                bossBtn.GetComponent<Button>().navigation = new Navigation() 
-                { mode = Navigation.Mode.Explicit, selectOnRight = secretCarSlot };
-            }
-
-            if(fastResponseBtn != null)
-            {
-                Button fastResponseButton = fastResponseBtn.GetComponent<Button>();
-                // Desabilitar se completada 10 vezes OU se não está desbloqueada
-                DisableBtn(fastResponseButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.FastResponse) || CareerPoints.instance.FastResponseCompleted >= 10);
-            }
-            if (pursuitBtn != null)
-            {
-                Button pursuitButton = pursuitBtn.GetComponent<Button>();
-                // Desabilitar se completada 10 vezes OU se não está desbloqueada
-                DisableBtn(pursuitButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Pursuit) || CareerPoints.instance.PursuitCompleted >= 10);
-            }
-            if(rescueBtn != null)
-            {
-                Button rescueButton = rescueBtn.GetComponent<Button>();
-                // Desabilitar se completada 10 vezes OU se não está desbloqueada
-                DisableBtn(rescueButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Rescue) || CareerPoints.instance.RescueCompleted >= 10);
-            }
-            if(bossBtn != null)
-            {
-                Button bossButton = bossBtn.GetComponent<Button>();
-                // Desabilitar se completada 1 vez OU se não está desbloqueada
-                DisableBtn(bossButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Boss) || CareerPoints.instance.BossCompleted >= 1);
-            }
-
-            void DisableBtn(Button btn, bool condition)
-            {
-                if (!condition) return;
-                btn.onClick.RemoveAllListeners();
-                btn.interactable = false;
-            }
-
-            if (fastResponseQnt != null)
-                fastResponseQnt.text = $"{CareerPoints.instance.FastResponseCompleted} / 10";
-
-            if (pursuitQnt != null)
-                pursuitQnt.text = $"{CareerPoints.instance.PursuitCompleted} / 10";
-
-            if (rescueQnt != null)
-                rescueQnt.text = $"{CareerPoints.instance.RescueCompleted} / 10";
-
-            if (bossQnt != null)
-                bossQnt.text = $"{CareerPoints.instance.BossCompleted} / 1";
-
-            if(SceneControl.instance != null)
-                SceneControl.instance.ToggleLoading(false);
+            shieldSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.ShieldUnlocked);
+            shieldSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.ShieldUnlocked);
         }
 
+        if (slotSlot.LockedIcon != null && slotSlot.UnlockedIcon != null)
+        {
+            slotSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.SlotUnlocked);
+            slotSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.SlotUnlocked);
+        }
+
+        if (bumperSlot.LockedIcon != null && bumperSlot.UnlockedIcon != null)
+        {
+            bumperSlot.LockedIcon.gameObject.SetActive(!CareerPoints.instance.BumperUnlocked);
+            bumperSlot.UnlockedIcon.gameObject.SetActive(CareerPoints.instance.BumperUnlocked);
+        }
+
+        if (secretCarSlot != null)
+        {
+            bool unlocked = CareerPoints.instance.SecretCarUnlocked;
+            secretCarSlot.gameObject.SetActive(unlocked);
+            if (unlocked && bossBtn != null)
+            {
+                bossBtn.GetComponent<Button>().navigation = new Navigation()
+                { mode = Navigation.Mode.Explicit, selectOnRight = secretCarSlot };
+
+                var secretLabel = secretCarSlot.GetComponentInChildren<TextMeshProUGUI>();
+                if (secretLabel != null)
+                    secretLabel.color = CareerPoints.instance.usingSecretCar ? Color.blue : Color.red;
+            }
+        }
+
+        if (fastResponseBtn != null)
+        {
+            Button fastResponseButton = fastResponseBtn.GetComponent<Button>();
+            SetBtnLocked(fastResponseButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.FastResponse) || CareerPoints.instance.FastResponseCompleted >= 10);
+        }
+        if (pursuitBtn != null)
+        {
+            Button pursuitButton = pursuitBtn.GetComponent<Button>();
+            SetBtnLocked(pursuitButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Pursuit) || CareerPoints.instance.PursuitCompleted >= 10);
+        }
+        if (rescueBtn != null)
+        {
+            Button rescueButton = rescueBtn.GetComponent<Button>();
+            SetBtnLocked(rescueButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Rescue) || CareerPoints.instance.RescueCompleted >= 10);
+        }
+        if (bossBtn != null)
+        {
+            Button bossButton = bossBtn.GetComponent<Button>();
+            SetBtnLocked(bossButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Boss) || CareerPoints.instance.BossCompleted >= 1);
+        }
+
+        if (fastResponseQnt != null)
+            fastResponseQnt.text = $"{CareerPoints.instance.FastResponseCompleted} / 10";
+
+        if (pursuitQnt != null)
+            pursuitQnt.text = $"{CareerPoints.instance.PursuitCompleted} / 10";
+
+        if (rescueQnt != null)
+            rescueQnt.text = $"{CareerPoints.instance.RescueCompleted} / 10";
+
+        if (bossQnt != null)
+            bossQnt.text = $"{CareerPoints.instance.BossCompleted} / 1";
+
+        if (SceneControl.instance != null)
+            SceneControl.instance.ToggleLoading(false);
+    }
+
+    static void SetBtnLocked(Button btn, bool locked)
+    {
+        if (btn == null) return;
+        btn.interactable = !locked;
     }
 
     void Update()

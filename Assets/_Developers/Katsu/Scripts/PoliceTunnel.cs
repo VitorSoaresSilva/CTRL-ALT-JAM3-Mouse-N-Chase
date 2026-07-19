@@ -23,6 +23,10 @@ public class PoliceTunnel : MonoBehaviour
 
     public void ActivatePolice()
     {
+        // Garante que as polícias fiquem visíveis mesmo após o túnel ser reposicionado
+        if (controlledObject != null && !controlledObject.activeSelf)
+            isActivated = false;
+
         SetActive(true);
     }
 

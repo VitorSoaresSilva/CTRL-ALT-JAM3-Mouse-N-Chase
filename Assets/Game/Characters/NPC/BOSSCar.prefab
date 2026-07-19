@@ -402,15 +402,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4152978810813071935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6abf5c2019851f44187627045af0dddb, type: 3}
+  m_Script: {fileID: 11500000, guid: b2c3d4e5f60718293a4b5c6d7e8f901a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 1243568798607966820, guid: 9d61d17b2ef2c254ba4356b584eb7085,
+  barrelPrefab: {fileID: 1000000000000000001, guid: c3d4e5f60718293a4b5c6d7e8f901a2b,
     type: 3}
-  effectPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+  pianoPrefab: {fileID: 2000000000000000001, guid: d4e5f60718293a4b5c6d7e8f901a2b3c,
     type: 3}
+  dropEffectPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+    type: 3}
+  barrelMinInterval: 4
+  barrelMaxInterval: 7
+  pianoMinInterval: 12
+  pianoMaxInterval: 20
+  pianoWarningSeconds: 1.2
+  barrelBehindDistance: 6
+  barrelLateralJitter: 1.5
+  pianoHeight: 12
+  pianoFallSpeed: 18
+  pianoLifetime: 12
   help: {fileID: 0}
-  spawnObject: 0
 --- !u!1 &5972147708481555517
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,9 +571,12 @@ MonoBehaviour:
   health: 80
   damageTag: Player
   takeDamage: 1
+  isHostageCarrier: 0
+  ignorePlayerRamming: 1
   dieParticle: {fileID: 0}
   hitImpactVfxPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913,
     type: 3}
+  maxHits: 10
 --- !u!1 &6553338052530550325
 GameObject:
   m_ObjectHideFlags: 0

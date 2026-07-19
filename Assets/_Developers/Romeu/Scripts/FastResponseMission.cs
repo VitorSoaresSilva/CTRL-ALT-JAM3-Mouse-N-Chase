@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using TMPro;
 using PathCreation;
 
@@ -10,8 +11,10 @@ public class FastResponseMission : MonoBehaviour
     public bool allowChaoticTraffic = true; // Flag para permitir trânsito caótico
     public GameplayManager gameplayManager;
     public PlayerCar playerCar;
-    public AudioClip damageAudio;
+    [FormerlySerializedAs("damageAudio")]
+    [SerializeField] private AudioClip timeOverClip;
     private AudioSource audioSource;
+    private bool timeOverPlayed;
 
     // UI References
     [SerializeField] private TextMeshProUGUI progressPercentageText;
@@ -62,6 +65,9 @@ public class FastResponseMission : MonoBehaviour
         if(playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
 
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        timeOverPlayed = false;
 
         // Randomizar lapsToWin: 2-4 comum, 5 raro
         int randomLaps = Random.Range(1, 100);
@@ -91,10 +97,12 @@ public class FastResponseMission : MonoBehaviour
             UpdateHitsDisplay();
             Debug.Log($"Traffic hit! Count: {damageTaken}/{maxHitsAllowed}");
 
-            // Reproduzir som ao 4º hit - com validação de null
-            if(damageTaken == 4 && audioSource != null && damageAudio != null)
+            // Alerta crítico: 1 hit antes do fail (fail quando damageTaken > maxHitsAllowed)
+            if (!timeOverPlayed && damageTaken >= maxHitsAllowed
+                && audioSource != null && timeOverClip != null)
             {
-                audioSource.PlayOneShot(damageAudio);
+                timeOverPlayed = true;
+                audioSource.PlayOneShot(timeOverClip);
             }
         };
 

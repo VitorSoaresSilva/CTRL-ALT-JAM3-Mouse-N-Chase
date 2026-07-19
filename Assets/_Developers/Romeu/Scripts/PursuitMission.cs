@@ -21,6 +21,12 @@ public class PursuitMission : MonoBehaviour
     private float missionStartTime = 0f;
     private float timeRemaining = 0f;
     private bool missionEnded = false;
+    private const float TimeWarningThreshold = 30f;
+
+    [Header("Situation VO")]
+    [SerializeField] private AudioClip alertStopClip;
+    private AudioSource audioSource;
+    private bool alertStopPlayed;
 
     // UI References
     [SerializeField] private TextMeshProUGUI timerText;
@@ -74,6 +80,11 @@ public class PursuitMission : MonoBehaviour
         missionTimeLimit = Random.Range(120f, 180f);
         missionStartTime = Time.time;
         timeRemaining = missionTimeLimit;
+        alertStopPlayed = false;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
         Debug.Log($"PursuitMission started - Time limit: {missionTimeLimit:F1}s");
 
@@ -121,6 +132,7 @@ public class PursuitMission : MonoBehaviour
 
         timeRemaining = missionTimeLimit - (Time.time - missionStartTime);
         UpdateTimerDisplay();
+        TryPlayTimeWarning();
 
         if (timeRemaining <= 0)
         {
@@ -129,6 +141,16 @@ public class PursuitMission : MonoBehaviour
             FailMission();
             return;
         }
+    }
+
+    private void TryPlayTimeWarning()
+    {
+        if (alertStopPlayed || timeRemaining > TimeWarningThreshold)
+            return;
+
+        alertStopPlayed = true;
+        if (audioSource != null && alertStopClip != null)
+            audioSource.PlayOneShot(alertStopClip);
     }
 
     private IEnumerator EnsurePursuitSpeedPowerUpSpawning()
@@ -328,7 +350,7 @@ public class PursuitMission : MonoBehaviour
             int seconds = (int)(timeRemaining % 60f);
             timerText.text = $"{minutes:D2}:{seconds:D2}";
 
-            if (timeRemaining <= 30f)
+            if (timeRemaining <= TimeWarningThreshold)
                 timerText.color = Color.red;
             else
                 timerText.color = Color.white;

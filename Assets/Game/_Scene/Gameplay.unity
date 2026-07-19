@@ -5425,7 +5425,19 @@ MonoBehaviour:
   enemies:
   - {fileID: -6232721783095306507, guid: 26324625c9050aa43ad250f3f011f570, type: 3}
   enemySpawner: {fileID: 1547526980}
+  hitsToWin: 10
+  barrelThrowablePrefab: {fileID: 1000000000000000001, guid: c3d4e5f60718293a4b5c6d7e8f901a2b,
+    type: 3}
+  pianoHazardPrefab: {fileID: 2000000000000000001, guid: d4e5f60718293a4b5c6d7e8f901a2b3c,
+    type: 3}
+  dropEffectPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
+    type: 3}
+  hitsStatusText: {fileID: 666230163}
+  missionHudVisuals:
+  - {fileID: 666230164}
+  - {fileID: 666230166}
   destroyedEnemies: 0
+  hitsLanded: 0
 --- !u!4 &285480937
 Transform:
   m_ObjectHideFlags: 0
@@ -5590,6 +5602,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 1547526980}
   destroyedEnemies: 0
   missionTimeLimit: 180
+  alertStopClip: {fileID: 8300000, guid: 69dd2f8c4ffd2ba458fcf6f73d6bbee8, type: 3}
   timerText: {fileID: 666230165}
   enemiesStatusText: {fileID: 666230163}
   missionHudVisuals:
@@ -5599,7 +5612,9 @@ MonoBehaviour:
     type: 3}
   pursuitSlowPowerUpPrefab: {fileID: 4823518202205099639, guid: c9e5b3a7d0f14e2a8b6c9d0e1f2a3b4c,
     type: 3}
-  speedPowerUpSpawnPoints: []
+  minPowerUps: 2
+  maxPowerUps: 3
+  heightOffset: 1
 --- !u!4 &598135307
 Transform:
   m_ObjectHideFlags: 0
@@ -16163,7 +16178,35 @@ MonoBehaviour:
   - {fileID: 1711840475351775023, guid: ad9f02471f80406449f92c925328b157, type: 3}
   - {fileID: -6232721783095306507, guid: 82db0eee87de82943a0c1c5fcc2706d1, type: 3}
   enemySpawner: {fileID: 1547526980}
-  destroyedEnemies: 0
+  maxFollowDistance: 70
+  riskFollowDistance: 40
+  closeFollowDistance: 22
+  closeWorldDistance: 18
+  distanceGraceSeconds: 5
+  farFailDelay: 1.25
+  tunnelWinRadius: 40
+  tunnelWinPathDistance: 45
+  lapsToRoadblock: 2
+  missionTimeLimit: 120
+  trafficHitTimePenalty: 5
+  alertStopClip: {fileID: 8300000, guid: 69dd2f8c4ffd2ba458fcf6f73d6bbee8, type: 3}
+  timeOverClip: {fileID: 8300000, guid: 4cc1c4064e493f44e9c5f1f02eee11f3, type: 3}
+  timerText: {fileID: 666230165}
+  statusText: {fileID: 666230163}
+  statusLabelText: {fileID: 1830902521}
+  progressPercentageText: {fileID: 367428613}
+  missionHudVisuals:
+  - {fileID: 666230164}
+  - {fileID: 666230166}
+  - {fileID: 1192794887}
+  rescueNpcBoostPrefab: {fileID: 4823518202205099639, guid: 3047c4ae5fcd469eb988423d6aef7f36,
+    type: 3}
+  rescueNpcSlowPrefab: {fileID: 4823518202205099639, guid: 4cb65d466abb432a8b78eaaf938ed7e9,
+    type: 3}
+  minPowerUpPairs: 3
+  maxPowerUpPairs: 5
+  sideOffset: 3.5
+  heightOffset: 1
 --- !u!4 &1830902520
 Transform:
   m_ObjectHideFlags: 0
@@ -16179,6 +16222,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1237953011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830902521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5075091205725713576, guid: e3db855a8f28dfc44849fded8370b0de,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192794884}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666230164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1942262818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21318,7 +21373,7 @@ MonoBehaviour:
   allowChaoticTraffic: 1
   gameplayManager: {fileID: 1192794885}
   playerCar: {fileID: 1942262819}
-  damageAudio: {fileID: 8300000, guid: 4cc1c4064e493f44e9c5f1f02eee11f3, type: 3}
+  timeOverClip: {fileID: 8300000, guid: 4cc1c4064e493f44e9c5f1f02eee11f3, type: 3}
   progressPercentageText: {fileID: 367428613}
   hitsDisplayText: {fileID: 1097062152}
   speedPowerUpCounterText: {fileID: 1192794888}

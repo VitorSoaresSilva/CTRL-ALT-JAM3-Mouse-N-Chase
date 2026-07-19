@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 016cf7583240a9643930dfb353fed26e, type: 2}
+  - {fileID: 2100000, guid: a5faaf36131749b408f58a6093791b15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 016cf7583240a9643930dfb353fed26e, type: 2}
+  - {fileID: 2100000, guid: a5faaf36131749b408f58a6093791b15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -396,7 +396,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 016cf7583240a9643930dfb353fed26e, type: 2}
+  - {fileID: 2100000, guid: a5faaf36131749b408f58a6093791b15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -469,6 +469,7 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   endOfPathInstruction: 0
   speed: 8
+  powerupSpeedOverride: -1
   lateralSpeed: 5
   yOffset: 0.5
   xOffset: 0
@@ -611,6 +612,10 @@ MonoBehaviour:
   damageSpeedBoost: 5
   boostDuration: 6
   negativeOffsetAfterBoost: -1
+  randomBoostInterval: 5
+  randomBoostChance: 0.3
+  panicNudgeOffset: 2.5
+  panicNudgeDuration: 1.5
 --- !u!114 &780440171879984969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +782,7 @@ MonoBehaviour:
   health: 80
   damageTag: Player
   takeDamage: 1
+  isHostageCarrier: 0
   dieParticle: {fileID: 0}
   hitImpactVfxPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913,
     type: 3}
@@ -1224,12 +1230,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &4624525958639790263
 MonoBehaviour:
   m_ObjectHideFlags: 0

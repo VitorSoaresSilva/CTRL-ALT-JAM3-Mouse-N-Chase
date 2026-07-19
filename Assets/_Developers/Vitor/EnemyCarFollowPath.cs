@@ -13,40 +13,44 @@ namespace _Developers.Vitor
         public float distanceTravelled;
         public Transform car;
         public EnemyDamage damage;
-        
-        // Variáveis para controle de movimentação aleatória
+
         private float horizontalInput = 0f;
-        private float changeDirectionInterval = 2f; // Intervalo de tempo para mudar a direção
+        private float changeDirectionInterval = 2f;
         private float lastDirectionChangeTime;
         public float lateralLimit = 7f;
         public CarFollowPath player;
-        public float minSpeedDifference = 0.5f; // Diferença mínima de velocidade quando próximo
-        public float maxSpeedDifference = 3f; // Diferença máxima de velocidade quando distante
-        public float minDistance = 5f; // Distância mínima para considerar a velocidade mínima
-        public float maxDistance = 50f; // Distância máxima para considerar a velocidade máxima
-        public float damageSpeedBoost = 5f; // Quantidade de aceleração ao sofrer dano
-        public float boostDuration = 2f; // Duração do boost em segundos
+        public float minSpeedDifference = 0.5f;
+        public float maxSpeedDifference = 3f;
+        public float minDistance = 5f;
+        public float maxDistance = 50f;
+        public float damageSpeedBoost = 5f;
+        public float boostDuration = 2f;
         public float negativeOffsetAfterBoost = -1;
         private bool isBoosted = false;
         private float boostEndTime = 0f;
 
-        // Boost aleatório
-        public float randomBoostInterval = 5f; // Intervalo entre 4-6 segundos
-        public float randomBoostChance = 0.3f; // 30% de chance de boost aleatório
+        public float randomBoostInterval = 5f;
+        public float randomBoostChance = 0.3f;
         private float lastRandomBoostCheckTime = 0f;
+
+        // Soft temporary modifiers (Rescue powerups / panic nudge)
+        private float temporarySpeedOffset = 0f;
+        private float temporaryOffsetEndTime = 0f;
+        [SerializeField] private float panicNudgeOffset = 2.5f;
+        [SerializeField] private float panicNudgeDuration = 1.5f;
 
         private void OnEnable()
         {
-            if(damage == null) damage = GetComponentInChildren<EnemyDamage>();
+            if (damage == null) damage = GetComponentInChildren<EnemyDamage>();
         }
 
-        void Start() {
+        void Start()
+        {
             if (pathCreator != null)
             {
                 pathCreator.pathUpdated += OnPathChanged;
             }
 
-            // Conectar callback de dano para disparar boost ao sofrer colisão
             if (damage != null)
             {
                 damage.onDamage += OnTakeDamage;
@@ -61,7 +65,42 @@ namespace _Developers.Vitor
             player = playerRef;
             pathCreator = pathCreatorRef;
         }
-        
+
+        /// <summary>
+        /// Soft pacing so the hostage carrier stays near the player instead of racing away.
+        /// </summary>
+        public void ConfigureHostagePacing()
+        {
+            minSpeedDifference = 0.3f;
+            maxSpeedDifference = 1.8f;
+            minDistance = 8f;
+            maxDistance = 55f;
+            randomBoostChance = 0f;
+            damageSpeedBoost = 1.5f;
+            boostDuration = 1.2f;
+            negativeOffsetAfterBoost = -8f;
+            panicNudgeOffset = 3f;
+            panicNudgeDuration = 1.5f;
+        }
+
+        /// <summary>
+        /// Soft boost/slow that stacks on top of normal pace matching (does not use hard Boost).
+        /// </summary>
+        public void ApplyTemporarySpeedOffset(float offset, float duration)
+        {
+            temporarySpeedOffset = offset;
+            temporaryOffsetEndTime = Time.time + duration;
+            isBoosted = false;
+        }
+
+        /// <summary>
+        /// Small pull-away when the player hits traffic during Rescue.
+        /// </summary>
+        public void ApplyPanicNudge()
+        {
+            ApplyTemporarySpeedOffset(panicNudgeOffset, panicNudgeDuration);
+        }
+
         void FixedUpdate()
         {
             if (Time.time - lastDirectionChangeTime > changeDirectionInterval)
@@ -69,12 +108,11 @@ namespace _Developers.Vitor
                 horizontalInput = Random.Range(-1f, 1f);
                 lastDirectionChangeTime = Time.time;
             }
-            if (horizontalInput != 0)
+            if (horizontalInput != 0 && car != null)
             {
                 float deltaX = horizontalInput * lateralSpeed * Time.fixedDeltaTime;
                 car.transform.Translate(Vector3.right * deltaX);
 
-                // Limita o movimento lateral
                 Vector3 carPosition = car.transform.localPosition;
                 carPosition.x = Mathf.Clamp(carPosition.x, -lateralLimit, lateralLimit);
                 car.transform.localPosition = carPosition;
@@ -87,32 +125,33 @@ namespace _Developers.Vitor
             }
 
             UpdateVelocity();
-
-            // Verificar boost aleatório
             CheckRandomBoost();
         }
 
-        void OnPathChanged() {
-            distanceTravelled = 0;
-            Debug.Log("Path Changed");
+        void OnPathChanged()
+        {
+            // Path/túnel regenerou: player volta pro início — recoloca inimigo à frente
+            if (player != null)
+                distanceTravelled = player.distanceTravelled + 40f;
+            else
+                distanceTravelled = 50f;
         }
 
-        // Callback para dano - acelera o inimigo
         private void OnTakeDamage()
         {
             Boost();
         }
 
-        // Verificar e aplicar boost aleatório periodicamente
         private void CheckRandomBoost()
         {
+            if (randomBoostChance <= 0f)
+                return;
+
             if (Time.time - lastRandomBoostCheckTime > randomBoostInterval && !isBoosted)
             {
-                // Sorteia intervalo aleatório (4-6 segundos)
                 randomBoostInterval = Random.Range(4f, 6f);
                 lastRandomBoostCheckTime = Time.time;
 
-                // 30% de chance de fazer boost
                 if (Random.value < randomBoostChance)
                 {
                     Boost();
@@ -122,31 +161,41 @@ namespace _Developers.Vitor
 
         private void UpdateVelocity()
         {
-            // float currentDistance = distanceTravelled - player.distanceTravelled;
+            if (player == null)
+                return;
+
+            if (Time.time >= temporaryOffsetEndTime)
+                temporarySpeedOffset = 0f;
 
             float distance = distanceTravelled - player.distanceTravelled;
             if (isBoosted && Time.time >= boostEndTime)
             {
                 isBoosted = false;
             }
-            
+
             if (!isBoosted)
             {
-                // Calcula a diferença de velocidade com base na distância
                 float speedDifference = Mathf.Lerp(maxSpeedDifference, minSpeedDifference, Mathf.InverseLerp(minDistance, maxDistance, distance));
-                speed = player.speed - speedDifference;
+                speed = player.speed - speedDifference + temporarySpeedOffset;
+                speed = Mathf.Max(speed, 1f);
+
                 if (distance < negativeOffsetAfterBoost)
                 {
                     Boost();
                 }
             }
+            else
+            {
+                speed = player.speed + damageSpeedBoost + temporarySpeedOffset;
+                speed = Mathf.Max(speed, 1f);
+            }
         }
+
         [ContextMenu("Take Damage")]
         public void Boost()
         {
-            // Aumenta a velocidade temporariamente
             isBoosted = true;
-            speed = player.speed + damageSpeedBoost;
+            speed = player != null ? player.speed + damageSpeedBoost : speed + damageSpeedBoost;
             boostEndTime = Time.time + boostDuration;
         }
     }

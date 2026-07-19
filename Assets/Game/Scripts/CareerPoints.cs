@@ -86,19 +86,7 @@ public class CareerPoints : Singleton<CareerPoints>
     public void AddPoints(int points)
     {
         this.Points += points;
-
-        // Verificar desbloqueios permanentes de upgrades
-        if (!ShieldUnlockedPermanent && Points >= shieldUnlockPoints)
-        {
-            ShieldUnlockedPermanent = true;
-            Log("Shield Upgrade Desbloqueado Permanentemente!");
-        }
-
-        if (!BumperUnlockedPermanent && Points >= bumperUnlockPoints)
-        {
-            BumperUnlockedPermanent = true;
-            Log("Bumper Upgrade Desbloqueado Permanentemente!");
-        }
+        ApplyPermanentUnlocksFromPoints();
     }
 
     public void RemovePoints(int points)
@@ -234,6 +222,78 @@ public class CareerPoints : Singleton<CareerPoints>
 
     public void SetPoints(int points)
     {
-        Points = points;
+        Points = Mathf.Max(0, points);
+        ApplyPermanentUnlocksFromPoints();
+    }
+
+    public void SetLostPoints(int points)
+    {
+        LostPoints = Mathf.Max(0, points);
+    }
+
+    public void SetMissionCount(MissionType mission, int count)
+    {
+        switch (mission)
+        {
+            case MissionType.FastResponse:
+                FastResponseCompleted = Mathf.Clamp(count, 0, 10);
+                break;
+            case MissionType.Pursuit:
+                PursuitCompleted = Mathf.Clamp(count, 0, 10);
+                break;
+            case MissionType.Rescue:
+                RescueCompleted = Mathf.Clamp(count, 0, 10);
+                break;
+            case MissionType.Boss:
+                BossCompleted = Mathf.Clamp(count, 0, 1);
+                break;
+        }
+    }
+
+    public void SetSecretCarUnlocked(bool unlocked)
+    {
+        SecretCarUnlocked = unlocked;
+        if (!unlocked)
+            usingSecretCar = false;
+    }
+
+    public void SetBumperPermanent(bool unlocked)
+    {
+        BumperUnlockedPermanent = unlocked;
+    }
+
+    public void SetShieldPermanent(bool unlocked)
+    {
+        ShieldUnlockedPermanent = unlocked;
+    }
+
+    public void ResetProgressFull()
+    {
+        Points = 1000;
+        LostPoints = 0;
+        FastResponseCompleted = 0;
+        PursuitCompleted = 0;
+        RescueCompleted = 0;
+        BossCompleted = 0;
+        SecretCarUnlocked = false;
+        usingSecretCar = false;
+        BumperUnlockedPermanent = false;
+        ShieldUnlockedPermanent = false;
+        Save();
+    }
+
+    void ApplyPermanentUnlocksFromPoints()
+    {
+        if (!ShieldUnlockedPermanent && Points >= shieldUnlockPoints)
+        {
+            ShieldUnlockedPermanent = true;
+            Log("Shield Upgrade Desbloqueado Permanentemente!");
+        }
+
+        if (!BumperUnlockedPermanent && Points >= bumperUnlockPoints)
+        {
+            BumperUnlockedPermanent = true;
+            Log("Bumper Upgrade Desbloqueado Permanentemente!");
+        }
     }
 }
