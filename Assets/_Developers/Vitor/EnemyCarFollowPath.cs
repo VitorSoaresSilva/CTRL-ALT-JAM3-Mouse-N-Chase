@@ -39,6 +39,10 @@ namespace _Developers.Vitor
         [SerializeField] private float panicNudgeOffset = 2.5f;
         [SerializeField] private float panicNudgeDuration = 1.5f;
 
+        // Boss: mantém lead à frente do player (inclusive após troca de fase/path)
+        private bool useBossPacing;
+        private float preferredLeadDistance = 35f;
+
         private void OnEnable()
         {
             if (damage == null) damage = GetComponentInChildren<EnemyDamage>();
@@ -81,6 +85,25 @@ namespace _Developers.Vitor
             negativeOffsetAfterBoost = -8f;
             panicNudgeOffset = 3f;
             panicNudgeDuration = 1.5f;
+        }
+
+        /// <summary>
+        /// Boss: fica um pouco à frente do player e não deixa colar (também após troca de fase).
+        /// </summary>
+        public void ConfigureBossPacing()
+        {
+            useBossPacing = true;
+            preferredLeadDistance = 35f;
+            minSpeedDifference = 0.5f;
+            maxSpeedDifference = 2f;
+            minDistance = 25f;
+            maxDistance = 50f;
+            randomBoostChance = 0.1f;
+            damageSpeedBoost = 7f;
+            boostDuration = 2.2f;
+            negativeOffsetAfterBoost = 25f;
+            panicNudgeOffset = 4f;
+            panicNudgeDuration = 1.2f;
         }
 
         /// <summary>
@@ -131,10 +154,11 @@ namespace _Developers.Vitor
         void OnPathChanged()
         {
             // Path/túnel regenerou: player volta pro início — recoloca inimigo à frente
+            float lead = useBossPacing ? preferredLeadDistance : 40f;
             if (player != null)
-                distanceTravelled = player.distanceTravelled + 40f;
+                distanceTravelled = player.distanceTravelled + lead;
             else
-                distanceTravelled = 50f;
+                distanceTravelled = lead + 10f;
         }
 
         private void OnTakeDamage()
@@ -173,6 +197,12 @@ namespace _Developers.Vitor
                 isBoosted = false;
             }
 
+            if (useBossPacing)
+            {
+                UpdateBossVelocity(distance);
+                return;
+            }
+
             if (!isBoosted)
             {
                 float speedDifference = Mathf.Lerp(maxSpeedDifference, minSpeedDifference, Mathf.InverseLerp(minDistance, maxDistance, distance));
@@ -189,6 +219,28 @@ namespace _Developers.Vitor
                 speed = player.speed + damageSpeedBoost + temporarySpeedOffset;
                 speed = Mathf.Max(speed, 1f);
             }
+        }
+
+        private void UpdateBossVelocity(float distance)
+        {
+            // Erro positivo = player chegou perto demais → boss acelera
+            float leadError = preferredLeadDistance - distance;
+
+            if (isBoosted)
+            {
+                speed = player.speed + damageSpeedBoost + temporarySpeedOffset;
+            }
+            else
+            {
+                // Mantém ~preferredLeadDistance à frente
+                float match = Mathf.Clamp(leadError * 0.2f, -2.5f, 6f);
+                speed = player.speed + match + temporarySpeedOffset;
+
+                if (distance < preferredLeadDistance * 0.7f || distance < negativeOffsetAfterBoost)
+                    Boost();
+            }
+
+            speed = Mathf.Max(speed, 1f);
         }
 
         [ContextMenu("Take Damage")]

@@ -5,6 +5,9 @@ using TMPro;
 
 public class CareerPoints : Singleton<CareerPoints>
 {
+    public const int MissionQuota = 10;
+    public const int BossQuota = 1;
+
     // Points
     public int Points { get; private set; }
     public int LostPoints { get; private set; }
@@ -51,6 +54,9 @@ public class CareerPoints : Singleton<CareerPoints>
     [SerializeField] private int shieldUnlockPoints = 15000;
     [SerializeField] private int bumperUnlockPoints = 7000;
     [SerializeField] private int slotUnlockPoints = 25000;
+    // Libera o jogo colorido (desativa o Volume P&B). ~20 missões bem-sucedidas a partir do início.
+    [SerializeField] private int colorUnlockPoints = 30000;
+    private bool _colorUnlockedPermanent = false;
 
     // Bônus do Bumper Upgrade (redução de dano em %)
     [SerializeField, Range(0f, 100f)] private float bumperDamageReduction = 33f; // 33% de redução = 1 chance extra
@@ -71,6 +77,8 @@ public class CareerPoints : Singleton<CareerPoints>
     public bool ShieldUnlocked { get => ShieldUnlockedPermanent || Points >= shieldUnlockPoints; }
     public bool BumperUnlocked { get => BumperUnlockedPermanent || Points >= bumperUnlockPoints; }
     public bool SlotUnlocked { get => Points >= slotUnlockPoints; }
+    public bool ColorUnlocked { get => _colorUnlockedPermanent || Points >= colorUnlockPoints; }
+    public int ColorUnlockPoints => colorUnlockPoints;
     public bool SecretCarUnlocked { get; private set; }
 
     // Propriedade para acessar a redução de dano do Bumper
@@ -115,13 +123,17 @@ public class CareerPoints : Singleton<CareerPoints>
         // Carregar desbloqueios permanentes de upgrades
         ShieldUnlockedPermanent = PlayerPrefs.GetInt("ShieldUnlockedPermanent", 0) == 1;
         BumperUnlockedPermanent = PlayerPrefs.GetInt("BumperUnlockedPermanent", 0) == 1;
+        _colorUnlockedPermanent = PlayerPrefs.GetInt("ColorUnlockedPermanent", 0) == 1;
 
         if (PlayerPrefs.HasKey("Points") == false)
             Save();
 
+        ApplyPermanentUnlocksFromPoints();
+
         Log($"Points: {Points}");
         Log($"LostPoints: {LostPoints}");
         Log($"MissionsCompleted: {MissionsCompleted}");
+        Log($"ColorUnlocked: {ColorUnlocked}");
     }
 
     public void Save()
@@ -143,6 +155,7 @@ public class CareerPoints : Singleton<CareerPoints>
         // Salvar desbloqueios permanentes de upgrades
         PlayerPrefs.SetInt("ShieldUnlockedPermanent", ShieldUnlockedPermanent ? 1 : 0);
         PlayerPrefs.SetInt("BumperUnlockedPermanent", BumperUnlockedPermanent ? 1 : 0);
+        PlayerPrefs.SetInt("ColorUnlockedPermanent", _colorUnlockedPermanent ? 1 : 0);
     }
 
     public void CompleteMission(MissionType mission)
@@ -150,19 +163,23 @@ public class CareerPoints : Singleton<CareerPoints>
         switch (mission)
         {
             case MissionType.FastResponse:
-                FastResponseCompleted++;
+                if (FastResponseCompleted < MissionQuota)
+                    FastResponseCompleted++;
                 AddPoints(FastResponsePoints);
                 break;
             case MissionType.Pursuit:
-                PursuitCompleted++;
+                if (PursuitCompleted < MissionQuota)
+                    PursuitCompleted++;
                 AddPoints(PursuitPoints);
                 break;
             case MissionType.Rescue:
-                RescueCompleted++;
+                if (RescueCompleted < MissionQuota)
+                    RescueCompleted++;
                 AddPoints(RescuePoints);
                 break;
             case MissionType.Boss:
-                BossCompleted++;
+                if (BossCompleted < BossQuota)
+                    BossCompleted++;
                 AddPoints(BossPoints);
                 break;
         }
@@ -207,7 +224,9 @@ public class CareerPoints : Singleton<CareerPoints>
                 return PursuitCompleted >= 1; // Após 1 vez Pursuit
 
             case MissionType.Boss:
-                return FastResponseCompleted >= 10 && PursuitCompleted >= 10 && RescueCompleted >= 10;
+                return FastResponseCompleted >= MissionQuota
+                    && PursuitCompleted >= MissionQuota
+                    && RescueCompleted >= MissionQuota;
 
             default:
                 return false;
@@ -236,18 +255,23 @@ public class CareerPoints : Singleton<CareerPoints>
         switch (mission)
         {
             case MissionType.FastResponse:
-                FastResponseCompleted = Mathf.Clamp(count, 0, 10);
+                FastResponseCompleted = Mathf.Clamp(count, 0, MissionQuota);
                 break;
             case MissionType.Pursuit:
-                PursuitCompleted = Mathf.Clamp(count, 0, 10);
+                PursuitCompleted = Mathf.Clamp(count, 0, MissionQuota);
                 break;
             case MissionType.Rescue:
-                RescueCompleted = Mathf.Clamp(count, 0, 10);
+                RescueCompleted = Mathf.Clamp(count, 0, MissionQuota);
                 break;
             case MissionType.Boss:
-                BossCompleted = Mathf.Clamp(count, 0, 1);
+                BossCompleted = Mathf.Clamp(count, 0, BossQuota);
                 break;
         }
+    }
+
+    public void SetColorUnlocked(bool unlocked)
+    {
+        _colorUnlockedPermanent = unlocked;
     }
 
     public void SetSecretCarUnlocked(bool unlocked)
@@ -279,6 +303,7 @@ public class CareerPoints : Singleton<CareerPoints>
         usingSecretCar = false;
         BumperUnlockedPermanent = false;
         ShieldUnlockedPermanent = false;
+        _colorUnlockedPermanent = false;
         Save();
     }
 
@@ -294,6 +319,12 @@ public class CareerPoints : Singleton<CareerPoints>
         {
             BumperUnlockedPermanent = true;
             Log("Bumper Upgrade Desbloqueado Permanentemente!");
+        }
+
+        if (!_colorUnlockedPermanent && Points >= colorUnlockPoints)
+        {
+            _colorUnlockedPermanent = true;
+            Log("Modo Colorido Desbloqueado Permanentemente!");
         }
     }
 }

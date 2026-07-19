@@ -361,6 +361,13 @@ public class PursuitMission : MonoBehaviour
     {
         if (enemiesStatusText != null)
         {
+            // Garante label correta (HUD compartilhado com BossMission)
+            var label = enemiesStatusText.transform.parent != null
+                ? enemiesStatusText.transform.parent.GetComponent<TextMeshProUGUI>()
+                : null;
+            if (label != null)
+                label.text = "Total Enemy:";
+
             enemiesStatusText.text = $"{destroyedEnemies}/{enemyInstances.Count}";
         }
     }

@@ -19,7 +19,10 @@ public class BossMission : MonoBehaviour
 
     [Header("HUD")]
     [SerializeField] private TextMeshProUGUI hitsStatusText;
+    [SerializeField] private TextMeshProUGUI hitsLabelText;
     [SerializeField] private GameObject[] missionHudVisuals;
+    [SerializeField] private string hitsLabel = "Hits in Boss:";
+    [SerializeField] private string defaultEnemyLabel = "Total Enemy:";
 
     List<EnemyCarFollowPath> enemyInstances = new();
     public int destroyedEnemies = 0;
@@ -46,6 +49,7 @@ public class BossMission : MonoBehaviour
     {
         if (dropController != null)
             dropController.StopDrops();
+        RestoreHudLabel();
     }
 
     void Start()
@@ -64,6 +68,8 @@ public class BossMission : MonoBehaviour
 
         foreach (EnemyCarFollowPath enemy in enemyInstances)
         {
+            enemy.ConfigureBossPacing();
+
             if (enemy.damage != null)
             {
                 enemy.damage.ignorePlayerRamming = true;
@@ -78,6 +84,7 @@ public class BossMission : MonoBehaviour
         }
 
         UpdateHitsDisplay();
+        ApplyBossHudLabel();
         ActivateMissionHuds(true);
         StartCoroutine(SetupBossCombat());
     }
@@ -177,6 +184,31 @@ public class BossMission : MonoBehaviour
             hitsStatusText.text = $"{hitsLanded}/{hitsToWin}";
     }
 
+    private void ApplyBossHudLabel()
+    {
+        ResolveHitsLabel();
+        if (hitsLabelText != null)
+            hitsLabelText.text = hitsLabel;
+    }
+
+    private void RestoreHudLabel()
+    {
+        ResolveHitsLabel();
+        if (hitsLabelText != null)
+            hitsLabelText.text = defaultEnemyLabel;
+    }
+
+    private void ResolveHitsLabel()
+    {
+        if (hitsLabelText != null || hitsStatusText == null)
+            return;
+
+        // TotalEnemyText é filho do TotalEnemyLabel no canvas compartilhado
+        hitsLabelText = hitsStatusText.transform.parent != null
+            ? hitsStatusText.transform.parent.GetComponent<TextMeshProUGUI>()
+            : null;
+    }
+
     private void ActivateMissionHuds(bool activate)
     {
         if (missionHudVisuals == null || missionHudVisuals.Length == 0)
@@ -194,6 +226,7 @@ public class BossMission : MonoBehaviour
         if (dropController != null)
             dropController.StopDrops();
 
+        RestoreHudLabel();
         ActivateMissionHuds(false);
 
         if (dropHolder != null)

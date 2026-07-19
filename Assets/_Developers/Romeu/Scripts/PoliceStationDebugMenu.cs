@@ -12,7 +12,7 @@ public class PoliceStationDebugMenu : MonoBehaviour
     const string CheatCode = "debug";
     const float BufferTimeout = 2.5f;
 
-    static readonly int[] PointPresets = { 0, 1000, 7000, 15000, 20000, 50000 };
+    static readonly int[] PointPresets = { 0, 1000, 7000, 15000, 30000, 50000 };
 
     readonly System.Text.StringBuilder _buffer = new System.Text.StringBuilder(16);
     float _lastKeyTime;
@@ -172,6 +172,7 @@ public class PoliceStationDebugMenu : MonoBehaviour
             $"Bumper {(cp.BumperUnlockedPermanent ? "PERM" : (cp.BumperUnlocked ? "ON" : "OFF"))}   " +
             $"Shield {(cp.ShieldUnlockedPermanent ? "PERM" : (cp.ShieldUnlocked ? "ON" : "OFF"))}   " +
             $"Slot {(cp.SlotUnlocked ? "ON" : "OFF")}   " +
+            $"Color {(cp.ColorUnlocked ? "ON" : "OFF")}@{cp.ColorUnlockPoints}   " +
             $"Secret {(cp.SecretCarUnlocked ? (cp.usingSecretCar ? "USING" : "UNLOCKED") : "LOCKED")}",
             _statusStyle);
 
@@ -226,13 +227,14 @@ public class PoliceStationDebugMenu : MonoBehaviour
         {
             Apply("Tudo liberado (Max All)", () =>
             {
-                cp.SetMissionCount(MissionType.FastResponse, 10);
-                cp.SetMissionCount(MissionType.Pursuit, 10);
-                cp.SetMissionCount(MissionType.Rescue, 10);
-                cp.SetMissionCount(MissionType.Boss, 1);
+                cp.SetMissionCount(MissionType.FastResponse, CareerPoints.MissionQuota);
+                cp.SetMissionCount(MissionType.Pursuit, CareerPoints.MissionQuota);
+                cp.SetMissionCount(MissionType.Rescue, CareerPoints.MissionQuota);
+                cp.SetMissionCount(MissionType.Boss, CareerPoints.BossQuota);
                 cp.SetPoints(50000);
                 cp.SetBumperPermanent(true);
                 cp.SetShieldPermanent(true);
+                cp.SetColorUnlocked(true);
                 cp.SetSecretCarUnlocked(true);
             });
         }
@@ -244,6 +246,8 @@ public class PoliceStationDebugMenu : MonoBehaviour
             Apply($"Bumper permanente = {!cp.BumperUnlockedPermanent}", () => cp.SetBumperPermanent(!cp.BumperUnlockedPermanent));
         if (GUILayout.Button("Toggle Shield", _buttonStyle, GUILayout.Height(30)))
             Apply($"Shield permanente = {!cp.ShieldUnlockedPermanent}", () => cp.SetShieldPermanent(!cp.ShieldUnlockedPermanent));
+        if (GUILayout.Button("Toggle Color", _buttonStyle, GUILayout.Height(30)))
+            Apply($"Color unlocked = {!cp.ColorUnlocked}", () => cp.SetColorUnlocked(!cp.ColorUnlocked));
         if (GUILayout.Button("Unlock Secret", _buttonStyle, GUILayout.Height(30)))
             Apply("Secret car desbloqueado", () => cp.SetSecretCarUnlocked(true));
         if (GUILayout.Button("Toggle Use Secret", _buttonStyle, GUILayout.Height(30)))

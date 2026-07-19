@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class CameraControl : MonoBehaviour
@@ -18,19 +19,22 @@ public class CameraControl : MonoBehaviour
 
     public Camera Camera { get; private set; }
 
+    Volume grayscaleVolume;
+    bool colorUnlocked;
+
     void Awake()
     {
         Camera = GetComponent<Camera>();
+        Camera.TryGetComponent(out grayscaleVolume);
     }
 
     private void Start()
     {
-        if(CareerPoints.instance != null)
-        {
-            if (CareerPoints.instance.Points > 100000)
-                if (Camera.TryGetComponent(out Volume vol))
-                    vol.enabled = false;
-        }
+        colorUnlocked = CareerPoints.instance != null && CareerPoints.instance.ColorUnlocked;
+
+        // Colorido por padrão quando desbloqueado; ESC alterna P&B durante a gameplay.
+        if (grayscaleVolume != null)
+            grayscaleVolume.enabled = !colorUnlocked;
     }
 
     void UpdateCamera()
@@ -56,6 +60,13 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
+        if (colorUnlocked && grayscaleVolume != null)
+        {
+            var keyboard = Keyboard.current;
+            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
+                grayscaleVolume.enabled = !grayscaleVolume.enabled;
+        }
+
         if(updateMode == UpdateMode.Update)
             UpdateCamera();
     }

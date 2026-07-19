@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Solta barris rebatedos e pianos hazard periodicamente durante a missao do boss.
+/// Solta barris rebatedos (faixa esquerda/centro/direita) e pianos hazard periodicamente.
 /// </summary>
 public class BossDropController : MonoBehaviour
 {
@@ -19,8 +19,9 @@ public class BossDropController : MonoBehaviour
     [SerializeField] private float pianoWarningSeconds = 1.2f;
 
     [Header("Spawn")]
-    [SerializeField] private float barrelBehindDistance = 6f;
-    [SerializeField] private float barrelLateralJitter = 1.5f;
+    [SerializeField] private float barrelBehindDistance = 8f;
+    [SerializeField] private float laneOffset = 4f;
+    [SerializeField] private float barrelHoverAboveRoad = 1.4f;
     [SerializeField] private float pianoHeight = 12f;
     [SerializeField] private float pianoFallSpeed = 18f;
     [SerializeField] private float pianoLifetime = 12f;
@@ -75,7 +76,6 @@ public class BossDropController : MonoBehaviour
 
     private IEnumerator BarrelLoop()
     {
-        // Primeiro drop um pouco depois do inicio
         yield return new WaitForSeconds(Random.Range(2f, 4f));
 
         while (active)
@@ -108,9 +108,11 @@ public class BossDropController : MonoBehaviour
         if (barrelPrefab == null)
             return;
 
+        // -1 esquerda, 0 centro, +1 direita
+        int lane = Random.Range(-1, 2);
         Vector3 spawnPos = transform.position - transform.forward * barrelBehindDistance;
-        spawnPos += transform.right * Random.Range(-barrelLateralJitter, barrelLateralJitter);
-        spawnPos.y = Mathf.Max(spawnPos.y, 0.5f);
+        spawnPos += transform.right * (lane * laneOffset);
+        spawnPos.y = GetRoadHoverY();
 
         Transform parent = dropHolder != null ? dropHolder : null;
         GameObject barrel = Instantiate(barrelPrefab, spawnPos, Quaternion.identity, parent);
@@ -123,7 +125,18 @@ public class BossDropController : MonoBehaviour
 
         BossThrowable throwable = barrel.GetComponent<BossThrowable>();
         if (throwable != null)
-            throwable.Init(transform, bossDamage);
+            throwable.Init(transform, bossDamage, spawnPos.y);
+    }
+
+    private float GetRoadHoverY()
+    {
+        // Boss está em pathY + yOffset; sobe o barril um pouco acima do asfalto
+        float roadY = transform.position.y;
+        var follow = GetComponent<_Developers.Vitor.EnemyCarFollowPath>();
+        if (follow != null)
+            roadY = transform.position.y - follow.yOffset;
+
+        return roadY + barrelHoverAboveRoad;
     }
 
     private void SpawnPiano()
@@ -135,9 +148,9 @@ public class BossDropController : MonoBehaviour
             ? playerTransform.position
             : transform.position - transform.forward * 8f;
 
-        // Ligeiramente a frente do player na direcao do movimento do boss
+        int lane = Random.Range(-1, 2);
         target += transform.forward * Random.Range(2f, 6f);
-        target += transform.right * Random.Range(-2f, 2f);
+        target += transform.right * (lane * laneOffset);
         Vector3 spawnPos = target + Vector3.up * pianoHeight;
 
         Transform parent = dropHolder != null ? dropHolder : null;

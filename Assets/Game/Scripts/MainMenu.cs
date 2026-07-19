@@ -128,35 +128,28 @@ public class MainMenu : MonoBehaviour
         if (fastResponseBtn != null)
         {
             Button fastResponseButton = fastResponseBtn.GetComponent<Button>();
-            SetBtnLocked(fastResponseButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.FastResponse) || CareerPoints.instance.FastResponseCompleted >= 10);
+            SetBtnLocked(fastResponseButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.FastResponse));
         }
         if (pursuitBtn != null)
         {
             Button pursuitButton = pursuitBtn.GetComponent<Button>();
-            SetBtnLocked(pursuitButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Pursuit) || CareerPoints.instance.PursuitCompleted >= 10);
+            SetBtnLocked(pursuitButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Pursuit));
         }
         if (rescueBtn != null)
         {
             Button rescueButton = rescueBtn.GetComponent<Button>();
-            SetBtnLocked(rescueButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Rescue) || CareerPoints.instance.RescueCompleted >= 10);
+            SetBtnLocked(rescueButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Rescue));
         }
         if (bossBtn != null)
         {
             Button bossButton = bossBtn.GetComponent<Button>();
-            SetBtnLocked(bossButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Boss) || CareerPoints.instance.BossCompleted >= 1);
+            SetBtnLocked(bossButton, !CareerPoints.instance.IsMissionUnlocked(MissionType.Boss));
         }
 
-        if (fastResponseQnt != null)
-            fastResponseQnt.text = $"{CareerPoints.instance.FastResponseCompleted} / 10";
-
-        if (pursuitQnt != null)
-            pursuitQnt.text = $"{CareerPoints.instance.PursuitCompleted} / 10";
-
-        if (rescueQnt != null)
-            rescueQnt.text = $"{CareerPoints.instance.RescueCompleted} / 10";
-
-        if (bossQnt != null)
-            bossQnt.text = $"{CareerPoints.instance.BossCompleted} / 1";
+        SetMissionProgressText(fastResponseQnt, CareerPoints.instance.FastResponseCompleted, CareerPoints.MissionQuota);
+        SetMissionProgressText(pursuitQnt, CareerPoints.instance.PursuitCompleted, CareerPoints.MissionQuota);
+        SetMissionProgressText(rescueQnt, CareerPoints.instance.RescueCompleted, CareerPoints.MissionQuota);
+        SetMissionProgressText(bossQnt, CareerPoints.instance.BossCompleted, CareerPoints.BossQuota);
 
         if (SceneControl.instance != null)
             SceneControl.instance.ToggleLoading(false);
@@ -166,6 +159,15 @@ public class MainMenu : MonoBehaviour
     {
         if (btn == null) return;
         btn.interactable = !locked;
+    }
+
+    static void SetMissionProgressText(TextMeshProUGUI label, int completed, int max)
+    {
+        if (label == null) return;
+
+        label.enableWordWrapping = false;
+        label.overflowMode = TextOverflowModes.Overflow;
+        label.text = $"{Mathf.Min(completed, max)}/{max}";
     }
 
     void Update()

@@ -388,11 +388,11 @@ MonoBehaviour:
   player: {fileID: 0}
   minSpeedDifference: 0
   maxSpeedDifference: 3
-  minDistance: 5
+  minDistance: 25
   maxDistance: 50
-  damageSpeedBoost: 5
-  boostDuration: 6
-  negativeOffsetAfterBoost: -1
+  damageSpeedBoost: 7
+  boostDuration: 2.2
+  negativeOffsetAfterBoost: 25
 --- !u!114 &-550932163831633512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,8 +416,9 @@ MonoBehaviour:
   pianoMinInterval: 12
   pianoMaxInterval: 20
   pianoWarningSeconds: 1.2
-  barrelBehindDistance: 6
-  barrelLateralJitter: 1.5
+  barrelBehindDistance: 8
+  laneOffset: 4
+  barrelHoverAboveRoad: 1.4
   pianoHeight: 12
   pianoFallSpeed: 18
   pianoLifetime: 12
@@ -576,6 +577,8 @@ MonoBehaviour:
   dieParticle: {fileID: 0}
   hitImpactVfxPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913,
     type: 3}
+  hitSoundEffect: {fileID: 8300000, guid: 1dc80395414d20845ad1d6048045bd26, type: 3}
+  hitSoundVolume: 0.7
   maxHits: 10
 --- !u!1 &6553338052530550325
 GameObject:
