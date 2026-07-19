@@ -1,6 +1,4 @@
 using _Developers.Vitor;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
@@ -10,6 +8,7 @@ public class EnemyDamage : MonoBehaviour
     public string damageTag = "Player"; // Tag dos objetos que causam dano ao carro
     public bool takeDamage = true;
     public GameObject dieParticle;
+    [SerializeField] private GameObject hitImpactVfxPrefab;
     public delegate void OnDamage();
     public OnDamage onDamage;
 
@@ -26,8 +25,6 @@ public class EnemyDamage : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("Entered enemy damage coll");
-
         if (collision.gameObject.CompareTag(damageTag) && takeDamage)
         {
             // Calcule o dano com base na velocidade do carro
@@ -39,6 +36,8 @@ public class EnemyDamage : MonoBehaviour
             // Incrementa contador de hits
             hitCount++;
 
+            SpawnHitImpactVfx(collision);
+
             onDamage?.Invoke();
 
             // Verifique se atingiu 5 hits (inimigo preso)
@@ -46,8 +45,20 @@ public class EnemyDamage : MonoBehaviour
             {
                 if(dieParticle != null) dieParticle.SetActive(true);
                 onDie?.Invoke();
-                // O carro foi preso, faça algo aqui (por exemplo, terminar o jogo ou destruir o carro)
             }
         }
+    }
+
+    private void SpawnHitImpactVfx(Collision collision)
+    {
+        if (hitImpactVfxPrefab == null)
+            return;
+
+        Vector3 pos = collision.contactCount > 0
+            ? collision.GetContact(0).point
+            : transform.position;
+
+        GameObject vfx = Instantiate(hitImpactVfxPrefab, pos, Quaternion.identity);
+        Destroy(vfx, 2f);
     }
 }

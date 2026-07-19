@@ -5595,6 +5595,11 @@ MonoBehaviour:
   missionHudVisuals:
   - {fileID: 666230164}
   - {fileID: 666230166}
+  pursuitSpeedPowerUpPrefab: {fileID: 4823518202205099639, guid: e4f8a2b6c9d03e1f7a5b8c4d2e9f0a1b,
+    type: 3}
+  pursuitSlowPowerUpPrefab: {fileID: 4823518202205099639, guid: c9e5b3a7d0f14e2a8b6c9d0e1f2a3b4c,
+    type: 3}
+  speedPowerUpSpawnPoints: []
 --- !u!4 &598135307
 Transform:
   m_ObjectHideFlags: 0
@@ -10817,6 +10822,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5075091205725713576, guid: e3db855a8f28dfc44849fded8370b0de,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -22.51419
+      objectReference: {fileID: 0}
     - target: {fileID: 5244241424248530561, guid: e3db855a8f28dfc44849fded8370b0de,
         type: 3}
       propertyPath: playerCar
@@ -10837,6 +10847,11 @@ PrefabInstance:
       propertyPath: cameraControl
       value: 
       objectReference: {fileID: 1942262820}
+    - target: {fileID: 5563082995641407976, guid: e3db855a8f28dfc44849fded8370b0de,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -20.023071
+      objectReference: {fileID: 0}
     - target: {fileID: 5642905129156421110, guid: e3db855a8f28dfc44849fded8370b0de,
         type: 3}
       propertyPath: m_IsActive
@@ -10847,7 +10862,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayManagerCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7249085715675496632, guid: e3db855a8f28dfc44849fded8370b0de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7324598183552088583, guid: e3db855a8f28dfc44849fded8370b0de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380011370223036087, guid: e3db855a8f28dfc44849fded8370b0de,
         type: 3}
       propertyPath: m_IsActive
       value: 0

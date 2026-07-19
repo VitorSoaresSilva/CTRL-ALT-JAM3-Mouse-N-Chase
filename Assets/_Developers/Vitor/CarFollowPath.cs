@@ -10,6 +10,23 @@ namespace _Developers.Vitor
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
+        /// <summary>
+        /// Temporary movement override for player powerups only.
+        /// When &gt;= 0, player moves at this speed; AI enemies still read <see cref="speed"/>.
+        /// </summary>
+        public float powerupSpeedOverride = -1f;
+
+        public float MoveSpeed => powerupSpeedOverride >= 0f ? powerupSpeedOverride : speed;
+
+        public void SetPowerupSpeed(float overrideSpeed)
+        {
+            powerupSpeedOverride = overrideSpeed;
+        }
+
+        public void ClearPowerupSpeed()
+        {
+            powerupSpeedOverride = -1f;
+        }
         public float lateralSpeed = 5;
         public float yOffset = 0;
         public float xOffset = 0;
@@ -80,7 +97,7 @@ namespace _Developers.Vitor
                     gameplayManager.currentLap++;
                 }
 
-                distanceTravelled += speed * Time.fixedDeltaTime;
+                distanceTravelled += MoveSpeed * Time.fixedDeltaTime;
 
                 // Obter a nova posição do path
                 Vector3 newPosition = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction) + new Vector3(0, yOffset, 0);

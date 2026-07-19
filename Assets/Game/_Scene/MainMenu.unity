@@ -161,6 +161,10 @@ MonoBehaviour:
   PursuitPoints: 1500
   RescuePoints: 1500
   BossPoints: 3000
+  shieldUnlockPoints: 15000
+  bumperUnlockPoints: 7000
+  slotUnlockPoints: 25000
+  bumperDamageReduction: 33
   debug: 0
 --- !u!4 &1834091
 Transform:
@@ -3317,14 +3321,14 @@ MonoBehaviour:
     Felipe Jardim\r\n    ElevenLabs\r\n\r\nMusic:\r\n\r\n    Oleg Kyrylkovv\r\n   
     Jeremy Frobose\r\n    Tom Feldmann\r\n\r\nTextures:\r\n\r\n    Chromisu\r\n   
     FreeStylized\r\n\r\nEffects:\r\n\r\n    Jean Moreno\r\n    Lana Studio\r\n   
-    Mono Limbo\n\r\nModels:\r\n\r\n    Felipe Jardim\r\n\r\nModel Assets:\r\n\r\n   
-    Erbeilo3D\r\n    False Wisp Studios\r\n    xiaolianhuastudio\r\n    Ioan Stan\r\n   
-    JustCreate\r\n    BigRookGames\r\n    Rokay3D\r\n    Supercyan\r\n    23 Space
-    Robots and Counting...\r\n    Cartoon Palmtree and Umbrellas\r\n\r\nDevelopers
+    Mono Limbo\n    Cartoon VFX by Wallcoeur\n\r\nModels:\r\n\r\n    Felipe Jardim\r\n\r\nModel
+    Assets:\r\n\r\n    Erbeilo3D\r\n    False Wisp Studios\r\n    xiaolianhuastudio\r\n   
+    Ioan Stan\r\n    JustCreate\r\n    BigRookGames\r\n    Rokay3D\r\n    Supercyan\r\n   
+    23 Space Robots and Counting...\r\n    Cartoon Palmtree and Umbrellas\r\n\r\nDevelopers
     Tools:\r\n\r\n    Sebastian Lague\r\n    Micah Wilder\r\n\nAcknowledgements:\n\n   
-    IA ChatGPT\n    IA Copilot\n\r\nSoftware:\r\n\r\n    Unity\r\n    GitHub\r\n   
-    Blender\r\n    Discord\r\n    WhatsApp\r\n    Jetbrains Rider\r\n    Visual Studio
-    Code\r\n    Adobe Substance Painter\r\n    Adobe Photoshop\n\n\n\n\n\n\n\n\n\n\n\n"
+    IA ChatGPT\n    IA Copilot\n    IA Cursor\n\r\nSoftware:\r\n\r\n    Unity\r\n   
+    GitHub\r\n    Blender\r\n    Discord\r\n    WhatsApp\r\n    Jetbrains Rider\r\n   
+    Visual Studio Code\r\n    Adobe Substance Painter\r\n    Adobe Photoshop\n\n\n\n\n\n\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

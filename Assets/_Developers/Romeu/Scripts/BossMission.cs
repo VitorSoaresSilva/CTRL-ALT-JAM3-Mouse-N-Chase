@@ -38,7 +38,7 @@ public class BossMission : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>();
         }
 
-        enemyInstances.AddRange(enemySpawner.SpawnRandomEnemies(enemies));
+        enemyInstances.AddRange(enemySpawner.SpawnEnemies(enemies));
 
         foreach (EnemyCarFollowPath enemy in enemyInstances)
         {
@@ -46,7 +46,7 @@ public class BossMission : MonoBehaviour
             {
                 destroyedEnemies++;
                 enemy.gameObject.SetActive(false);
-                if (destroyedEnemies >= enemies.Length)
+                if (destroyedEnemies >= enemyInstances.Count)
                 {
                     gameplayManager.EndGameplay(true);
                 }

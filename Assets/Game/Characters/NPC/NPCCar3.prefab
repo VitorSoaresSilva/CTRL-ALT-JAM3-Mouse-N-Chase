@@ -612,6 +612,8 @@ MonoBehaviour:
   damageTag: Player
   takeDamage: 1
   dieParticle: {fileID: 0}
+  hitImpactVfxPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913,
+    type: 3}
 --- !u!1 &6553338052530550325
 GameObject:
   m_ObjectHideFlags: 0

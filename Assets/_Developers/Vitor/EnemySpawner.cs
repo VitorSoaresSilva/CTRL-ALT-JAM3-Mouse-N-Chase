@@ -9,51 +9,69 @@ namespace _Developers.Vitor
     public class EnemySpawner : MonoBehaviour
     {
         public EnemyCarFollowPath[] enemyPrefabs;
-        // private PathCreator _pathCreator;
         private PathGenerator _pathGenerator;
 
         public List<EnemyCarFollowPath> enemies = new();
 
         private void Awake()
         {
-            // _pathCreator = GetComponent<PathCreator>();
             _pathGenerator = GetComponent<PathGenerator>();
         }
 
         private void Start()
         {
             enemies.Clear();
-            // _pathGenerator.pathCreatorInstance.path
-            //Vector3 spawnPosition = _pathGenerator.pathCreatorInstance.path.GetPointAtDistance(40);
-            //EnemyCarFollowPath selectedEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            //EnemyCarFollowPath enemyInstance = Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
-            //enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, 40);
-            //enemyInstance.pathCreator = _pathGenerator.pathCreatorInstance;
         }
 
         public List<EnemyCarFollowPath> SpawnEnemies(EnemyCarFollowPath[] enemiesToSpawn)
         {
-            float spawnPos = 40;
+            enemies.Clear();
 
-            foreach(EnemyCarFollowPath enemy in enemiesToSpawn)
+            if (enemiesToSpawn == null || enemiesToSpawn.Length == 0)
             {
+                Debug.LogWarning("[EnemySpawner] Nenhum prefab de inimigo para spawnar.");
+                return enemies;
+            }
+
+            if (_pathGenerator == null || _pathGenerator.pathCreatorInstance == null
+                || _pathGenerator.pathCreatorInstance.path == null)
+            {
+                Debug.LogWarning("[EnemySpawner] Path não pronto para SpawnEnemies.");
+                return enemies;
+            }
+
+            float playerDistance = 0f;
+            if (_pathGenerator.carFollowPath != null)
+                playerDistance = _pathGenerator.carFollowPath.distanceTravelled;
+
+            // Espaçados à frente do player: +50, +120, +190...
+            float[] aheadOffsets = { 50f, 120f, 190f, 260f };
+
+            for (int i = 0; i < enemiesToSpawn.Length; i++)
+            {
+                float ahead = aheadOffsets[Mathf.Min(i, aheadOffsets.Length - 1)];
+                // Se houver mais inimigos que offsets, incrementa
+                if (i >= aheadOffsets.Length)
+                    ahead = 50f + i * 70f;
+
+                float spawnPos = playerDistance + ahead;
                 Vector3 spawnPosition = _pathGenerator.pathCreatorInstance.path.GetPointAtDistance(spawnPos);
 
-                // Validar posição de spawn
                 if (!ValidationUtility.IsValidVector3(spawnPosition))
                 {
                     Debug.LogWarning($"[EnemySpawner] Posição de spawn inválida: {spawnPosition}. Pulando spawn.");
                     continue;
                 }
 
-                EnemyCarFollowPath enemyInstance = Instantiate(enemy, spawnPosition, Quaternion.identity);
-                enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, 40);
+                EnemyCarFollowPath enemyInstance = Instantiate(enemiesToSpawn[i], spawnPosition, Quaternion.identity);
+                enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, spawnPos);
                 enemyInstance.pathCreator = _pathGenerator.pathCreatorInstance;
                 enemies.Add(enemyInstance);
 
-                spawnPos += 5;
+                Debug.Log($"[EnemySpawner] Spawned {enemyInstance.name} at distance {spawnPos:F1}");
             }
 
+            Debug.Log($"[EnemySpawner] Spawned {enemies.Count} enemies total");
             return enemies;
         }
 
@@ -63,7 +81,6 @@ namespace _Developers.Vitor
             {
                 Vector3 spawnPosition = _pathGenerator.pathCreatorInstance.path.GetPointAtDistance(Random.Range(40, 100));
 
-                // Validar posição de spawn
                 if (!ValidationUtility.IsValidVector3(spawnPosition))
                 {
                     Debug.LogWarning($"[EnemySpawner] Posição de spawn aleatória inválida: {spawnPosition}. Pulando spawn.");
@@ -73,7 +90,8 @@ namespace _Developers.Vitor
                 EnemyCarFollowPath selectedEnemyPrefab = enemiesToSpawn[Random.Range(0, enemiesToSpawn.Length)];
                 EnemyCarFollowPath enemyInstance = Instantiate(selectedEnemyPrefab, spawnPosition, Quaternion.identity);
 
-                enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, 40);
+                float spawnDist = Random.Range(40f, 100f);
+                enemyInstance.Init(_pathGenerator.carFollowPath, _pathGenerator.pathCreatorInstance, spawnDist);
                 enemyInstance.pathCreator = _pathGenerator.pathCreatorInstance;
                 enemies.Add(enemyInstance);
             }
