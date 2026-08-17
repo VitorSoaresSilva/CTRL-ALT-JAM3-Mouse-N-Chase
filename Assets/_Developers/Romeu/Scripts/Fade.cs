@@ -23,12 +23,12 @@ public class Fade : Singleton<Fade>
         FadeOut();
     }
 
-    public void FadeIn() // Deixa a tela preta, sem o círculo
+    public void FadeIn() // Deixa a tela preta, sem o cï¿½rculo
     {
         fadeAnimator.SetTrigger("trClose");
     }
 
-    public void FadeOut() // Deixa a tela visível, com o círculo
+    public void FadeOut() // Deixa a tela visï¿½vel, com o cï¿½rculo
     {
         fadeAnimator.SetTrigger("trOpen");
     }

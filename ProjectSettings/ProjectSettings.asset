@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: ebfbb99f1a08cdd4ca969414cd00790e, type: 3}
+  - logo: {fileID: 21300000, guid: 87156bf16424eb644b7c47d454a5cd7b, type: 3}
     duration: 2
   - logo: {fileID: 21300000, guid: 4392f95c66274f046b0c4b010108b655, type: 3}
     duration: 2
@@ -148,7 +148,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.3.0
+  bundleVersion: 0.4.0
   preloadedAssets:
   - {fileID: 11400000, guid: 29e7ca4fd77eb50469d34da1090c82c8, type: 2}
   metroInputSource: 0

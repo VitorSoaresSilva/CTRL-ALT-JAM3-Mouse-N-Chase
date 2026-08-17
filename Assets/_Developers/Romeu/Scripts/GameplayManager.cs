@@ -40,9 +40,12 @@ public class GameplayManager : MonoBehaviour
     public bool isIntroPlaying = false;
     public bool isChaoticTraffic { get; private set; } = false;
 
-    // Proteção contra GameOver múltiplo
+    // Proteï¿½ï¿½o contra GameOver mï¿½ltiplo
     private bool gameplayEnded = false;
     public bool HasGameplayEnded => gameplayEnded;
+
+    // Serialized default car; playerCar may be swapped to secretCar at runtime.
+    private PlayerCar defaultCar;
 
     void OnEnable()
     {
@@ -52,20 +55,27 @@ public class GameplayManager : MonoBehaviour
         if(cameraControl == null) cameraControl = FindObjectOfType<CameraControl>();
         if(playerCar == null) playerCar = FindObjectOfType<PlayerCar>();
 
+        if (defaultCar == null)
+            defaultCar = playerCar;
+
         if(secretCar != null && CareerPoints.instance != null)
         {
-            // Validação: carro secreto só pode ser usado se liberado E selecionado no menu
+            // Validaï¿½ï¿½o: carro secreto sï¿½ pode ser usado se liberado E selecionado no menu
             if(CareerPoints.instance.SecretCarUnlocked && CareerPoints.instance.usingSecretCar)
             {
                 playerCar = secretCar;
-                cameraControl = secretCar.GetComponentInChildren<CameraControl>();
+                cameraControl = secretCar.GetComponentInChildren<CameraControl>(true);
             }
             else
             {
-                // Se não está liberado ou não foi selecionado, sempre usa o carro padrão
+                // Se nï¿½o estï¿½ liberado ou nï¿½o foi selecionado, sempre usa o carro padrï¿½o
                 CareerPoints.instance.usingSecretCar = false;
+                if (defaultCar != null)
+                    playerCar = defaultCar;
             }
         }
+
+        EnsureSinglePlayerCarActive(activateSelected: false);
 
         if(CareerPoints.instance != null)
         {
@@ -117,10 +127,32 @@ public class GameplayManager : MonoBehaviour
         lapsToFail = UnityEngine.Random.Range(5, maxLaps);
     }
 
+    /// <summary>
+    /// Keeps exactly one player car active so only one AudioListener is in the scene.
+    /// </summary>
+    void EnsureSinglePlayerCarActive(bool activateSelected)
+    {
+        if (!activateSelected)
+        {
+            // During load: only keep the unused secret car off. Leave the default car
+            // alone so we still have one AudioListener until StartGameplay swaps.
+            if (secretCar != null && secretCar != playerCar)
+                secretCar.gameObject.SetActive(false);
+            return;
+        }
+
+        if (defaultCar != null && defaultCar != playerCar)
+            defaultCar.gameObject.SetActive(false);
+        if (secretCar != null && secretCar != playerCar)
+            secretCar.gameObject.SetActive(false);
+        if (playerCar != null)
+            playerCar.gameObject.SetActive(true);
+    }
+
     public void StartGameplay()
     {
         //Debug.Log("Starting gameplay");
-        playerCar.gameObject.SetActive(true);
+        EnsureSinglePlayerCarActive(activateSelected: true);
         isIntroPlaying = true;
 
         InitializeChaoticTraffic();
@@ -170,7 +202,7 @@ public class GameplayManager : MonoBehaviour
 
             yield return new WaitForSeconds(StartSceneTime);
 
-            // volta a camera a posição original
+            // volta a camera a posiï¿½ï¿½o original
             playerCar.Siren.activateSiren = true;
             while(Mathf.Abs(cameraControl.FollowDistance - followDist) > 0.2f)
             {
@@ -209,10 +241,10 @@ public class GameplayManager : MonoBehaviour
 
     public void EndGameplay(bool success = false)
     {
-        // Proteção contra múltiplas chamadas
+        // Proteï¿½ï¿½o contra mï¿½ltiplas chamadas
         if (gameplayEnded)
         {
-            Debug.LogWarning("[GameplayManager] EndGameplay já foi chamado! Ignorando chamada duplicada.");
+            Debug.LogWarning("[GameplayManager] EndGameplay jï¿½ foi chamado! Ignorando chamada duplicada.");
             return;
         }
 
@@ -243,13 +275,13 @@ public class GameplayManager : MonoBehaviour
     {
         Debug.Log("[GameplayManager] Iniciando limpeza de recursos de gameplay");
 
-        // NÃO parar StopAllCoroutines() aqui! Pode parar a coroutine ExitGameplay()
-        // que foi iniciada APÓS esta limpeza
+        // Nï¿½O parar StopAllCoroutines() aqui! Pode parar a coroutine ExitGameplay()
+        // que foi iniciada APï¿½S esta limpeza
 
         // 1. Parar e limpar TrafficSpawner completamente
         CleanupTrafficSpawner();
 
-        // 3. Destruir todos os carros de tráfego spawados
+        // 3. Destruir todos os carros de trï¿½fego spawados
         TrafficCarFollowPath[] trafficCars = FindObjectsByType<TrafficCarFollowPath>(FindObjectsSortMode.None);
         foreach (TrafficCarFollowPath trafficCar in trafficCars)
         {
@@ -258,9 +290,9 @@ public class GameplayManager : MonoBehaviour
                 Destroy(trafficCar.gameObject);
             }
         }
-        Debug.Log($"[GameplayManager] {trafficCars.Length} carros de tráfego destruídos");
+        Debug.Log($"[GameplayManager] {trafficCars.Length} carros de trï¿½fego destruï¿½dos");
 
-        // 4. Parar todas as missões e limpar seus listeners
+        // 4. Parar todas as missï¿½es e limpar seus listeners
         FastResponseMission fastResponse = FindObjectOfType<FastResponseMission>();
         if (fastResponse != null)
         {
@@ -346,12 +378,12 @@ public class GameplayManager : MonoBehaviour
         // 11. Cancelar todos os Invokes pendentes em GameplayManager
         CancelInvoke();
 
-        // 12. Resetar velocidades de Rigidbodies válidos (mantendo apenas safe values)
+        // 12. Resetar velocidades de Rigidbodies vï¿½lidos (mantendo apenas safe values)
         foreach (Rigidbody rb in rigidbodies)
         {
             if (rb != null && rb.gameObject != null && rb.gameObject.CompareTag("Player") == false)
             {
-                // Para objetos não-player, setar velocidades baixas para evitar física pesada
+                // Para objetos nï¿½o-player, setar velocidades baixas para evitar fï¿½sica pesada
                 if (rb.velocity.magnitude > 5f)
                 {
                     rb.velocity = rb.velocity * 0.1f; // Reduzir drasticamente
@@ -371,7 +403,7 @@ public class GameplayManager : MonoBehaviour
         if (!enableChaoticTraffic)
         {
             isChaoticTraffic = false;
-            Debug.Log("Trânsito caótico desativado globalmente");
+            Debug.Log("Trï¿½nsito caï¿½tico desativado globalmente");
             return;
         }
 
@@ -410,7 +442,7 @@ public class GameplayManager : MonoBehaviour
         if (!missionAllowsChaotic)
         {
             isChaoticTraffic = false;
-            Debug.Log("Trânsito caótico bloqueado por esta missão");
+            Debug.Log("Trï¿½nsito caï¿½tico bloqueado por esta missï¿½o");
             return;
         }
 
@@ -418,12 +450,12 @@ public class GameplayManager : MonoBehaviour
 
         if (isChaoticTraffic)
         {
-            Debug.Log("Trânsito caótico ATIVADO!");
+            Debug.Log("Trï¿½nsito caï¿½tico ATIVADO!");
             ApplyChaoticTrafficSettings();
         }
         else
         {
-            Debug.Log("Trânsito caótico desativado nesta sessão");
+            Debug.Log("Trï¿½nsito caï¿½tico desativado nesta sessï¿½o");
         }
     }
 
@@ -503,13 +535,13 @@ public class GameplayManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Audita problemas de duplicação e acúmulo após GameOver
+    /// Audita problemas de duplicaï¿½ï¿½o e acï¿½mulo apï¿½s GameOver
     /// </summary>
     public static void GameOverAudit()
     {
-        Debug.Log("========== [AUDIT] Iniciando validação de acúmulo após GameOver ==========");
+        Debug.Log("========== [AUDIT] Iniciando validaï¿½ï¿½o de acï¿½mulo apï¿½s GameOver ==========");
 
-        // 1. Verificar duplicação de Singletons
+        // 1. Verificar duplicaï¿½ï¿½o de Singletons
         Debug.Log("[AUDIT] Verificando Singletons...");
         PathGenerator.AuditInstances();
         if (CareerPoints.instance != null)
@@ -534,7 +566,7 @@ public class GameplayManager : MonoBehaviour
         {
             if (spawner != null)
             {
-                Debug.LogWarning($"[AUDIT] TrafficSpawner ativo ainda está rodando coroutines!");
+                Debug.LogWarning($"[AUDIT] TrafficSpawner ativo ainda estï¿½ rodando coroutines!");
             }
         }
 
@@ -568,7 +600,7 @@ public class GameplayManager : MonoBehaviour
             Debug.Log($"  [{i}] {scene.name} (objetos: {scene.rootCount})");
         }
 
-        Debug.Log("========== [AUDIT] Validação concluída ==========");
+        Debug.Log("========== [AUDIT] Validaï¿½ï¿½o concluï¿½da ==========");
     }
 
     /// <summary>
@@ -579,13 +611,13 @@ public class GameplayManager : MonoBehaviour
         PathGenerator pathGen = FindObjectOfType<PathGenerator>();
         if (pathGen != null)
         {
-            // Parar todas as coroutines de geração
+            // Parar todas as coroutines de geraï¿½ï¿½o
             pathGen.StopAllCoroutines();
 
-            // Desativar validação de path
+            // Desativar validaï¿½ï¿½o de path
             pathGen.EnablePathValidation = false;
 
-            Debug.Log("[GameplayManager] PathGenerator parado e validação desativada");
+            Debug.Log("[GameplayManager] PathGenerator parado e validaï¿½ï¿½o desativada");
         }
     }
 

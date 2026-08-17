@@ -129,20 +129,18 @@ public class CareerPoints : Singleton<CareerPoints>
             Save();
 
         ApplyPermanentUnlocksFromPoints();
+        EvaluateSecretCarUnlock();
 
         Log($"Points: {Points}");
         Log($"LostPoints: {LostPoints}");
         Log($"MissionsCompleted: {MissionsCompleted}");
         Log($"ColorUnlocked: {ColorUnlocked}");
+        Log($"SecretCarUnlocked: {SecretCarUnlocked}");
     }
 
     public void Save()
     {
-        if (!SecretCarUnlocked)
-        {
-            SecretCarUnlocked = FastResponseCompleted == 9 && PursuitCompleted == 1 && RescueCompleted == 1;
-            usingSecretCar = true;
-        }
+        EvaluateSecretCarUnlock();
 
         PlayerPrefs.SetInt("Points", Points);
         PlayerPrefs.SetInt("LostPoints", LostPoints);
@@ -156,6 +154,7 @@ public class CareerPoints : Singleton<CareerPoints>
         PlayerPrefs.SetInt("ShieldUnlockedPermanent", ShieldUnlockedPermanent ? 1 : 0);
         PlayerPrefs.SetInt("BumperUnlockedPermanent", BumperUnlockedPermanent ? 1 : 0);
         PlayerPrefs.SetInt("ColorUnlockedPermanent", _colorUnlockedPermanent ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void CompleteMission(MissionType mission)
@@ -184,11 +183,22 @@ public class CareerPoints : Singleton<CareerPoints>
                 break;
         }
 
-        // Verificar desbloqueio do carro secreto (15 completações totais)
-        if (!SecretCarUnlocked && MissionsCompleted >= 15)
+        // Easter egg 911: 9× Fast Response, 1× Pursuit, 1× Rescue
+        EvaluateSecretCarUnlock();
+        Save();
+    }
+
+    void EvaluateSecretCarUnlock()
+    {
+        if (SecretCarUnlocked)
+            return;
+
+        // Easter egg: sequence 911 — 9× Fast Response, 1× Pursuit, 1× Rescue
+        if (FastResponseCompleted >= 9 && PursuitCompleted >= 1 && RescueCompleted >= 1)
         {
             SecretCarUnlocked = true;
-            Log("Carro Secreto Desbloqueado!");
+            usingSecretCar = true;
+            Log("Carro Secreto Desbloqueado! (911)");
         }
     }
 
@@ -200,6 +210,8 @@ public class CareerPoints : Singleton<CareerPoints>
         PursuitCompleted = 0;
         RescueCompleted = 0;
         BossCompleted = 0;
+        SecretCarUnlocked = false;
+        usingSecretCar = false;
         Save();
     }
 

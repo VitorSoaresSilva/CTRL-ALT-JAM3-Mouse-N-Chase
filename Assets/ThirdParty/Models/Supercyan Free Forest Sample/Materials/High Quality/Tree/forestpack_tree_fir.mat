@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: forestpack_tree_fir
-  m_Shader: {fileID: -6465566751694194690, guid: 8529db5d8e2d9374cb3e0671e0311c34, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8529db5d8e2d9374cb3e0671e0311c34,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -36,10 +37,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: bf82169728589cb40ab39408bc144c8f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - Ramp:
         m_Texture: {fileID: 2800000, guid: 55d9f997de358a34a85e48ef6b49e8f7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -92,6 +89,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: bf82169728589cb40ab39408bc144c8f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -127,10 +128,13 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Max_Light: 1
     - _Metallic: 0
+    - _Min_Light: 0.12
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _RampIntensity: 0.5
     - _RampSmooth: 0.544
@@ -138,6 +142,7 @@ Material:
     - _ReceiveShadows: 1
     - _RimSmooth: 0.39
     - _RimThreshold: 0.5
+    - _Shade: 0.4
     - _ShadowIntensity: 1
     - _Shininess: 10
     - _Smoothness: 0.5
@@ -154,9 +159,6 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - __dirty: 0
-    - _Shade: 0.4
-    - _Min_Light: 0.12
-    - _Max_Light: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

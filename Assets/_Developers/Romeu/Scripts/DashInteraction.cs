@@ -1,10 +1,10 @@
 // by vassago1 from https://forum.unity.com/threads/having-multitap-interaction-issues.859300/
 
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 #if UNITY_EDITOR
+using UnityEditor;
 [InitializeOnLoad]
 #endif
 public class DashInteraction : IInputInteraction

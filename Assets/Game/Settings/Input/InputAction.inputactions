@@ -458,35 +458,24 @@
                 {
                     "name": "Keyboard",
                     "id": "e980cd67-ef14-4ebb-9c6d-28e96158e105",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Submit",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "6e20231d-6f77-4deb-8b77-a5055df2df99",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Submit",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
-                    "name": "binding",
-                    "id": "7b8d2609-5e0b-48d3-bed1-4a6ef33715ba",
-                    "path": "<Keyboard>/rightArrow",
+                    "name": "",
+                    "id": "fdad62ef-cef9-4413-887d-12b47491b82a",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Submit",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "Gamepad",

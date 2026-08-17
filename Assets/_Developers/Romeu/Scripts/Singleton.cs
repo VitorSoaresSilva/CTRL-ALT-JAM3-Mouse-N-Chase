@@ -22,10 +22,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             }
             else
             {
-                // Há duplicação! Destruir esta
+                // Há duplicação! Destruir esta (desativa antes pra não rodar OnEnable no duplicado)
                 Debug.LogWarning($"[Singleton] {typeof(T).Name} já existe! Destruindo duplicata. " +
                     $"Instancia existente: {instance.gameObject.name}, " +
                     $"Nova tentativa: {gameObject.name}", gameObject);
+                gameObject.SetActive(false);
                 Destroy(gameObject);
                 return;
             }

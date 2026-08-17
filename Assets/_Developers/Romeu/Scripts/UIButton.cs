@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -61,6 +58,17 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
         set => _missionType = value;
     }
 
+    public void SetPointerAnchor(UIPointer pointer, Vector3 position, Vector3 rotationEuler)
+    {
+        if (pointer != null)
+            GlobalPointer = pointer;
+        else if (GlobalPointer == null)
+            GlobalPointer = FindObjectOfType<UIPointer>();
+
+        PointerPosition = position;
+        PointerRotation = rotationEuler;
+    }
+
     public Button Button { get; private set; }
 
     void OnEnable()
@@ -108,10 +116,10 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
         bool isMissionUnlocked = CareerPoints.instance != null && CareerPoints.instance.IsMissionUnlocked(missionType);
 
         // Mover o pointer para esta missão
+        if (GlobalPointer == null)
+            GlobalPointer = FindObjectOfType<UIPointer>();
         if (GlobalPointer != null)
-        {
             GlobalPointer.MoveTo(PointerPosition, Quaternion.Euler(PointerRotation));
-        }
 
         // Se a missão está bloqueada, apenas garantir que o LockIcon está visível e ocultar StartText/ProgressText/UnlockedVisuals
         if (!isMissionUnlocked)
@@ -132,6 +140,9 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
                         visual.SetActive(false);
                 }
             }
+
+            if (MissionTipBalloon.instance != null)
+                MissionTipBalloon.instance.Hide();
 
             previouslySelectedButton = this;
             return;
@@ -177,6 +188,10 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
                 StartText.gameObject.SetActive(false);
             }
         }
+
+        if ((StartText != null || ProgressText != null || randomMission)
+            && MissionTipBalloon.instance != null)
+            MissionTipBalloon.instance.ShowForMission(_missionType, randomMission);
 
         // Rastrear este botão como o último selecionado
         previouslySelectedButton = this;

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class UIPointer : MonoBehaviour
 {
@@ -15,7 +10,7 @@ public class UIPointer : MonoBehaviour
     private RectTransform rt;
     private float currentOffset = 0f;
     private bool moving = true;
-    private float initialXPosition;
+    private float bobBase;
     public enum MoveAxis { X, Y }
 
     private void OnEnable()
@@ -25,55 +20,63 @@ public class UIPointer : MonoBehaviour
 
     void Start()
     {
-        if(FirstButtonSelected != null)
+        if (rt == null)
+            rt = GetComponent<RectTransform>();
+
+        if (FirstButtonSelected != null)
         {
-            if(FirstButtonSelected.TryGetComponent<Button>(out Button btn))
+            if (FirstButtonSelected.TryGetComponent<UnityEngine.UI.Button>(out var btn))
                 btn.Select();
         }
 
-        if(moveAxis == MoveAxis.X)
-            initialXPosition = rt.localPosition.x;
-        else if(moveAxis == MoveAxis.Y)
-            initialXPosition = rt.localPosition.y;
+        SyncBobBaseFromTransform();
     }
 
     void Update()
     {
-        // Movendo o RectTransform
+        if (rt == null)
+            return;
+
         if (moving)
         {
             currentOffset += moveSpeed * Time.deltaTime;
             if (currentOffset >= moveOffset)
-            {
                 moving = false;
-            }
         }
         else
         {
             currentOffset -= moveSpeed * Time.deltaTime;
             if (currentOffset <= -moveOffset)
-            {
                 moving = true;
-            }
         }
 
-        // Calculando a nova posição com base na posição inicial e no offset atual
-        float newXPosition = initialXPosition + currentOffset;
-
-        // Aplicando a nova posição ao RectTransform
-        Vector3 newPosition = rt.localPosition;
-        if(moveAxis == MoveAxis.X)
-            newPosition.x = newXPosition;
-        else if(moveAxis == MoveAxis.Y)
-            newPosition.y = newXPosition;
-
-        rt.localPosition = newPosition;
+        // Always bob via anchoredPosition ï¿½ localPosition fights MoveTo when the hand is rotated.
+        Vector2 pos = rt.anchoredPosition;
+        if (moveAxis == MoveAxis.X)
+            pos.x = bobBase + currentOffset;
+        else
+            pos.y = bobBase + currentOffset;
+        rt.anchoredPosition = pos;
     }
 
-    public void MoveTo(Vector3 position, Quaternion rotation)
+    public void MoveTo(Vector3 anchoredPosition, Quaternion rotation)
     {
-        rt.anchoredPosition = position;
+        if (rt == null)
+            rt = GetComponent<RectTransform>();
+        if (rt == null)
+            return;
+
+        rt.anchoredPosition = anchoredPosition;
         rt.localRotation = rotation;
-        initialXPosition = position.x;
+        currentOffset = 0f;
+        SyncBobBaseFromTransform();
+    }
+
+    void SyncBobBaseFromTransform()
+    {
+        if (rt == null)
+            return;
+
+        bobBase = moveAxis == MoveAxis.X ? rt.anchoredPosition.x : rt.anchoredPosition.y;
     }
 }
